@@ -1,27 +1,25 @@
-.dataTable{
-  width: 100vw;
-  .dataGrid{
-    background: white;
-    padding: 20px;
-    overflow-x: scroll;
-    width: 100vw;
+.dataTable {
+  max-width: 100%; /* set a maximum width of 100% to ensure the element doesn't overflow its parent container */
+  overflow-x: auto; /* add a horizontal scrollbar when content overflows */
 
-    .MuiDataGrid-toolbarContainer{
+  .dataGrid {
+
+    .MuiDataGrid-toolbarContainer {
       flex-direction: row-reverse;
     }
 
-    img{
+    img {
       width: 32px;
       height: 32px;
       border-radius: 50%;
       object-fit: cover;
     }
 
-    .action{
+    .action {
       display: flex;
       gap: 15px;
 
-      img{
+      img {
         width: 20px;
         height: 20px;
         cursor: pointer;

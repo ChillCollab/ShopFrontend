@@ -20,12 +20,12 @@ const queryClient = new QueryClient();
 
 function App() {
   const Layout = () => {
-    const [a, setA] =useState(false)
+    const [toggle, setToggle] = useState<boolean>(false)
     return (
       <div className="main">
-        <Navbar setA={setA} a={a}/>
+        <Navbar setToggle={setToggle} toggle={toggle}/>
         <div className="container">
-          {a && <div className="menuContainer">
+          {toggle && <div className="menuContainer">
            <Menu />
           </div>
   }

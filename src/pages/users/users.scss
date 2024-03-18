@@ -1,7 +1,7 @@
 .users{
 
   .info{
-    padding: 20px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     gap: 20px;
@@ -13,10 +13,18 @@
     }
   }
   .dataTable{
+    flex: 1;
     overflow: hidden;
     padding: 20px;
+    display: inline;
   }
 }
 .dataTable{
   overflow: hidden;
+}
+
+.dataTable .dataGrid {
+  background: white;
+  padding: 20px;
+  overflow-x: auto; /* add a horizontal scrollbar when content overflows */
 }

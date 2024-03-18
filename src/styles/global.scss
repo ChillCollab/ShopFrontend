@@ -24,8 +24,7 @@ min-width: 100%;
 }
 .container {
   display: flex;
-  flex: 1;
-  // min-width: 100%;
+  max-width: 100%;
 }
 
 .wrapper {
@@ -35,7 +34,6 @@ min-width: 100%;
 }
 
 .menuContainer {
-  position: absolute;
   background-color: $main-bg;
   width: 250px;
   padding: 5px 20px;
@@ -46,15 +44,14 @@ min-width: 100%;
   z-index: 1;
   height: 100%;
   @include lg{
-    width: max-content;
     height: 100%;
-    // background: #000;
   }
 }
 
 .contentContainer {
   flex: 1;
   width: 100%;
+  padding: 0 2rem;
 }
 @media (max-width: 550px){
   .main {

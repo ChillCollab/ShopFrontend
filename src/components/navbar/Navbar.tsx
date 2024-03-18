@@ -1,11 +1,15 @@
 import "./navbar.scss";
-
-const Navbar = ({setA, a}) => {
+import React from "react";
+interface NavbarProps {
+    setToggle: React.Dispatch<React.SetStateAction<boolean>>;
+    toggle: boolean;
+}
+const Navbar: React.FC<NavbarProps> = ({setToggle , toggle}) => {
   return (
-    
+
     <div className="navbar">
       <div className="logo">
-      <button onClick={() => setA(!a)}>fdf</button>
+      <button onClick={() => setToggle(!toggle)}>ЛОЛ</button>
         <img src="logo.svg" alt="" />
         <span>lamadmin</span>
       </div>
