@@ -1,6 +1,7 @@
 .users{
 
   .info{
+    padding: 20px;
     display: flex;
     align-items: center;
     gap: 20px;
@@ -11,4 +12,11 @@
       cursor: pointer;
     }
   }
+  .dataTable{
+    overflow: hidden;
+    padding: 20px;
+  }
+}
+.dataTable{
+  overflow: hidden;
 }

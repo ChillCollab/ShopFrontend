@@ -1,10 +1,10 @@
 @import "./variables.scss";
 @import "./responsive.scss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
 
 a {
@@ -13,26 +13,58 @@ a {
 }
 
 .main {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
   font-family: "Inter", sans-serif;
   background-color: $main-bg;
   color: $main-color;
+min-width: 100%;
+// overflow-x: auto;
 }
-
 .container {
   display: flex;
+  flex: 1;
+  // min-width: 100%;
+}
+
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .menuContainer {
+  position: absolute;
+  background-color: $main-bg;
   width: 250px;
   padding: 5px 20px;
   border-right: 2px solid $soft-bg;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+  height: 100%;
   @include lg{
     width: max-content;
+    height: 100%;
+    // background: #000;
   }
 }
 
 .contentContainer {
-  padding: 5px 20px;
+  flex: 1;
   width: 100%;
+}
+@media (max-width: 550px){
+  .main {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    font-family: "Inter", sans-serif;
+    background-color: $main-bg;
+    color: $main-color;
+  min-width: 100%;
+  // overflow-x: auto;
+  }
 }

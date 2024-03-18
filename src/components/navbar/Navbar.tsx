@@ -1,9 +1,11 @@
 import "./navbar.scss";
 
-const Navbar = () => {
+const Navbar = ({setA, a}) => {
   return (
+    
     <div className="navbar">
       <div className="logo">
+      <button onClick={() => setA(!a)}>fdf</button>
         <img src="logo.svg" alt="" />
         <span>lamadmin</span>
       </div>

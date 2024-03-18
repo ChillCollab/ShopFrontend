@@ -13,19 +13,22 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import { useState } from "react";
 
 
 const queryClient = new QueryClient();
 
 function App() {
   const Layout = () => {
+    const [a, setA] =useState(false)
     return (
       <div className="main">
-        <Navbar />
+        <Navbar setA={setA} a={a}/>
         <div className="container">
-          <div className="menuContainer">
-            <Menu />
+          {a && <div className="menuContainer">
+           <Menu />
           </div>
+  }
           <div className="contentContainer">
             <QueryClientProvider client={queryClient}>
               <Outlet />
