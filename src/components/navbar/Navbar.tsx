@@ -1,4 +1,5 @@
 import "./navbar.scss";
+import "material-symbols/outlined.scss"
 import React from "react";
 interface NavbarProps {
     setToggle: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,7 +10,7 @@ const Navbar: React.FC<NavbarProps> = ({setToggle , toggle}) => {
 
     <div className="navbar">
       <div className="logo">
-      <button onClick={() => setToggle(!toggle)}>ЛОЛ</button>
+      <span className="material-symbols-outlined" style={{fontSize: "1.8rem"}} onClick={() => setToggle(!toggle)}>menu</span>
         <img src="logo.svg" alt="" />
         <span>lamadmin</span>
       </div>

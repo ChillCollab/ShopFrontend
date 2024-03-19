@@ -5,6 +5,7 @@ import {
 } from "@mui/x-data-grid";
 import "./dataTable.scss";
 import { Link } from "react-router-dom";
+import {hexToRgb} from "@mui/material";
 
 type Props = {
   columns: GridColDef[];
@@ -54,6 +55,8 @@ const DataTable = (props: Props) => {
   return (
     <div className="dataTable">
       <DataGrid
+
+          style={{border: 2, borderStyle: "solid", borderColor: "#384256", borderRadius: 10}}
         className="dataGrid"
         rows={props.rows}
         columns={[...props.columns, actionColumn]}

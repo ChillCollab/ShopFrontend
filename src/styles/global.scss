@@ -48,6 +48,21 @@ min-width: 100%;
   }
 }
 
+.mobileMenuContainer {
+  background-color: $main-bg;
+  width: 250px;
+  padding: 5px 20px;
+  border-right: 2px solid $soft-bg;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+  height: 100%;
+  @include lg{
+    height: 100%;
+  }
+}
+
 .contentContainer {
   flex: 1;
   width: 100%;
@@ -63,5 +78,20 @@ min-width: 100%;
     color: $main-color;
   min-width: 100%;
   // overflow-x: auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .menuContainer {
+    width: auto;
+  }
+  .contentContainer {
+    padding: 0 1rem 0 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .mobileMenuContainer {
+    display: none;
   }
 }

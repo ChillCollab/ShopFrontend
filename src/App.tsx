@@ -25,8 +25,10 @@ function App() {
       <div className="main">
         <Navbar setToggle={setToggle} toggle={toggle}/>
         <div className="container">
-          {toggle && <div className="menuContainer">
+          {toggle ? <div className="menuContainer">
            <Menu />
+          </div> : <div className="mobileMenuContainer">
+            <Menu />
           </div>
   }
           <div className="contentContainer">

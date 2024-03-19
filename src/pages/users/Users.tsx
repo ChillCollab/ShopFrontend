@@ -21,36 +21,42 @@ const columns: GridColDef[] = [
     type: "string",
     headerName: "First name",
     width: 150,
+    cellClassName: "nameCell",
   },
   {
     field: "lastName",
     type: "string",
     headerName: "Last name",
     width: 150,
+    cellClassName: "nameCell",
   },
   {
     field: "email",
     type: "string",
     headerName: "Email",
     width: 200,
+    cellClassName: "nameCell",
   },
   {
     field: "phone",
     type: "string",
     headerName: "Phone",
     width: 200,
+    cellClassName: "phoneCell",
   },
   {
     field: "createdAt",
     headerName: "Created At",
     width: 200,
     type: "string",
+    cellClassName: "createCell",
   },
   {
     field: "verified",
     headerName: "Verified",
     width: 150,
     type: "boolean",
+    cellClassName: "verifiedCell",
   },
 ];
 

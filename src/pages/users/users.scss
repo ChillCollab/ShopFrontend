@@ -24,8 +24,11 @@
 }
 
 .dataTable .dataGrid {
-  background: white;
   padding: 20px;
-  overflow-x: auto; /* add a horizontal scrollbar when content overflows */
+  overflow-x: auto;
   display: grid;
 }
+.nameCell {
+  color: white;
+}
+
