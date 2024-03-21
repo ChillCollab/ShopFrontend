@@ -20,7 +20,7 @@ const queryClient = new QueryClient();
 
 function App() {
   const Layout = () => {
-    const [toggle, setToggle] = useState<boolean>(false)
+    const [toggle, setToggle] = useState(false);
     return (
       <div className="main">
         <Navbar setToggle={setToggle} toggle={toggle}/>

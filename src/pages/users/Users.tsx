@@ -73,7 +73,7 @@ const columns: GridColDef[] = [
     headerAlign: "center",
     headerClassName: "headerBox",
     renderCell: (params) => {
-      return params.value ? <img src="verified.svg" alt="Verified" /> : <img src="notverified.svg" alt="Not Verified" />;
+      return params.value ? <img src="/verified.svg" alt="Verified" /> : <img src="/notverified.svg" alt="Not Verified" />;
     },
   },
 ];
@@ -96,7 +96,7 @@ const Users = () => {
       <div className="info">
         <h1>Users</h1>
         <button onClick={() => setOpen(true)}>
-          <img src="adduser.svg" alt=""/>
+          <img src="/adduser.svg" alt=""/>
           Add User
         </button>
       </div>
