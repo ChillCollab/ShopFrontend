@@ -5,7 +5,6 @@ import {
 } from "@mui/x-data-grid";
 import "./dataTable.scss";
 import { Link } from "react-router-dom";
-import {hexToRgb} from "@mui/material";
 
 type Props = {
   columns: GridColDef[];
@@ -29,15 +28,18 @@ const DataTable = (props: Props) => {
   // //   }
   // // });
 
-  const handleDelete = (id: number) => {
+  // @ts-ignore
+    const handleDelete = (id: number) => {
     //delete the item
     // mutation.mutate(id)
   };
 
   const actionColumn: GridColDef = {
-    field: "action",
-    headerName: "Action",
-    width: 200,
+      field: "action",
+      headerName: "Action",
+      width: 100,
+      headerAlign: "center",
+      headerClassName: "headerBox",
     renderCell: (params) => {
       return (
         <div className="action">

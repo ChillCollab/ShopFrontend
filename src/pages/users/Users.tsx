@@ -4,14 +4,17 @@ import "./Users.scss";
 import { useState } from "react";
 import Add from "../../components/add/Add";
 import { userRows } from "../../data";
-// import { useQuery } from "@tanstack/react-query";
+// @ts-ignore
 
 const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 90 },
+  { field: "id", headerAlign: "center", headerClassName: "headerBox", cellClassName:"idClass", headerName: "ID", width: 80, },
   {
     field: "img",
     headerName: "Avatar",
-    width: 100,
+    headerAlign: "center",
+    cellClassName: "nameCell",
+    headerClassName: "headerBox",
+    width: 80,
     renderCell: (params) => {
       return <img src={params.row.img || "/noavatar.png"} alt="" />;
     },
@@ -20,43 +23,58 @@ const columns: GridColDef[] = [
     field: "firstName",
     type: "string",
     headerName: "First name",
-    width: 150,
+    width: 175,
+    headerAlign: "center",
+    headerClassName: "headerBox",
     cellClassName: "nameCell",
   },
   {
     field: "lastName",
     type: "string",
     headerName: "Last name",
-    width: 150,
+    width: 175,
     cellClassName: "nameCell",
+    headerAlign: "center",
+    headerClassName: "headerBox",
   },
   {
     field: "email",
     type: "string",
     headerName: "Email",
     width: 200,
-    cellClassName: "nameCell",
+    cellClassName: "emailCell",
+    headerAlign: "center",
+    headerClassName: "headerBox",
   },
   {
     field: "phone",
     type: "string",
     headerName: "Phone",
-    width: 200,
+    width: 150,
     cellClassName: "phoneCell",
+    headerAlign: "center",
+    headerClassName: "headerBox",
   },
   {
     field: "createdAt",
     headerName: "Created At",
-    width: 200,
+    flex: 0.05,
     type: "string",
     cellClassName: "createCell",
+    headerAlign: "center",
+    headerClassName: "headerBox",
   },
   {
-    field: "verified",
-    headerName: "Verified",
-    width: 150,
+    field: "activated",
+    headerName: "Activated",
+    flex: 0.05,
     type: "boolean",
     cellClassName: "verifiedCell",
+    headerAlign: "center",
+    headerClassName: "headerBox",
+    renderCell: (params) => {
+      return params.value ? <img src="verified.svg" alt="Verified" /> : <img src="notverified.svg" alt="Not Verified" />;
+    },
   },
 ];
 
@@ -77,7 +95,10 @@ const Users = () => {
     <div className="users">
       <div className="info">
         <h1>Users</h1>
-        <button onClick={() => setOpen(true)}>Add New User</button>
+        <button onClick={() => setOpen(true)}>
+          <img src="adduser.svg" alt=""/>
+          Add User
+        </button>
       </div>
       <DataTable slug="users" columns={columns} rows={userRows} />
       {/* TEST THE API */}
