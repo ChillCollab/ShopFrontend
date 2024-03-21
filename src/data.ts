@@ -5,8 +5,8 @@ export const menu = [
     listItems: [
       {
         id: 1,
-        title: "Homepage",
-        url: "/",
+        title: "Home",
+        url: "/admin/home",
         icon: "home.svg",
       },
       {
@@ -19,30 +19,30 @@ export const menu = [
   },
   {
     id: 2,
-    title: "lists",
+    title: "/admin/lists",
     listItems: [
       {
         id: 1,
         title: "Users",
-        url: "/users",
+        url: "/admin/users",
         icon: "user.svg",
       },
       {
         id: 2,
         title: "Products",
-        url: "/products",
+        url: "/admin/products",
         icon: "product.svg",
       },
       {
         id: 3,
         title: "Orders",
-        url: "/orders",
+        url: "/admin/orders",
         icon: "order.svg",
       },
       {
         id: 4,
         title: "Posts",
-        url: "/posts",
+        url: "/admin/posts",
         icon: "post2.svg",
       },
     ],
@@ -54,7 +54,7 @@ export const menu = [
       {
         id: 1,
         title: "Elements",
-        url: "/",
+        url: "/admin/",
         icon: "element.svg",
       },
       {

@@ -48,25 +48,31 @@ function App() {
       element: <Layout />,
       children: [
         {
-          path: "/",
-          element: <Home />,
-        },
-        {
-          path: "/users",
-          element: <Users />,
-        },
-        {
-          path: "/products",
-          element: <Products />,
-        },
-        {
-          path: "/users/:id",
-          element: <User />,
-        },
-        {
-          path: "/products/:id",
-          element: <Product />,
-        },
+          path: "/admin",
+          children: [
+            {
+              path: "home",
+              element: <Home />,
+            },
+            {
+              path: "users",
+              element: <Users />,
+            },
+            {
+              path: "products",
+              element: <Products />,
+            },
+            {
+              path: "users/:id",
+              element: <User />,
+            },
+            {
+              path: "products/:id",
+              element: <Product />,
+            },
+          ]
+        }
+
       ],
     },
     {
