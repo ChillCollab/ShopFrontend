@@ -1,11 +1,16 @@
 import {Button, Input} from "@mui/material";
 import "./auth.scss"
 
-const Register = () => {
+const Register = ({setRegister}) => {
     return (
         <div className="inputContainer">
-            <div className="backButtonContainer">
-                <Button></Button>
+            <div className="backContainer">
+                <Button
+                    variant="outlined"
+                    onClick={() => setRegister(false)}
+                >
+                    ⬅ Back
+                </Button>
             </div>
             <h1>Registration</h1>
             <div className="dataContainer"></div>
@@ -25,12 +30,14 @@ const Register = () => {
                 type="email"
                 placeholder="Email"
             />
+            <div className="buttonsContainer">
             <Button
                 className="loginButton"
                 variant="contained"
                 style={{}}>
                 Register
             </Button>
+            </div>
         </div>
     )
 }

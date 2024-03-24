@@ -6,6 +6,7 @@
   width: 100%;
   justify-content: center;
   align-items: center;
+  padding: 5rem 0;
   height: 100vh;
   background-color: $main_bg;
 }
@@ -13,7 +14,7 @@
 .inputContainer {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 70%;
   padding: 5rem 10rem;
   border: 1.5px solid $soft-bg;
   border-radius: 1rem;
@@ -26,21 +27,12 @@
   }
 
   Input {
+    font-size: 1.1rem;
     color: $soft_color;
-    height: 3rem;
+    height: 2.5rem;
     align-content: end;
     padding: 0.25rem 0.5rem;
     border-color: #f45b69 !important;
-  }
-
-  //input
-  .css-bz5ng3-MuiInputBase-root-MuiInput-root:hover {
-    border-bottom: 1px solid $main-button;
-  }
-
-  //input after
-  .css-bz5ng3-MuiInputBase-root-MuiInput-root::after {
-    border-bottom: 2px solid $hover-button !important;
   }
 
   .forget {
@@ -70,6 +62,18 @@
     margin: 0.5rem;
     color: $main-button;
     border-color: $main-button;
+    font-weight: 600;
+  }
+
+  .backContainer {
+    display: flex;
+    justify-content: start;
+
+    Button {
+      color: $main-button !important;
+      border-color: $main-button !important;
+      font-weight: 100;
+    }
   }
 
   .registerButton:hover {

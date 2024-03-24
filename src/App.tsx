@@ -1,5 +1,5 @@
 import Home from "./pages/home/Home";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import {createBrowserRouter, RouterProvider, Outlet, useNavigate} from "react-router-dom";
 import Users from "./pages/users/Users";
 import Products from "./pages/products/Products";
 import Navbar from "./components/navbar/Navbar";
@@ -13,14 +13,39 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { useState } from "react";
+import {useEffect, useState} from "react";
+import authRequests from "./requests/auth/auth.ts";
 
 
 const queryClient = new QueryClient();
 
 function App() {
   const Layout = () => {
+    const navigate = useNavigate()
     const [toggle, setToggle] = useState(false);
+
+    function getAuth() {
+      return authRequests.userInfo()
+          .then(userResponse => {
+            if(userResponse?.status !== 200){
+              if (userResponse?.status === 401) {
+                return authRequests.refreshToken()
+                    .then(refreshResponse => {
+                      if(refreshResponse?.status !== 200) return false
+                    })
+              }
+            } else return true;
+          });
+    }
+
+    useEffect(() => {
+      getAuth().then(res => {
+        if(!res) {
+          navigate('/auth', {replace: false});
+        }
+      });
+    }, []);
+
     return (
       <div className="main">
         <Navbar setToggle={setToggle} toggle={toggle}/>
@@ -44,14 +69,13 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/",
-      element: <Layout />,
       children: [
         {
           path: "/admin",
+          element: <Layout/>,
           children: [
             {
-              path: "home",
+              path: "",
               element: <Home />,
             },
             {

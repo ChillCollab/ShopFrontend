@@ -1,4 +1,3 @@
-import {Button, Input} from "@mui/material";
 import "./auth.scss"
 import {useState} from "react";
 import Login from "./Login.tsx";
@@ -8,8 +7,8 @@ const Auth = () => {
     const [register, setRegister] = useState<boolean>(false)
 
     function Manipulator() {
-        if(register) return <Register/>
-        return <Login />
+        if(register) return <Register setRegister={setRegister}/>
+        return <Login setRegister={setRegister}/>
     }
 
   return (

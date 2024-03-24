@@ -106,7 +106,7 @@ const Users = () => {
       {/* {isLoading ? (
         "Loading..."
       ) : (
-        <DataTable slug="users" columns={columns} rows={data} />
+      <DataTable slug="users" columns={columns} rows={data} />
       )} */}
       {open && <Add slug="user" columns={columns} setOpen={setOpen} />}
     </div>
