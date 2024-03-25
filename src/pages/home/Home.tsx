@@ -12,8 +12,36 @@ import {
   chartBoxUser,
 } from "../../data";
 import "./home.scss";
+import {useNavigate} from "react-router-dom";
+import authRequests from "../../requests/auth/auth.ts";
+import {useEffect, useRef} from "react";
 
 const Home = () => {
+    const navigate = useNavigate()
+    const hasRendered = useRef(false);
+
+    function getAuth() {
+        return authRequests.userInfo()
+            .then(userResponse => {
+                if(userResponse?.status !== 200){
+                    if (userResponse?.status === 401) {
+                        return authRequests.refreshToken()
+                            .then(refreshResponse => {
+                                if(refreshResponse?.status !== 200) return false
+                            })
+                    }
+                } else return true;
+            });
+    }
+
+    useEffect(() => {
+                getAuth().then(res => {
+                    if (!res) {
+                        navigate('/auth', {replace: false});
+                    }
+                });
+    }, []);
+
   return (
     <div className="home">
       <div className="box box1">

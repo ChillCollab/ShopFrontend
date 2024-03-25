@@ -49,6 +49,7 @@ const Login = ({setRegister}: any) => {
                 onChange={handlerEmail}
                 value={email}
                 onClick={() => setErrMsg("")}
+                onKeyDown={handleKeyDown}
             />
             <TextField
                 variant="filled"
@@ -57,6 +58,7 @@ const Login = ({setRegister}: any) => {
                 onChange={handlerPassword}
                 value={password}
                 onClick={() => setErrMsg("")}
+                onKeyDown={handleKeyDown}
             />
             <div style={{color: "red", display: "flex", justifyContent: "center"}}>{errMsg}</div>
             <div className="forget">

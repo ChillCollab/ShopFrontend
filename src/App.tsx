@@ -1,61 +1,41 @@
 import Home from "./pages/home/Home";
-import {createBrowserRouter, RouterProvider, Outlet, useNavigate} from "react-router-dom";
+import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom";
 import Users from "./pages/users/Users";
 import Products from "./pages/products/Products";
-import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/footer/Footer";
-import Menu from "./components/menu/Menu";
 import Auth from "./pages/auth/Auth.tsx";
 import "./styles/global.scss";
 import User from "./pages/user/User";
 import Product from "./pages/product/Product";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
-import {useEffect, useState} from "react";
-import authRequests from "./requests/auth/auth.ts";
-
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {useEffect, useRef, useState} from "react";
+import Navbar from "./components/navbar/Navbar.tsx";
+import Menu from "./components/menu/Menu.tsx";
+import Footer from "./components/footer/Footer.tsx";
 
 const queryClient = new QueryClient();
 
-function App() {
-  const Layout = () => {
-    const navigate = useNavigate()
+function Layout({isMounted, setIsMounted}){
     const [toggle, setToggle] = useState(false);
-
-    function getAuth() {
-      return authRequests.userInfo()
-          .then(userResponse => {
-            if(userResponse?.status !== 200){
-              if (userResponse?.status === 401) {
-                return authRequests.refreshToken()
-                    .then(refreshResponse => {
-                      if(refreshResponse?.status !== 200) return false
-                    })
-              }
-            } else return true;
-          });
-    }
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const hasRendered = useRef(false);
 
     useEffect(() => {
-      getAuth().then(res => {
-        if(!res) {
-          navigate('/auth', {replace: false});
+        if (!hasRendered.current) {
+            hasRendered.current = true;
+            setIsMounted(true);
         }
-      });
-    }, []);
+    }, [isMounted])
 
-    return (
+  return (
       <div className="main">
-        <Navbar setToggle={setToggle} toggle={toggle}/>
-        <div className="container">
+        <Navbar setToggle={setToggle} toggle={toggle} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}/>
+        <div className="container" onClick={() => setIsMenuOpen(false)}>
           {toggle ? <div className="menuContainer">
-           <Menu setToggle={setToggle}/>
+            <Menu setToggle={setToggle}/>
           </div> : <div className="mobileMenuContainer">
             <Menu setToggle={setToggle}/>
           </div>
-  }
+          }
           <div className="contentContainer">
             <QueryClientProvider client={queryClient}>
               <Outlet />
@@ -64,48 +44,57 @@ function App() {
         </div>
         <Footer />
       </div>
-    );
-  };
+  );
+};
 
-  const router = createBrowserRouter([
-    {
-      children: [
+function App() {
+    const [isMounted, setIsMounted] = useState(false);
+    const hasRendered = useRef(false);
+
+    useEffect(() => {
+        console.log(1)
+    }, []);
+
+    const router = createBrowserRouter([
         {
-          path: "/admin",
-          element: <Layout/>,
-          children: [
-            {
-              path: "",
-              element: <Home />,
-            },
-            {
-              path: "users",
-              element: <Users />,
-            },
-            {
-              path: "products",
-              element: <Products />,
-            },
-            {
-              path: "users/:id",
-              element: <User />,
-            },
-            {
-              path: "products/:id",
-              element: <Product />,
-            },
-          ]
-        }
+            path: "/admin",
+            element: <Layout isMounted={isMounted} setIsMounted={setIsMounted}/>,
+            children: [
+                {
+                    path: "",
+                    element: <Home />,
+                },
+                {
+                    path: "users",
+                    element: <Users />,
+                },
+                {
+                    path: "products",
+                    element: <Products />,
+                },
+                {
+                    path: "users/:id",
+                    element: <User />,
+                },
+                {
+                    path: "products/:id",
+                    element: <Product />,
+                },
+            ],
+        },
+        {
+            path: "/auth",
+            element: <Auth
+                isMounted={isMounted}
+                setIsMounted={setIsMounted}
+            />,
+        },
+    ]);
 
-      ],
-    },
-    {
-      path: "/auth",
-      element: <Auth />,
-    },
-  ]);
-
-  return <RouterProvider router={router} />;
+    return (
+        <RouterProvider router={router} />
+    );
 }
+
 
 export default App;

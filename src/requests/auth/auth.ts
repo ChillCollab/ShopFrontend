@@ -27,6 +27,18 @@ const authRequests = {
                return e
            })
     },
+    logout: () => {
+        return axios.post(config.HOST + "/auth/logout", {}, {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("access_token")
+            }
+        }).then((logoutResponse: AxiosResponse<any>) => {
+            return logoutResponse
+        }).catch(e => {
+            console.error(e)
+            return e
+        })
+    },
     userInfo: () => {
             return axios.get(config.HOST + "/user/info", {
                 headers: {
@@ -37,6 +49,7 @@ const authRequests = {
                 return infoResponse
             }).catch(e => {
                     console.error(e)
+                    return e
                 })
     },
     refreshToken: () => {
@@ -53,6 +66,7 @@ const authRequests = {
                 })
         } catch (e) {
             throw new Error(`${e}`)
+
         }
     }
 }
