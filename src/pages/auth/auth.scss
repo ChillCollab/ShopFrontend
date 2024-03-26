@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   padding: 5rem 0;
-  height: 100%;
+  height: 100vh;
   background-color: $main_bg;
 }
 
@@ -83,6 +83,13 @@
 
   .loginButton:hover {
     background-color: $hover-button;
+  }
+
+  .text {
+    padding: 0 10rem;
+    color: $soft-color;
+    text-align: center;
+    font-size: 1.2rem;
   }
 
 }

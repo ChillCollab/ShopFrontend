@@ -1,6 +1,6 @@
 import "./navbar.scss";
 import "material-symbols/outlined.scss"
-import React, {useState} from "react";
+import React from "react";
 import authRequests from "../../requests/auth/auth.ts";
 import {useNavigate} from "react-router-dom";
 interface NavbarProps {
@@ -9,9 +9,13 @@ interface NavbarProps {
     setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
     isMenuOpen: boolean;
 }
+interface SettingsMenu {
+    isOpen: boolean
+}
 const Navbar: React.FC<NavbarProps> = ({setToggle , toggle, isMenuOpen, setIsMenuOpen}) => {
     const navigate = useNavigate();
-    const SettingsMenu = ({isOpen}) => {
+
+    const SettingsMenu: React.FC<SettingsMenu> = ({isOpen}) => {
         function logout() {
             authRequests.logout()
                 .then(logoutResponse => {

@@ -16,6 +16,30 @@ export interface LoginResponse {
     refresh_token: string
 }
 const authRequests = {
+    register: (login: string, name: string, surname: string, email: string) => {
+        return axios.post(config.HOST + "/auth/register", {
+            login: login,
+            name: name,
+            surname: surname,
+            email: email
+        }).then((loginResponse: AxiosResponse<any>) => {
+            return loginResponse
+        })
+    },
+    sendMail: (email: string) => {
+        return axios.post(config.HOST + "/auth/activate/send", {
+            email: email
+        }).then((loginResponse: AxiosResponse<any>) => {
+            return loginResponse
+        })
+    },
+    recovery: (email: string) => {
+        return axios.post(config.HOST + "/auth/recovery", {
+            email: email
+        }).then((loginResponse: AxiosResponse<any>) => {
+            return loginResponse
+        })
+    },
     login: (login: string, password: string) => {
            return axios.post(config.HOST + "/auth/login", {
                email: login,

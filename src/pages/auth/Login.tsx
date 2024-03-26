@@ -1,10 +1,15 @@
 import {Button, TextField} from "@mui/material";
 import "./auth.scss"
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import React, {SetStateAction, useState} from "react";
 import authRequests from "../../requests/auth/auth.ts";
 
-const Login = ({setRegister}: any) => {
+interface Login {
+    setRegister: React.Dispatch<SetStateAction<boolean>>
+    setIsForgot: React.Dispatch<SetStateAction<boolean>>
+}
+
+const Login: React.FC<Login> = ({setRegister, setIsForgot}) => {
     const navigate = useNavigate()
 
     const [email, setEmail] = useState("")
@@ -63,7 +68,8 @@ const Login = ({setRegister}: any) => {
             <div style={{color: "red", display: "flex", justifyContent: "center"}}>{errMsg}</div>
             <div className="forget">
                 <Button
-                >Forget password?</Button>
+                    onClick={() => setIsForgot(true)}
+                >Forgot password?</Button>
             </div>
             <div className="buttonsContainer">
                 <Button

@@ -7,24 +7,16 @@ import "./styles/global.scss";
 import User from "./pages/user/User";
 import Product from "./pages/product/Product";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import {useEffect, useRef, useState} from "react";
+import {useState} from "react";
 import Navbar from "./components/navbar/Navbar.tsx";
 import Menu from "./components/menu/Menu.tsx";
 import Footer from "./components/footer/Footer.tsx";
 
 const queryClient = new QueryClient();
 
-function Layout({isMounted, setIsMounted}){
+function Layout(){
     const [toggle, setToggle] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const hasRendered = useRef(false);
-
-    useEffect(() => {
-        if (!hasRendered.current) {
-            hasRendered.current = true;
-            setIsMounted(true);
-        }
-    }, [isMounted])
 
   return (
       <div className="main">
@@ -48,17 +40,10 @@ function Layout({isMounted, setIsMounted}){
 };
 
 function App() {
-    const [isMounted, setIsMounted] = useState(false);
-    const hasRendered = useRef(false);
-
-    useEffect(() => {
-        console.log(1)
-    }, []);
-
     const router = createBrowserRouter([
         {
             path: "/admin",
-            element: <Layout isMounted={isMounted} setIsMounted={setIsMounted}/>,
+            element: <Layout />,
             children: [
                 {
                     path: "",
@@ -84,10 +69,7 @@ function App() {
         },
         {
             path: "/auth",
-            element: <Auth
-                isMounted={isMounted}
-                setIsMounted={setIsMounted}
-            />,
+            element: <Auth />,
         },
     ]);
 

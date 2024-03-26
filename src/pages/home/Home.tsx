@@ -14,24 +14,29 @@ import {
 import "./home.scss";
 import {useNavigate} from "react-router-dom";
 import authRequests from "../../requests/auth/auth.ts";
-import {useEffect, useRef} from "react";
+import {useEffect} from "react";
 
 const Home = () => {
     const navigate = useNavigate()
-    const hasRendered = useRef(false);
 
-    function getAuth() {
-        return authRequests.userInfo()
-            .then(userResponse => {
-                if(userResponse?.status !== 200){
-                    if (userResponse?.status === 401) {
-                        return authRequests.refreshToken()
-                            .then(refreshResponse => {
-                                if(refreshResponse?.status !== 200) return false
-                            })
-                    }
-                } else return true;
-            });
+    async function getAuth() {
+        try {
+            const userResponse = await authRequests.userInfo();
+            if (userResponse?.status !== 200) {
+                const refreshResponse = await authRequests.refreshToken();
+                if (refreshResponse?.status === 200) {
+                    localStorage.setItem("access_token", refreshResponse?.data.access_token);
+                    localStorage.setItem("refresh_token", refreshResponse?.data.refresh_token);
+                    authRequests.userInfo()
+                    return true
+                } else return false
+            } else {
+                return true;
+            }
+        } catch (error) {
+            console.error('Error during authentication:', error);
+            return false;
+        }
     }
 
     useEffect(() => {

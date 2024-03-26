@@ -4,9 +4,14 @@ import Login from "./Login.tsx";
 import Register from "./Register.tsx";
 import authRequests from "../../requests/auth/auth.ts";
 import {useNavigate} from "react-router-dom";
+import SuccessfulSend from "./SuccessfulSend.tsx";
+import Forgot from "./Forgot.tsx";
 
-const Auth = ({isMounted, setIsMounted}) => {
-    const [register, setRegister] = useState<boolean>(false)
+const Auth = () => {
+    const [register, setRegister] = useState<boolean>(false);
+    const [isSuccessfulSend, setIsSuccessfulSend] = useState(false);
+    const [isForgot, setIsForgot] = useState(false);
+    const [isTitle, setIsTitle] = useState<string>("")
     const navigate = useNavigate()
     function checkLogin() {
         const access = localStorage.getItem("access_token");
@@ -31,8 +36,10 @@ const Auth = ({isMounted, setIsMounted}) => {
         }
     }
     function Manipulator() {
-        if(register) return <Register setRegister={setRegister}/>
-        return <Login setRegister={setRegister}/>
+        if(register) return <Register setRegister={setRegister} setRegisterSuccess={setIsSuccessfulSend} setTitle={setIsTitle}/>
+        if(isSuccessfulSend) return <SuccessfulSend setRegisterSuccess={setIsSuccessfulSend} title={isTitle}/>
+        if(isForgot) return <Forgot setForgot={setIsForgot} setSuccessfulRegister={setIsSuccessfulSend} setTitle={setIsTitle}/>
+        return <Login setRegister={setRegister} setIsForgot={setIsForgot}/>
     }
 
     useEffect(() => {
@@ -41,7 +48,7 @@ const Auth = ({isMounted, setIsMounted}) => {
             localStorage.removeItem("refresh_token");
         }
         checkLogin()
-    }, [isMounted])
+    }, [])
   return (
     <div className="loginContainer">
       <Manipulator/>
