@@ -1,8 +1,8 @@
 @import "../../styles/responsive.scss";
 
 .navbar {
-  width: 100%;
-  padding: 20px;
+  width: 100vw;
+  padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -55,5 +55,16 @@
         object-fit: cover;
       }
     }
+  }
+}
+
+.logo .material-symbols-outlined {
+  display: none;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .logo .material-symbols-outlined {
+    display: block;
   }
 }

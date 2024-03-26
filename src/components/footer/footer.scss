@@ -3,7 +3,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 30px;
-
+margin-top: auto;
+flex-shrink: 0;
   span{
 
     &:first-child{

@@ -1,0 +1,86 @@
+@import "../../styles/variables";
+
+.loginContainer {
+  font-family: "Inter", sans-serif;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $main_bg;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  padding: 5rem 10rem;
+  border: 1.5px solid $soft-bg;
+  border-radius: 1rem;
+  gap: 1rem;
+
+  h1 {
+    text-align: center;
+    color: $soft_color;
+    margin-bottom: 2rem;
+  }
+
+  Input {
+    color: $soft_color;
+    height: 3rem;
+    align-content: end;
+    padding: 0.25rem 0.5rem;
+    border-color: #f45b69 !important;
+  }
+
+  //input
+  .css-bz5ng3-MuiInputBase-root-MuiInput-root:hover {
+    border-bottom: 1px solid $main-button;
+  }
+
+  //input after
+  .css-bz5ng3-MuiInputBase-root-MuiInput-root::after {
+    border-bottom: 2px solid $hover-button !important;
+  }
+
+  .forget {
+    display: flex;
+    justify-content: end;
+
+    Button {
+      color: $soft_color;
+    }
+  }
+
+  .buttonsContainer {
+    display: flex;
+    padding: 0 20%;
+    margin-top: 5rem;
+    flex-direction: column;
+  }
+
+  .loginButton {
+    margin: 0.5rem;
+    color: black;
+    background-color: $main-button;
+    font-weight: 600;
+  }
+
+  .registerButton {
+    margin: 0.5rem;
+    color: $main-button;
+    border-color: $main-button;
+  }
+
+  .registerButton:hover {
+    border-color: $hover-button;
+    color: $hover-button;
+  }
+
+  .loginButton:hover {
+    background-color: $hover-button;
+  }
+
+}
+
+

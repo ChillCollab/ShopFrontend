@@ -318,7 +318,7 @@ export const userRows = [
     email: "kewez@@gmail.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
-    verified: true,
+    activated: true,
   },
   {
     id: 2,
@@ -328,7 +328,7 @@ export const userRows = [
     email: "comhuhmit@gmail.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
-    verified: true,
+    activated: true,
   },
   {
     id: 3,
@@ -338,7 +338,7 @@ export const userRows = [
     email: "ujudokon@hottmail.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
-    verified: true,
+    activated: true,
   },
   {
     id: 4,
@@ -348,7 +348,7 @@ export const userRows = [
     email: "tinhavabe@gmail.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
-    verified: true,
+    activated: true,
   },
   {
     id: 5,
@@ -358,6 +358,7 @@ export const userRows = [
     email: "gobtagbes@yahoo.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
+    activated: false,
   },
   {
     id: 6,
@@ -367,7 +368,7 @@ export const userRows = [
     email: "vulca.eder@mail.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
-    verified: true,
+    activated: true,
   },
   {
     id: 7,
@@ -377,6 +378,7 @@ export const userRows = [
     email: "reso.bilic@gmail.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
+    activated: true,
   },
   {
     id: 8,
@@ -386,7 +388,7 @@ export const userRows = [
     email: "codaic@mail.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
-    verified: true,
+    activated: true,
   },
   {
     id: 9,
@@ -405,7 +407,7 @@ export const userRows = [
     email: "tuhkabapu@gmail.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
-    verified: true,
+    activated: true,
   },
   {
     id: 11,
@@ -415,7 +417,7 @@ export const userRows = [
     email: "gibo@gmail.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
-    verified: true,
+    activated: true,
   },
   {
     id: 12,
@@ -425,6 +427,7 @@ export const userRows = [
     email: "tic.harvey@hotmail.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
+    activated: true,
   },
   {
     id: 13,
@@ -434,6 +437,7 @@ export const userRows = [
     email: "ceuc@gmail.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
+    activated: true,
   },
   {
     id: 14,
@@ -443,6 +447,7 @@ export const userRows = [
     email: "bafuv@hotmail.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
+    activated: true,
   },
   {
     id: 15,
@@ -452,6 +457,7 @@ export const userRows = [
     email: "ubi@gmail.com",
     phone: "123 456 789",
     createdAt: "01.02.2023",
+    activated: true,
   },
 ];
 
