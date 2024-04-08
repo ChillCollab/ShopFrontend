@@ -1,17 +1,20 @@
 import axios, {AxiosResponse} from "axios";
 import config from "../../config.ts";
 
+
+export interface User {
+    id: number
+    login: string
+    name: string
+    surname: string
+    email: string
+    active: boolean
+    created: string
+    updated: string
+    role: number
+}
 export interface LoginResponse {
-    user: {
-        id: number
-        login: string
-        name: string
-        surname: string
-        email: string
-        active: boolean
-        created: string
-        updated: string
-    }
+    user: User
     access_token: string
     refresh_token: string
 }
@@ -69,7 +72,7 @@ const authRequests = {
                     "Authorization": "Bearer " + localStorage.getItem("access_token")
                 }
             })
-                .then((infoResponse: AxiosResponse<LoginResponse>) => {
+                .then((infoResponse: AxiosResponse<User>) => {
                 return infoResponse
             }).catch(e => {
                     console.error(e)

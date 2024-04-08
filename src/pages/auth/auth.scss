@@ -3,66 +3,117 @@
 .loginContainer {
   font-family: "Inter", sans-serif;
   display: flex;
-  width: 100%;
+  min-width: 325px;
   justify-content: center;
   align-items: center;
-  padding: 5rem 0;
-  height: 100vh;
   background-color: $main_bg;
+  width: 100%;
+  height: 100%;
 }
 
 .inputContainer {
+  justify-content: center;
   display: flex;
   flex-direction: column;
-  width: 70%;
-  padding: 2.5rem 5rem;
-  border: 1.5px solid $soft-bg;
-  border-radius: 1rem;
-  gap: 1rem;
+  width: 700px;
+  min-width: 325px;
+  height: 735px;
+  gap: 32px;
+
+  .titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+      display: flex;
+      text-align: center;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 25px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
 
   h1 {
     text-align: center;
-    color: $soft_color;
+    color: $main-color;
     margin-bottom: 2rem;
   }
 
   Input {
-    font-size: 1.1rem;
+    font-size: 17px;
+    border-radius: 7px !important;
     color: $soft_color;
-    height: 2.5rem;
+    max-width: 700px;
+    max-height: 80px !important;
     align-content: end;
-    padding: 0.25rem 0.5rem;
-    border-color: #f45b69 !important;
+    margin: 0;
+    border-color: #ABABAB !important;
+  }
+
+  .rememberContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    p {
+      color: $soft_color;
+      line-height: 21.25px;
+      font-size: 17px;
+    }
   }
 
   .forget {
     display: flex;
-    justify-content: end;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
 
-    Button {
+    .forgot-btn {
       color: $soft_color;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 21.25px;
+      text-align: right;
     }
   }
 
   .buttonsContainer {
     display: flex;
-    padding: 0 20%;
-    margin-top: 5rem;
     flex-direction: column;
   }
 
   .loginButton {
-    margin: 0.5rem;
-    color: black;
+    display: flex;
+    height: 80px;
     background-color: $main-button;
     font-weight: 600;
+    color: $main-color;
+  }
+
+  .registerBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    p {
+      font-size: 17px;
+      line-height: 17px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+    }
   }
 
   .registerButton {
     margin: 0.5rem;
-    color: $main-button;
-    border-color: $main-button;
-    font-weight: 600;
+    color: $soft-color;
+    font-size: 17px;
+    line-height: 17px;
+    font-weight: 700;
   }
 
   .backContainer {
@@ -74,11 +125,6 @@
       border-color: $main-button !important;
       font-weight: 100;
     }
-  }
-
-  .registerButton:hover {
-    border-color: $hover-button;
-    color: $hover-button;
   }
 
   .loginButton:hover {
@@ -97,6 +143,10 @@
 @media (max-width: 900px) {
   .inputContainer {
     padding: 2rem 2rem;
+
+    .registerBox {
+      margin-top: 25px;
+    }
   }
 }
 

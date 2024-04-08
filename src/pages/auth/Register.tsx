@@ -1,8 +1,8 @@
-import {Button, TextField} from "@mui/material";
 import { LoadingButton } from '@mui/lab';
 import "./auth.scss"
 import React, {ChangeEvent, useState} from "react";
 import authRequests from "../../requests/auth/auth.ts";
+import {InputLabelMain} from "../../components/inputs/Inputs.tsx";
 
 interface RegisterPage {
     setRegister: React.Dispatch<React.SetStateAction<boolean>>
@@ -16,25 +16,34 @@ const Register: React.FC<RegisterPage> = ({setRegister, setRegisterSuccess, setT
     const [isSurname, setIsSurname] = useState("")
     const [isEmail, setIsEmail] = useState("")
     const [isErrMsg, setIsErrMsg] = useState("")
+    const [isErr, setIsErr] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState(false)
+    const [isEmailErr, setIsEmailErr] = useState<boolean>(false)
 
     const handlerLogin = (event: ChangeEvent<HTMLInputElement>) => {
         setIsLogin(event.target.value)
+        setIsErr(false)
     }
     const handlerName = (event: ChangeEvent<HTMLInputElement>) => {
         setIsName(event.target.value)
+        setIsErr(false)
     }
     const handlerSurname = (event: ChangeEvent<HTMLInputElement>) => {
         setIsSurname(event.target.value)
+        setIsErr(false)
     }
     const handlerEmail = (event: ChangeEvent<HTMLInputElement>) => {
         setIsEmail(event.target.value)
+        setIsErr(false)
+        setIsEmailErr(false)
     }
 
     function register(login: string, name: string, surname: string, email: string) {
         setIsLoading(true)
+
         if(login === "" || name === "" || surname === "" || email === ""){
             setIsErrMsg("Inputs can't be empty")
+            setIsErr(true)
             setIsLoading(false)
             return
         }
@@ -61,6 +70,7 @@ const Register: React.FC<RegisterPage> = ({setRegister, setRegisterSuccess, setT
                     if(error.response.data?.code === 2) {
                         setIsLoading(false)
                         setIsErrMsg("Incorrect email. Please, validate your email")
+                        setIsEmailErr(true)
                     }
                 }
             setIsLoading(false)
@@ -69,45 +79,36 @@ const Register: React.FC<RegisterPage> = ({setRegister, setRegisterSuccess, setT
 
     return (
         <div className="inputContainer">
-            <div className="backContainer">
-                <Button
-                    variant="outlined"
-                    onClick={() => setRegister(false)}
-                >
-                    ⬅ Back
-                </Button>
-            </div>
             <h1>Registration</h1>
-            <div className="dataContainer"></div>
-            <TextField
-                variant="filled"
-                type="login"
-                placeholder="Login"
-                onChange={handlerLogin}
-                value={isLogin}
+            <InputLabelMain
+                error={isErr}
+                type={"login"}
+                label={"Login"}
+                size={"medium"}
+                event={handlerLogin}
+                />
+            <InputLabelMain
+                error={isErr}
+                type={"name"}
+                label={"Name"}
+                size={"medium"}
+                event={handlerName}
             />
-            <TextField
-                variant="filled"
-                type="name"
-                placeholder="Name"
-                onChange={handlerName}
-                value={isName}
+            <InputLabelMain
+                error={isErr}
+                type={"surname"}
+                label={"Surname"}
+                size={"medium"}
+                event={handlerSurname}
             />
-            <TextField
-                variant="filled"
-                type="surname"
-                placeholder="Surname"
-                onChange={handlerSurname}
-                value={isSurname}
+            <InputLabelMain
+                error={isEmailErr}
+                type={"email"}
+                label={"Email"}
+                size={"medium"}
+                event={handlerEmail}
             />
-            <TextField
-                variant="filled"
-                type="email"
-                placeholder="Email"
-                onChange={handlerEmail}
-                value={isEmail}
-            />
-            <div style={{display: "flex", justifyContent: "center", color: "red"}}>{isErrMsg}</div>
+            {isErr ? <div style={{display: "flex", justifyContent: "center", color: "red"}}>{isErrMsg}</div> : <></>}
             <div className="buttonsContainer">
             <LoadingButton
                 className="loginButton"
@@ -118,6 +119,11 @@ const Register: React.FC<RegisterPage> = ({setRegister, setRegisterSuccess, setT
                 }}>
                 Register
             </LoadingButton>
+            </div>
+            <div className="registerBox"
+                 onClick={() => setRegister(false)}>
+                <p>Do you have an account yet?</p>
+                <div className="registerButton">Login</div>
             </div>
         </div>
     )
