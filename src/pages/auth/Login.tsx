@@ -3,7 +3,7 @@ import {
 } from "@mui/material";
 import "./auth.scss"
 import {useNavigate} from "react-router-dom";
-import React, {SetStateAction, useState} from "react";
+import React, {ChangeEvent, SetStateAction, useState} from "react";
 import authRequests from "../../requests/auth/auth.ts";
 import {CCheckBox} from "../../components/checkBoxes/CheckBoxes.tsx";
 import {InputLabelEmail, InputLabelPassword} from "../../components/inputs/Inputs.tsx";
@@ -22,12 +22,14 @@ const Login: React.FC<Login> = ({setRegister, setIsForgot}) => {
     const [errMsg, setErrMsg] = useState("")
     const [isEye, setIsEye] = useState(false)
 
-    const handlerEmail = (data: any) => {
+    const handlerEmail = (data: ChangeEvent<HTMLInputElement>) => {
         setEmail(data.target.value)
+        setIsErr(false)
     }
 
-    const handlerPassword = (data: any) => {
+    const handlerPassword = (data: ChangeEvent<HTMLInputElement>) => {
         setPassword(data.target.value)
+        setIsErr(false)
         console.log(password)
     }
 
@@ -62,6 +64,7 @@ const Login: React.FC<Login> = ({setRegister, setIsForgot}) => {
                 label={"Email"}
                 size={"medium"}
                 event={handlerEmail}
+                onKeyDown={handleKeyDown}
                 />
             <InputLabelPassword
                 error={isErr}
@@ -69,6 +72,7 @@ const Login: React.FC<Login> = ({setRegister, setIsForgot}) => {
                 setIsShow={setIsEye}
                 label={"Password"}
                 event={handlerPassword}
+                onKeyDown={handleKeyDown}
                 size={"medium"}
             />
             {isErr ? <div style={{color: "red", display: "flex", justifyContent: "center"}}>{errMsg}</div> : <></>}

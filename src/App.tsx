@@ -11,6 +11,7 @@ import {useState} from "react";
 import Navbar from "./components/navbar/Navbar.tsx";
 import Menu from "./components/menu/Menu.tsx";
 import Footer from "./components/footer/Footer.tsx";
+import SubmitRegistration from "./pages/auth/SubmitRegistration.tsx";
 
 const queryClient = new QueryClient();
 
@@ -70,6 +71,10 @@ function App() {
         {
             path: "/auth",
             element: <Auth />,
+        },
+        {
+            path: "/registration/submit/:id",
+            element: <SubmitRegistration/>,
         },
     ]);
 

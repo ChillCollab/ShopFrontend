@@ -8,22 +8,28 @@ interface InputLabelPassword {
     label: string
     size: "small" | "medium"
     event: any
+    onKeyDown?:   React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
 }
 interface InputLabelEmail {
     error: boolean
     label: string
     size: "small" | "medium"
     event: any
+    onKeyDown?:   React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
 }
 interface InputLabelMain {
     error: boolean
     type: string
     label: string
     size: "small" | "medium"
-    event: any
+    event?: any
+    onKeyDown?:   React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
+    disabled?: boolean | undefined
+    value?: unknown
+    itemID?: string
 }
 
-export const InputLabelPassword: React.FC<InputLabelPassword> = ({error, isShow, setIsShow, label, event, size}) => {
+export const InputLabelPassword: React.FC<InputLabelPassword> = ({error, isShow, setIsShow, label, event, size, onKeyDown}) => {
     return (
         <FormControl className="custom-form-control" variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password" style={{ display: 'flex', alignItems: 'center' }}>{label}</InputLabel>
@@ -33,6 +39,7 @@ export const InputLabelPassword: React.FC<InputLabelPassword> = ({error, isShow,
                 id="outlined-adornment-password"
                 type={isShow ? 'text' : 'password'}
                 onChange={event}
+                onKeyDown={onKeyDown}
                 endAdornment={
                     <InputAdornment position="end">
                         <IconButton
@@ -50,7 +57,7 @@ export const InputLabelPassword: React.FC<InputLabelPassword> = ({error, isShow,
     )
 }
 
-export const InputLabelEmail: React.FC<InputLabelEmail> = ({error, label, event, size}) => {
+export const InputLabelEmail: React.FC<InputLabelEmail> = ({error, label, event, size, onKeyDown}) => {
     return (
         <FormControl className="custom-form-control" variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password" style={{ display: 'flex', alignItems: 'center' }}>{label}</InputLabel>
@@ -61,22 +68,41 @@ export const InputLabelEmail: React.FC<InputLabelEmail> = ({error, label, event,
                 type="email"
                 onChange={event}
                 label={label}
+                onKeyDown={onKeyDown}
             />
         </FormControl>
     )
 }
 
-export const InputLabelMain: React.FC<InputLabelMain> = ({error, type, label, event, size}) => {
+export const
+    InputLabelMain:
+        React.FC<InputLabelMain> =
+        ({
+             error,
+             type,
+             label,
+             event,
+             size,
+             onKeyDown,
+             disabled,
+             value,
+             itemID
+
+}) => {
     return (
         <FormControl className="custom-form-control" variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password" style={{ display: 'flex', alignItems: 'center' }}>{label}</InputLabel>
+            <InputLabel disabled={disabled} htmlFor="outlined-adornment-password" style={{ display: 'flex', alignItems: 'center' }}>{label}</InputLabel>
             <OutlinedInput
+                itemID={itemID}
+                disabled={disabled}
                 error={error}
                 size={size}
                 id="outlined-adornment-password"
                 type={type}
                 onChange={event}
                 label={label}
+                onKeyDown={onKeyDown}
+                value={value}
             />
         </FormControl>
     )
