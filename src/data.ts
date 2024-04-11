@@ -1,3 +1,5 @@
+const test = "asd"
+
 export const menu = [
   {
     id: 1,
