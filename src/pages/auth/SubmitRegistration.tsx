@@ -1,15 +1,6 @@
 import {InputLabelMain, InputLabelPassword} from "../../components/inputs/Inputs.tsx";
 import {Button} from "@mui/material";
 import {ChangeEvent, useEffect, useState} from "react";
-import {
-    BallSpinner,
-    BarsSpinner,
-    CubeSpinner,
-    DominoSpinner,
-    GridSpinner,
-    MetroSpinner,
-    PushSpinner, WhisperSpinner
-} from "react-spinners-kit";
 import {MainSpinner} from "../../components/spinners/MainSpinner.tsx";
 
 export default function SubmitRegistration() {
@@ -17,10 +8,14 @@ export default function SubmitRegistration() {
     const [isEyeFirst, setIsEyeFirst] = useState<boolean>(false)
     const [isEyeSecond, setIsEyeSecond] = useState<boolean>(false)
     const [isPassword, setIsPassword] = useState<string>("")
+    const [isPasswordSubmit, setIsPasswordSubmit] = useState<string>("")
     const [isLoading, setIsLoading] = useState<boolean>(true)
 
     const handlerPassword = (data: ChangeEvent<HTMLInputElement>) => {
         setIsPassword(data.target.value)
+    }
+    const handlerPasswordSubmit = (data: ChangeEvent<HTMLInputElement>) => {
+        setIsPasswordSubmit(data.target.value)
     }
 
     useEffect(() => {
@@ -72,7 +67,7 @@ export default function SubmitRegistration() {
                         isShow={isEyeSecond}
                         setIsShow={setIsEyeSecond}
                         label={"Password"}
-                        event={handlerPassword}
+                        event={handlerPasswordSubmit}
                         size={"medium"}
                     />
                     {isErr ? <div style={{color: "red", display: "flex", justifyContent: "center"}}>{errMsg}</div> : <></>}

@@ -1,7 +1,7 @@
 import "./navbar.scss";
 import "material-symbols/outlined.scss"
 import React from "react";
-import authRequests from "../../requests/auth/auth.ts";
+import authRequests from "../../pages/auth/requests/auth.ts";
 import {useNavigate} from "react-router-dom";
 interface NavbarProps {
     setToggle: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = ({setToggle , toggle, isMenuOpen, setIsMen
                     } else {
                         localStorage.removeItem("access_token");
                         localStorage.removeItem("refresh_token");
-                        navigate("/auth", {replace: true})
+                        navigate("/requests", {replace: true})
                     }
                 })
         }

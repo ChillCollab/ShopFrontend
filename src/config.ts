@@ -1,5 +1,5 @@
 const config = {
-    HOST: "http://localhost:8080/api_v1"
+    HOST: "http://31.172.83.196:11080/api_v1"
 }
 
 export default config;

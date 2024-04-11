@@ -2,7 +2,7 @@ import "./auth.scss"
 import {useEffect, useState} from "react";
 import Login from "./Login.tsx";
 import Register from "./Register.tsx";
-import authRequests from "../../requests/auth/auth.ts";
+import authRequests from "./requests/auth.ts";
 import {useNavigate} from "react-router-dom";
 import SuccessfulSend from "./SuccessfulSend.tsx";
 import Forgot from "./Forgot.tsx";

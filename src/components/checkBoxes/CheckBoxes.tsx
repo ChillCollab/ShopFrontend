@@ -10,7 +10,7 @@ export const CCheckBox: React.FC<CheckBox> = ({size}) => {
     return (
             <Checkbox
             size={size}
-
+            style={{margin: 0}}
             />
     )
 }

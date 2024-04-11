@@ -4,7 +4,7 @@ import {
 import "./auth.scss"
 import {useNavigate} from "react-router-dom";
 import React, {ChangeEvent, SetStateAction, useState} from "react";
-import authRequests from "../../requests/auth/auth.ts";
+import authRequests from "./requests/auth.ts";
 import {CCheckBox} from "../../components/checkBoxes/CheckBoxes.tsx";
 import {InputLabelEmail, InputLabelPassword} from "../../components/inputs/Inputs.tsx";
 

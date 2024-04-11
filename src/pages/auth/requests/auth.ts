@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from "axios";
-import config from "../../config.ts";
+import config from "../../../config.ts";
+import {RegistrationResponse, SendEmailResponse} from "../../../types/Auth.ts";
 
 
 export interface User {
@@ -25,15 +26,8 @@ const authRequests = {
             name: name,
             surname: surname,
             email: email
-        }).then((loginResponse: AxiosResponse<any>) => {
-            return loginResponse
-        })
-    },
-    sendMail: (email: string) => {
-        return axios.post(config.HOST + "/auth/activate/send", {
-            email: email
-        }).then((loginResponse: AxiosResponse<any>) => {
-            return loginResponse
+        }).then((registerResponse: AxiosResponse<RegistrationResponse>) => {
+            return registerResponse
         })
     },
     recovery: (email: string) => {
@@ -64,6 +58,13 @@ const authRequests = {
         }).catch(e => {
             console.error(e)
             return e
+        })
+    },
+    sendMail: (email: string) => {
+        return axios.post(config.HOST + "/auth/activate/send", {
+            email: email
+        }).then((sendResponse: AxiosResponse<SendEmailResponse>) => {
+            return sendResponse
         })
     },
     userInfo: () => {

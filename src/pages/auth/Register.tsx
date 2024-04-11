@@ -1,8 +1,10 @@
 import { LoadingButton } from '@mui/lab';
 import "./auth.scss"
 import React, {ChangeEvent, useState} from "react";
-import authRequests from "../../requests/auth/auth.ts";
+import authRequests from "./requests/auth.ts";
 import {InputLabelMain} from "../../components/inputs/Inputs.tsx";
+import {RegistrationResponse, SendEmailResponse} from "../../types/Auth.ts";
+import {AxiosResponse} from "axios";
 
 interface RegisterPage {
     setRegister: React.Dispatch<React.SetStateAction<boolean>>
@@ -48,11 +50,11 @@ const Register: React.FC<RegisterPage> = ({setRegister, setRegisterSuccess, setT
             return
         }
         authRequests.register(login, name, surname, email)
-            .then(registerResponse => {
+            .then((registerResponse: AxiosResponse<RegistrationResponse>) => {
                 if(registerResponse?.status === 200){
                     if(!registerResponse?.data?.error) {
                         authRequests.sendMail(isEmail)
-                            .then(sendResponse => {
+                            .then((sendResponse: AxiosResponse<SendEmailResponse>) => {
                                 if(sendResponse?.status === 200) {
                                     setTitle("Register successful!")
                                     setIsLoading(false)

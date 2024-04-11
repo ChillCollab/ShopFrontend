@@ -1,6 +1,6 @@
 import React, {ChangeEvent, SetStateAction, useState} from "react";
 import {LoadingButton} from "@mui/lab";
-import authRequests from "../../requests/auth/auth.ts";
+import authRequests from "./requests/auth.ts";
 import {InputLabelEmail} from "../../components/inputs/Inputs.tsx";
 
 interface Forgot {
