@@ -1,15 +1,27 @@
 import {InputLabelMain, InputLabelPassword} from "../../components/inputs/Inputs.tsx";
-import {Button} from "@mui/material";
 import {ChangeEvent, useEffect, useState} from "react";
 import {MainSpinner} from "../../components/spinners/MainSpinner.tsx";
+import authRequests, {SuccessInterface, User} from "./requests/auth.ts";
+import {useNavigate, useParams} from "react-router-dom";
+import {AxiosError, AxiosResponse} from "axios";
+import {LoadingButton} from "@mui/lab";
 
 export default function SubmitRegistration() {
     const [isErr, setIsErr] = useState<boolean>(false)
+    const [isMsg, setIsMsg] = useState<string>("")
     const [isEyeFirst, setIsEyeFirst] = useState<boolean>(false)
     const [isEyeSecond, setIsEyeSecond] = useState<boolean>(false)
     const [isPassword, setIsPassword] = useState<string>("")
     const [isPasswordSubmit, setIsPasswordSubmit] = useState<string>("")
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
+    const [isName, setIsName] = useState<string>("");
+    const [isSurname, setIsSurname] = useState<string>("")
+    const [isEmail, setIsEmail] = useState<string>("")
+
+    const navigate = useNavigate()
+    const {id} = useParams();
+    const code = id == undefined ? "" : id
 
     const handlerPassword = (data: ChangeEvent<HTMLInputElement>) => {
         setIsPassword(data.target.value)
@@ -18,8 +30,69 @@ export default function SubmitRegistration() {
         setIsPasswordSubmit(data.target.value)
     }
 
+    const handleKeyDown = (event: any) => {
+        if (event.key === 'Enter') {
+            setIsButtonLoading(true)
+            activate(code, isPassword, isPasswordSubmit)
+        }
+    };
+
+    const activate = (code: string, password: string, repeatPassword: string) => {
+        if(password === repeatPassword) {
+            authRequests.registerSubmit(code, password)
+                .then((submitRegister: AxiosResponse<SuccessInterface>) => {
+                    if(submitRegister.data.success) {
+                        navigate('/auth', {replace: true})
+                        setIsButtonLoading(false)
+                    }
+                }).catch((error: AxiosError<SuccessInterface>) => {
+                console.log(error.response?.status)
+                     if(error.response?.status === 403) {
+                        if (error.response?.data?.code === 13) {
+                            setIsMsg("Password should be include Digits and Symbols")
+                            setIsErr(true)
+                            setIsButtonLoading(false)
+                        }
+                    } else {
+                        setIsMsg("Unexpected error!")
+                        setIsErr(true)
+                        setIsButtonLoading(false)
+                    }
+            })
+        } else {
+            setIsErr(true)
+            setIsButtonLoading(false)
+        }
+    }
+
+
     useEffect(() => {
-        setTimeout(() => setIsLoading(false), 5000)
+        if (code.length < 19) {
+            localStorage.removeItem("access_token")
+            localStorage.removeItem("refresh_token")
+            navigate("/auth", {replace: true})
+        } else {
+            authRequests.registerCodeCheck(code)
+                .then((checkResponse: AxiosResponse<User>) => {
+                    if(checkResponse.status === 200) {
+                        setIsName(checkResponse.data.name);
+                        setIsSurname(checkResponse.data.surname);
+                        setIsEmail(checkResponse.data.email)
+                        setIsLoading(false)
+                    } else {
+                        localStorage.removeItem("access_token")
+                        localStorage.removeItem("refresh_token")
+                        setIsLoading(false)
+                        navigate("/auth", {replace: true})
+                    }
+                }).catch(e => {
+                    console.error(e)
+                    localStorage.removeItem("access_token")
+                    localStorage.removeItem("refresh_token")
+                    navigate("/auth", {replace: true})
+                    setIsLoading(false)
+            })
+        }
     }, [])
 
     return (
@@ -36,7 +109,7 @@ export default function SubmitRegistration() {
                         type={"text"}
                         label={""}
                         size={"medium"}
-                        value={"Daniil"}
+                        value={isName}
                     />
                     <InputLabelMain
                         itemID={"surname"}
@@ -44,7 +117,7 @@ export default function SubmitRegistration() {
                         type={"text"}
                         label={""}
                         size={"medium"}
-                        value={"Petrov"}
+                        value={isSurname}
                     />
                     <InputLabelMain
                         itemID={"email"}
@@ -52,14 +125,16 @@ export default function SubmitRegistration() {
                         type={"email"}
                         label={""}
                         size={"medium"}
-                        value={"sanya2test@msoftgroup.ru"}
+                        value={isEmail}
                     />
                     <InputLabelPassword
                         error={isErr}
                         isShow={isEyeFirst}
                         setIsShow={setIsEyeFirst}
                         label={"Password"}
+                        onFocus={() => setIsErr(false)}
                         event={handlerPassword}
+                        onKeyDown={handleKeyDown}
                         size={"medium"}
                     />
                     <InputLabelPassword
@@ -67,17 +142,23 @@ export default function SubmitRegistration() {
                         isShow={isEyeSecond}
                         setIsShow={setIsEyeSecond}
                         label={"Password"}
+                        onFocus={() => setIsErr(false)}
                         event={handlerPasswordSubmit}
+                        onKeyDown={handleKeyDown}
                         size={"medium"}
                     />
-                    {isErr ? <div style={{color: "red", display: "flex", justifyContent: "center"}}>{errMsg}</div> : <></>}
+                    {isErr ? <div style={{color: "red", display: "flex", justifyContent: "center"}}>{isMsg}</div> : <></>}
                     <div className="buttonsContainer">
-                        <Button
+                        <LoadingButton
+                            loading={isButtonLoading}
                             className="loginButton"
                             variant="contained"
-                            onClick={() => {}
+                            onClick={() => {
+                                setIsButtonLoading(true)
+                                activate(code, isPassword, isPasswordSubmit)
                             }
-                        >Login</Button>
+                        }
+                        >Register</LoadingButton>
                     </div>
                 </div>
             }

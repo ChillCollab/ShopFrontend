@@ -19,6 +19,12 @@ export interface LoginResponse {
     access_token: string
     refresh_token: string
 }
+
+export interface SuccessInterface {
+    message: string
+    success: boolean
+    code?: number
+}
 const authRequests = {
     register: (login: string, name: string, surname: string, email: string) => {
         return axios.post(config.HOST + "/auth/register", {
@@ -28,6 +34,21 @@ const authRequests = {
             email: email
         }).then((registerResponse: AxiosResponse<RegistrationResponse>) => {
             return registerResponse
+        })
+    },
+    registerCodeCheck: (code: string) => {
+        return axios.post(config.HOST + "/auth/register/check", {
+            code: code,
+        }).then((registerCodeCheck: AxiosResponse<User>) => {
+            return registerCodeCheck
+        })
+    },
+    registerSubmit: (code: string, password: string) => {
+        return axios.post(config.HOST + "/auth/activate", {
+            code: code,
+            password: password
+        }).then((registerSubmitResponse: AxiosResponse<SuccessInterface>) => {
+            return registerSubmitResponse
         })
     },
     recovery: (email: string) => {

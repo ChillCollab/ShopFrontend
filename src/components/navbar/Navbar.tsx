@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = ({setToggle , toggle, isMenuOpen, setIsMen
                     } else {
                         localStorage.removeItem("access_token");
                         localStorage.removeItem("refresh_token");
-                        navigate("/requests", {replace: true})
+                        navigate("/auth", {replace: true})
                     }
                 })
         }

@@ -12,6 +12,7 @@ import Navbar from "./components/navbar/Navbar.tsx";
 import Menu from "./components/menu/Menu.tsx";
 import Footer from "./components/footer/Footer.tsx";
 import SubmitRegistration from "./pages/auth/SubmitRegistration.tsx";
+import ResetPassword from "./pages/auth/ResetPassword.tsx";
 
 const queryClient = new QueryClient();
 
@@ -75,6 +76,10 @@ function App() {
         {
             path: "/registration/submit/:id",
             element: <SubmitRegistration/>,
+        },
+        {
+            path: "/reset/submit/:id",
+            element: <ResetPassword/>,
         },
     ]);
 

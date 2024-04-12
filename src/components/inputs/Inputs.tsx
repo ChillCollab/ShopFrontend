@@ -9,6 +9,7 @@ interface InputLabelPassword {
     size: "small" | "medium"
     event: any
     onKeyDown?:   React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
+    onFocus?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
 }
 interface InputLabelEmail {
     error: boolean
@@ -16,6 +17,7 @@ interface InputLabelEmail {
     size: "small" | "medium"
     event: any
     onKeyDown?:   React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
+    onFocus?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
 }
 interface InputLabelMain {
     error: boolean
@@ -27,9 +29,10 @@ interface InputLabelMain {
     disabled?: boolean | undefined
     value?: unknown
     itemID?: string
+    onFocus?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
 }
 
-export const InputLabelPassword: React.FC<InputLabelPassword> = ({error, isShow, setIsShow, label, event, size, onKeyDown}) => {
+export const InputLabelPassword: React.FC<InputLabelPassword> = ({error, isShow, setIsShow, label, event, size, onKeyDown, onFocus}) => {
     return (
         <FormControl className="custom-form-control" variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password" style={{ display: 'flex', alignItems: 'center' }}>{label}</InputLabel>
@@ -40,6 +43,7 @@ export const InputLabelPassword: React.FC<InputLabelPassword> = ({error, isShow,
                 type={isShow ? 'text' : 'password'}
                 onChange={event}
                 onKeyDown={onKeyDown}
+                onFocus={onFocus}
                 endAdornment={
                     <InputAdornment position="end">
                         <IconButton
@@ -57,7 +61,7 @@ export const InputLabelPassword: React.FC<InputLabelPassword> = ({error, isShow,
     )
 }
 
-export const InputLabelEmail: React.FC<InputLabelEmail> = ({error, label, event, size, onKeyDown}) => {
+export const InputLabelEmail: React.FC<InputLabelEmail> = ({error, label, event, size, onKeyDown, onFocus}) => {
     return (
         <FormControl className="custom-form-control" variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password" style={{ display: 'flex', alignItems: 'center' }}>{label}</InputLabel>
@@ -69,6 +73,7 @@ export const InputLabelEmail: React.FC<InputLabelEmail> = ({error, label, event,
                 onChange={event}
                 label={label}
                 onKeyDown={onKeyDown}
+                onFocus={onFocus}
             />
         </FormControl>
     )
@@ -86,7 +91,8 @@ export const
              onKeyDown,
              disabled,
              value,
-             itemID
+             itemID,
+             onFocus
 
 }) => {
     return (
@@ -103,6 +109,7 @@ export const
                 label={label}
                 onKeyDown={onKeyDown}
                 value={value}
+                onFocus={onFocus}
             />
         </FormControl>
     )
