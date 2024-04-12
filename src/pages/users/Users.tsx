@@ -1,10 +1,9 @@
 import { GridColDef } from "@mui/x-data-grid";
 import DataTable from "../../components/dataTable/DataTable";
 import "./Users.scss";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import Add from "../../components/add/Add";
-import { userRows } from "../../data";
-// @ts-ignore
+import adminReqs from "../../requests/admin/admin.ts";
 
 const columns: GridColDef[] = [
   { field: "id", headerAlign: "center", headerClassName: "headerBox", cellClassName:"idClass", headerName: "ID", width: 80, },
@@ -20,7 +19,7 @@ const columns: GridColDef[] = [
     },
   },
   {
-    field: "firstName",
+    field: "name",
     type: "string",
     headerName: "First name",
     width: 175,
@@ -29,7 +28,7 @@ const columns: GridColDef[] = [
     cellClassName: "nameCell",
   },
   {
-    field: "lastName",
+    field: "surname",
     type: "string",
     headerName: "Last name",
     width: 175,
@@ -47,16 +46,7 @@ const columns: GridColDef[] = [
     headerClassName: "headerBox",
   },
   {
-    field: "phone",
-    type: "string",
-    headerName: "Phone",
-    width: 150,
-    cellClassName: "phoneCell",
-    headerAlign: "center",
-    headerClassName: "headerBox",
-  },
-  {
-    field: "createdAt",
+    field: "created",
     headerName: "Created At",
     flex: 0.05,
     type: "string",
@@ -65,7 +55,16 @@ const columns: GridColDef[] = [
     headerClassName: "headerBox",
   },
   {
-    field: "activated",
+    field: "updated",
+    headerName: "Updated At",
+    flex: 0.05,
+    type: "string",
+    cellClassName: "createCell",
+    headerAlign: "center",
+    headerClassName: "headerBox",
+  },
+  {
+    field: "active",
     headerName: "Activated",
     flex: 0.05,
     type: "boolean",
@@ -73,40 +72,44 @@ const columns: GridColDef[] = [
     headerAlign: "center",
     headerClassName: "headerBox",
     renderCell: (params) => {
-      return params.value ? <img src="verified.svg" alt="Verified" /> : <img src="notverified.svg" alt="Not Verified" />;
+      return params.value ? <img src="/verified.svg" alt="Verified" /> : <img src="/notverified.svg" alt="Not Verified" />;
     },
   },
 ];
 
 const Users = () => {
   const [open, setOpen] = useState(false);
+  const [isUsers, setIsUsers] = useState([])
 
-  // TEST THE API
-
-  // const { isLoading, data } = useQuery({
-  //   queryKey: ["allusers"],
-  //   queryFn: () =>
-  //     fetch("http://localhost:8800/api/users").then(
-  //       (res) => res.json()
-  //     ),
-  // });
+  useEffect(() => {
+        adminReqs.getUsers()
+          .then(async (res) => {
+            await setIsUsers(res.data)
+          }).catch(e => {
+            console.error(e)
+      })
+  }, [])
 
   return (
     <div className="users">
       <div className="info">
         <h1>Users</h1>
         <button onClick={() => setOpen(true)}>
-          <img src="adduser.svg" alt=""/>
+          <img src="/adduser.svg" alt=""/>
           Add User
         </button>
       </div>
-      <DataTable slug="users" columns={columns} rows={userRows} />
+      <DataTable slug="users" columns={columns} rows={isUsers} />
+      {/*{getUsers()*/}
+      {/*    .then(response => {*/}
+      {/*      return response*/}
+      {/*    })}*/}
       {/* TEST THE API */}
 
-      {/* {isLoading ? (
+      {/* {isLoading ? (s
         "Loading..."
       ) : (
-        <DataTable slug="users" columns={columns} rows={data} />
+      <DataTable slug="users" columns={columns} rows={data} />
       )} */}
       {open && <Add slug="user" columns={columns} setOpen={setOpen} />}
     </div>
