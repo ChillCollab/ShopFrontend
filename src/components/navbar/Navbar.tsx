@@ -1,16 +1,16 @@
-import "./navbar.scss";
-import "material-symbols/outlined.scss"
-import React from "react";
-interface NavbarProps {
-    setToggle: React.Dispatch<React.SetStateAction<boolean>>;
-    toggle: boolean;
-}
-const Navbar: React.FC<NavbarProps> = ({setToggle , toggle}) => {
+import './navbar.scss';
+import 'material-symbols/outlined.scss';
+import React from 'react';
+type NavbarPropTypes = {
+  toggleMenu: () => void;
+};
+const Navbar: React.FC<NavbarPropTypes> = ({ toggleMenu }) => {
   return (
-
     <div className="navbar">
       <div className="logo">
-      <span className="material-symbols-outlined" style={{fontSize: "1.8rem"}} onClick={() => setToggle(!toggle)}>menu</span>
+        <span className="material-symbols-outlined" style={{ fontSize: '1.8rem' }} onClick={toggleMenu}>
+          menu
+        </span>
         <img src="logo.svg" alt="" />
         <span>lamadmin</span>
       </div>
