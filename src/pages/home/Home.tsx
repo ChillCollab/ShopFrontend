@@ -10,43 +10,16 @@ import {
   chartBoxProduct,
   chartBoxRevenue,
   chartBoxUser,
-} from '../../data';
+} from '../../staticDatas.ts';
 import './home.scss';
 import { useNavigate } from 'react-router-dom';
-import authRequests from '../auth/requests/auth.ts';
 import { useEffect, useState } from 'react';
 import { MainSpinner } from '../../components/spinners/MainSpinner.tsx';
+import { getAuth } from './Home.utils.ts';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
-
-  async function getAuth() {
-    try {
-      const userResponse = await authRequests.userInfo();
-      if (userResponse.data.role <= 0) {
-        navigate('/', { replace: true });
-      }
-      if (userResponse?.status !== 200) {
-        const refreshResponse = await authRequests.refreshToken();
-        if (refreshResponse?.status === 200) {
-          localStorage.setItem('access_token', refreshResponse?.data.access_token);
-          localStorage.setItem('refresh_token', refreshResponse?.data.refresh_token);
-          authRequests.userInfo().then((infoResponse) => {
-            if (infoResponse.data.role <= 0) {
-              navigate('/', { replace: true });
-            }
-          });
-          return true;
-        } else return false;
-      } else {
-        return true;
-      }
-    } catch (error) {
-      console.error('Error during authentication:', error);
-      return false;
-    }
-  }
 
   useEffect(() => {
     getAuth().then((res) => {

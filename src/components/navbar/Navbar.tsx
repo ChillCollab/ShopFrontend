@@ -1,6 +1,6 @@
 import './navbar.scss';
 import 'material-symbols/outlined.scss';
-import React from 'react';
+import React, { useCallback } from 'react';
 import authRequests from '../../pages/auth/requests/auth.ts';
 import { useNavigate } from 'react-router-dom';
 interface NavbarProps {
@@ -12,30 +12,30 @@ interface NavbarProps {
 interface SettingsMenu {
   isOpen: boolean;
 }
-const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMenuOpen }) => {
+
+const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
   const navigate = useNavigate();
+  const logout = useCallback(() => {
+    authRequests.logout().then((logoutResponse) => {
+      if (logoutResponse.status == 200) {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        navigate('/auth', { replace: true });
+      }
+    });
+  }, []);
+  if (isOpen) {
+    return (
+      <div className="settingsMenuContainer">
+        <span className="settingsButton" onClick={() => logout()}>
+          Logout
+        </span>
+      </div>
+    );
+  } else return <></>;
+};
 
-  const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
-    function logout() {
-      authRequests.logout().then((logoutResponse) => {
-        if (logoutResponse.status == 200) {
-          localStorage.removeItem('access_token');
-          localStorage.removeItem('refresh_token');
-          navigate('/auth', { replace: true });
-        }
-      });
-    }
-    if (isOpen) {
-      return (
-        <div className="settingsMenuContainer">
-          <span className="settingsButton" onClick={() => logout()}>
-            Logout
-          </span>
-        </div>
-      );
-    } else return <></>;
-  };
-
+const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMenuOpen }) => {
   return (
     <div className="navbar">
       <div className="logo">

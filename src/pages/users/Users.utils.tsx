@@ -1,11 +1,6 @@
 import { GridColDef } from '@mui/x-data-grid';
-import DataTable from '../../components/dataTable/DataTable';
-import './Users.scss';
-import { useEffect, useState } from 'react';
-import Add from '../../components/add/Add';
-import adminReqs from '../../requests/admin/admin.ts';
 
-const columns: GridColDef[] = [
+export const columns: GridColDef[] = [
   {
     field: 'id',
     headerAlign: 'center',
@@ -21,7 +16,7 @@ const columns: GridColDef[] = [
     cellClassName: 'nameCell',
     headerClassName: 'headerBox',
     width: 80,
-    renderCell: (params) => {
+    renderCell: (params: any) => {
       return <img src={params.row.img || '/noavatar.png'} alt="" />;
     },
   },
@@ -87,31 +82,3 @@ const columns: GridColDef[] = [
     },
   },
 ];
-
-const Users = () => {
-  const [open, setOpen] = useState(false);
-  const [isUsers, setIsUsers] = useState([]);
-
-  useEffect(() => {
-    adminReqs
-      .getUsers()
-      .then((res) => setIsUsers(res.data))
-      .catch(console.error);
-  }, []);
-
-  return (
-    <div className="users">
-      <div className="info">
-        <h1>Users</h1>
-        <button onClick={() => setOpen(true)}>
-          <img src="/adduser.svg" alt="" />
-          Add User
-        </button>
-      </div>
-      <DataTable slug="users" columns={columns} rows={isUsers} />
-      {open && <Add slug="user" columns={columns} setOpen={setOpen} />}
-    </div>
-  );
-};
-
-export default Users;

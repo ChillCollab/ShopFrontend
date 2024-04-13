@@ -1,19 +1,15 @@
 import { GridColDef } from '@mui/x-data-grid';
 import './add.scss';
-// import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type Props = {
   slug: string;
   columns: GridColDef[];
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen: (arg: boolean) => void;
 };
 
 const Add = (props: Props) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    //add new item
-    // mutation.mutate();
     props.setOpen(false);
   };
   return (

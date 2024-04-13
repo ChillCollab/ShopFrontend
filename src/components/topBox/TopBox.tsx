@@ -1,5 +1,5 @@
 import './topBox.scss';
-import { topDealUsers } from '../../data.ts';
+import { topDealUsers } from '../../staticDatas.ts';
 
 const TopBox = () => {
   return (

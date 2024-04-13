@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import config from '../../../config.ts';
+import config from '../../../config/config.ts';
 import { RegistrationResponse, SendEmailResponse } from '../../../types/Auth.ts';
 
 export interface User {
