@@ -1,13 +1,5 @@
-import {
-  Legend,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import "./single.scss";
+import { Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import './single.scss';
 
 type Props = {
   id: number;
@@ -60,11 +52,7 @@ const Single = (props: Props) => {
                 <Tooltip />
                 <Legend />
                 {props.chart.dataKeys.map((dataKey) => (
-                  <Line
-                    type="monotone"
-                    dataKey={dataKey.name}
-                    stroke={dataKey.color}
-                  />
+                  <Line type="monotone" dataKey={dataKey.name} stroke={dataKey.color} />
                 ))}
               </LineChart>
             </ResponsiveContainer>

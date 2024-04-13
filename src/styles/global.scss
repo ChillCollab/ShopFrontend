@@ -1,15 +1,14 @@
-@import "./variables.scss";
-@import "./responsive.scss";
+@import './variables.scss';
+@import './responsive.scss';
 
-
-
-*{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -29,7 +28,7 @@ a {
 
 .main {
   height: 100%;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: $main-bg;
   color: $main-color;
   max-width: 100%;
@@ -71,10 +70,10 @@ a {
   width: 100%;
   padding: 0 20px;
 }
-@media (max-width: 550px){
+@media (max-width: 550px) {
   .main {
     grid-template-rows: auto 1fr auto;
-    font-family: "Inter", sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: $main-bg;
     color: $main-color;
     min-width: 100%;

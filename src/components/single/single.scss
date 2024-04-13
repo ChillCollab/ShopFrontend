@@ -1,9 +1,9 @@
-@import "../../styles/responsive.scss";
+@import '../../styles/responsive.scss';
 
 .single {
   display: flex;
 
-  @include xl{
+  @include xl {
     flex-direction: column;
     gap: 50px;
   }
@@ -48,7 +48,7 @@
       border: 0.5px solid gray;
       margin: 20px 0px;
 
-      @include md{
+      @include md {
         display: none;
       }
     }
@@ -58,7 +58,7 @@
       width: 80%;
       height: 400px;
 
-      @include md{
+      @include md {
         display: none;
       }
     }
@@ -79,7 +79,7 @@
         background-color: #f45b69;
 
         &::after {
-          content: "";
+          content: '';
           position: absolute;
           left: 50%;
           bottom: 0;
@@ -95,15 +95,15 @@
           padding: 15px;
           background-color: #f45b6810;
 
-          @include md{
+          @include md {
             min-width: 250px;
           }
 
-          p{
+          p {
             margin-bottom: 5px;
           }
 
-          time{
+          time {
             font-size: 12px;
           }
         }

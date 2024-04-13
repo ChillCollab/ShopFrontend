@@ -1,6 +1,5 @@
-.users{
-
-  .info{
+.users {
+  .info {
     overflow: hidden;
     display: flex;
     justify-content: space-between;
@@ -14,7 +13,7 @@
       line-height: 38.73px;
     }
 
-    button{
+    button {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -35,13 +34,13 @@
     object-fit: cover;
   }
 
-  .dataTable{
+  .dataTable {
     flex: 1;
     overflow: hidden;
     display: inline;
   }
 }
-.dataTable{
+.dataTable {
   overflow: hidden;
 }
 
@@ -100,4 +99,3 @@
   align-items: center !important;
   color: white;
 }
-

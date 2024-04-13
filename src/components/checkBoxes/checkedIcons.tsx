@@ -1,5 +1,3 @@
 export const DefaultChecked = () => {
-    return (
-        <img src="/checkedBoxIcon.svg" alt={""}/>
-    )
-}
+  return <img src="/checkedBoxIcon.svg" alt={''} />;
+};
