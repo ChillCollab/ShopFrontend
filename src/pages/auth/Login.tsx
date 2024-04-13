@@ -40,7 +40,7 @@ const Login: React.FC<Login> = ({ setRegister, setIsForgot }) => {
       localStorage.setItem('access_token', loginResponse.data.access_token);
       localStorage.setItem('refresh_token', loginResponse.data.refresh_token);
 
-      navigate('/admin', { replace: false });
+      navigate('/', { replace: false });
     });
   }
 

@@ -12,7 +12,7 @@ export const routePaths = {
   HOME: '/',
   PRODUCT: '/product/:id',
   PRODUCTS: '/products',
-  USER: '/user/:id',
+  USER: '/users/:id',
   USERS: '/users',
   AUTH: '/auth',
   ADMIN: '/admin',
