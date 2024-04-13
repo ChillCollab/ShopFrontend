@@ -14,24 +14,9 @@ type Props = {
 
 const DataTable = (props: Props) => {
 
-  // TEST THE API
-
-  // const queryClient = useQueryClient();
-  // // const mutation = useMutation({
-  // //   mutationFn: (id: number) => {
-  // //     return fetch(`http://localhost:8800/api/${props.slug}/${id}`, {
-  // //       method: "delete",
-  // //     });
-  // //   },
-  // //   onSuccess: ()=>{
-  // //     queryClient.invalidateQueries([`all${props.slug}`]);
-  // //   }
-  // // });
-
-  // @ts-ignore
     const handleDelete = (id: number) => {
-    //delete the item
-    // mutation.mutate(id)
+        console.log(id)
+
   };
 
   const actionColumn: GridColDef = {
@@ -57,7 +42,6 @@ const DataTable = (props: Props) => {
   return (
     <div className="dataTable">
       <DataGrid
-
           style={{border: 2, borderStyle: "solid", borderColor: "#384256", borderRadius: 10}}
         className="dataGrid"
         rows={props.rows}

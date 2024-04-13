@@ -3,84 +3,151 @@
 .loginContainer {
   font-family: "Inter", sans-serif;
   display: flex;
-  width: 100%;
+  min-width: 325px;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   background-color: $main_bg;
+  width: 100%;
+  height: 100%;
 }
 
 .inputContainer {
+  justify-content: center;
   display: flex;
   flex-direction: column;
-  width: 40%;
-  padding: 5rem 10rem;
-  border: 1.5px solid $soft-bg;
-  border-radius: 1rem;
-  gap: 1rem;
+  width: 700px;
+  min-width: 325px;
+  height: 735px;
+  gap: 32px;
+
+  .titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+      display: flex;
+      text-align: center;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 25px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
 
   h1 {
     text-align: center;
-    color: $soft_color;
+    color: $main-color;
     margin-bottom: 2rem;
   }
 
   Input {
+    font-size: 17px;
+    border-radius: 7px !important;
     color: $soft_color;
-    height: 3rem;
+    max-width: 700px;
+    max-height: 80px !important;
     align-content: end;
-    padding: 0.25rem 0.5rem;
-    border-color: #f45b69 !important;
+    margin: 0;
+    border-color: #ABABAB !important;
   }
 
-  //input
-  .css-bz5ng3-MuiInputBase-root-MuiInput-root:hover {
-    border-bottom: 1px solid $main-button;
-  }
+  .rememberContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 
-  //input after
-  .css-bz5ng3-MuiInputBase-root-MuiInput-root::after {
-    border-bottom: 2px solid $hover-button !important;
+    p {
+      color: $soft_color;
+      line-height: 21.25px;
+      font-size: 17px;
+    }
   }
 
   .forget {
     display: flex;
-    justify-content: end;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
 
-    Button {
+    .forgot-btn {
       color: $soft_color;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 21.25px;
+      text-align: right;
     }
   }
 
   .buttonsContainer {
     display: flex;
-    padding: 0 20%;
-    margin-top: 5rem;
     flex-direction: column;
   }
 
   .loginButton {
-    margin: 0.5rem;
-    color: black;
+    display: flex;
+    height: 80px;
     background-color: $main-button;
     font-weight: 600;
+    color: $main-color;
+  }
+
+  .registerBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    p {
+      font-size: 17px;
+      line-height: 17px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+    }
   }
 
   .registerButton {
     margin: 0.5rem;
-    color: $main-button;
-    border-color: $main-button;
+    color: $soft-color;
+    font-size: 17px;
+    line-height: 17px;
+    font-weight: 700;
   }
 
-  .registerButton:hover {
-    border-color: $hover-button;
-    color: $hover-button;
+  .backContainer {
+    display: flex;
+    justify-content: start;
+
+    Button {
+      color: $main-button !important;
+      border-color: $main-button !important;
+      font-weight: 100;
+    }
   }
 
   .loginButton:hover {
     background-color: $hover-button;
   }
 
+  .text {
+    padding: 0 10rem;
+    color: $soft-color;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+}
+
+@media (max-width: 900px) {
+  .inputContainer {
+    padding: 2rem 2rem;
+
+    .registerBox {
+      margin-top: 25px;
+    }
+  }
 }
 
 

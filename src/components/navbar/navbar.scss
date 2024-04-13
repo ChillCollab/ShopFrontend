@@ -1,7 +1,7 @@
-@import "../../styles/responsive.scss";
+@import "../../styles/variables";
 
 .navbar {
-  width: 100vw;
+  width: 100%;
   padding: 1rem;
   display: flex;
   align-items: center;
@@ -19,13 +19,15 @@
     gap: 20px;
 
     .icon{
-      @include sm{
-        display: none;
-      }
+      cursor: pointer;
+      //@include sm{
+      //  display: none;
+      //}
     }
 
     .notification {
       position: relative;
+      cursor: pointer;
 
       span {
         background-color: red;
@@ -62,6 +64,32 @@
   display: none;
   cursor: pointer;
 }
+
+.settingsMenuContainer {
+  display: flex;
+  position: absolute;
+  top: 3.7rem;
+  right: 1.5rem;
+  background: $dark-bg;
+  padding: 0.3rem;
+  width: 8rem;
+  border: 1.5px solid $soft-bg;
+  border-radius: 5px;
+
+}
+
+.settingsButton {
+  padding: 2px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.settingsButton:hover {
+  background: $menu-button-hover;
+}
+
 
 @media (max-width: 1024px) {
   .logo .material-symbols-outlined {

@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import "./Menu.scss";
 import { menu } from "../../data";
-import React, {SetStateAction} from "react";
+import React from "react";
 
-const Menu = (setToggle: React.FC<SetStateAction<boolean>>) => {
+interface MenuInterface {
+  setToggle:  React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Menu: React.FC<MenuInterface> = ({setToggle}) => {
   return (
     <div className="menu">
       {menu.map((item) => (

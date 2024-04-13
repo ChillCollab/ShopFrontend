@@ -1,0 +1,33 @@
+@import "src/styles/variables";
+
+.css-r47a1p-MuiFormControl-root {
+  width: 100% !important;
+  margin: 0 !important;
+  border-color: $soft-color !important;
+}
+
+.custom-form-control {
+  .MuiInputLabel-root {
+    color: $placeholder-color;
+  }
+  .MuiOutlinedInput-root.Mui-focused {
+    border-color: $soft-color;
+    .MuiOutlinedInput-notchedOutline {
+      color: $main-button !important;
+      border-color: $soft-color;
+    }
+  }
+}
+.custom-form-control .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-radius: 7px;
+  border-color: $soft-color;
+}
+.custom-form-control:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: $soft-color;
+}
+.custom-form-control:focus-within .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: $soft-color;
+}
+.custom-form-control:focus-within .MuiInputLabel-root {
+  color: #8B87D6;
+}
