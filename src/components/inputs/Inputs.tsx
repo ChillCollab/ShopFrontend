@@ -62,7 +62,7 @@ export const InputLabelPassword: React.FC<InputLabelPassword> = ({
               onClick={() => {
                 isShow ? setIsShow(false) : setIsShow(true);
               }}
-              onMouseDown={() => {}}
+              onMouseDown={() => void {}}
               edge="end"
             >
               {isShow ? <img src="/eye.svg" alt={''} /> : <img src="/eye-off.svg" alt={''} />}

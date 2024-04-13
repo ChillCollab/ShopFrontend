@@ -18,8 +18,7 @@ const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMen
   const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
     function logout() {
       authRequests.logout().then((logoutResponse) => {
-        if (logoutResponse.status !== 200) {
-        } else {
+        if (logoutResponse.status == 200) {
           localStorage.removeItem('access_token');
           localStorage.removeItem('refresh_token');
           navigate('/auth', { replace: true });
