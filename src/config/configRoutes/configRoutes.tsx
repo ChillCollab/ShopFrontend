@@ -51,13 +51,13 @@ export const routeConfig = [
   },
   {
     path: routePaths.HOME,
-    element: <Layout/>,
+    element: <Layout />,
     children: [
       {
         path: routePaths.HOME,
-        element: <Home/>,
-      }
-    ]
+        element: <Home />,
+      },
+    ],
   },
   {
     path: routePaths.AUTH,
