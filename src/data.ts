@@ -39,12 +39,6 @@ export const menu = [
         url: '/admin/orders',
         icon: '/order.svg',
       },
-      {
-        id: 4,
-        title: 'Posts',
-        url: '/admin/posts',
-        icon: '/post2.svg',
-      },
     ],
   },
   {
