@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
-import "./Menu.scss";
-import { menu } from "../../data";
-import React from "react";
+import { Link } from 'react-router-dom';
+import './Menu.scss';
+import { menu } from '../../staticDatas';
+import React from 'react';
 
 interface MenuInterface {
-  setToggle:  React.Dispatch<React.SetStateAction<boolean>>
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Menu: React.FC<MenuInterface> = ({setToggle}) => {
+const Menu: React.FC<MenuInterface> = ({ setToggle }) => {
   return (
     <div className="menu">
       {menu.map((item) => (

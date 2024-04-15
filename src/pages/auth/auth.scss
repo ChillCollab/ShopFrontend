@@ -1,7 +1,7 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .loginContainer {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   display: flex;
   min-width: 325px;
   justify-content: center;
@@ -49,7 +49,7 @@
     max-height: 80px !important;
     align-content: end;
     margin: 0;
-    border-color: #ABABAB !important;
+    border-color: #ababab !important;
   }
 
   .rememberContainer {
@@ -137,7 +137,6 @@
     text-align: center;
     font-size: 1.2rem;
   }
-
 }
 
 @media (max-width: 900px) {
@@ -149,5 +148,3 @@
     }
   }
 }
-
-

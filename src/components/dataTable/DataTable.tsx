@@ -1,10 +1,6 @@
-import {
-  DataGrid,
-  GridColDef,
-  GridToolbar,
-} from "@mui/x-data-grid";
-import "./dataTable.scss";
-import { Link } from "react-router-dom";
+import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
+import './dataTable.scss';
+import { Link } from 'react-router-dom';
 
 type Props = {
   columns: GridColDef[];
@@ -13,18 +9,16 @@ type Props = {
 };
 
 const DataTable = (props: Props) => {
-
-    const handleDelete = (id: number) => {
-        console.log(id)
-
+  const handleDelete = (id: number) => {
+    console.log(id);
   };
 
   const actionColumn: GridColDef = {
-      field: "action",
-      headerName: "Action",
-      width: 100,
-      headerAlign: "center",
-      headerClassName: "headerBox",
+    field: 'action',
+    headerName: 'Action',
+    width: 100,
+    headerAlign: 'center',
+    headerClassName: 'headerBox',
     renderCell: (params) => {
       return (
         <div className="action">
@@ -42,7 +36,7 @@ const DataTable = (props: Props) => {
   return (
     <div className="dataTable">
       <DataGrid
-          style={{border: 2, borderStyle: "solid", borderColor: "#384256", borderRadius: 10}}
+        style={{ border: 2, borderStyle: 'solid', borderColor: '#384256', borderRadius: 10 }}
         className="dataGrid"
         rows={props.rows}
         columns={[...props.columns, actionColumn]}

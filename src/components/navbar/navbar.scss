@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .navbar {
   width: 100%;
@@ -18,7 +18,7 @@
     align-items: center;
     gap: 20px;
 
-    .icon{
+    .icon {
       cursor: pointer;
       //@include sm{
       //  display: none;
@@ -75,7 +75,6 @@
   width: 8rem;
   border: 1.5px solid $soft-bg;
   border-radius: 5px;
-
 }
 
 .settingsButton {
@@ -89,7 +88,6 @@
 .settingsButton:hover {
   background: $menu-button-hover;
 }
-
 
 @media (max-width: 1024px) {
   .logo .material-symbols-outlined {
