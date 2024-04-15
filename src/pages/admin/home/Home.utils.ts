@@ -1,4 +1,4 @@
-import authRequests from '../auth/requests/auth';
+import authRequests from '../../auth/requests/auth';
 
 export async function getAuth() {
   try {

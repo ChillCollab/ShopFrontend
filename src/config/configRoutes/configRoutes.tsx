@@ -1,19 +1,21 @@
-import Layout from '../../components/layout/Layout';
+import AdminLayout from '../../components/layouts/AdminLayout/Layout';
 import Auth from '../../pages/auth/Auth';
 import ResetPassword from '../../pages/auth/ResetPassword';
 import SubmitRegistration from '../../pages/auth/SubmitRegistration';
-import Home from '../../pages/home/Home';
-import Product from '../../pages/product/Product';
-import Products from '../../pages/products/Products';
-import User from '../../pages/user/User';
-import Users from '../../pages/users/Users';
+import AdminHome from '../../pages/admin/home/Home';
+import Product from '../../pages/admin/product/Product';
+import Products from '../../pages/admin/products/Products';
+import User from '../../pages/admin/user/User';
+import Users from '../../pages/admin/users/Users';
+import Layout from '../../components/layouts/Layout';
+import Home from '../../pages/Home';
 
 export const routePaths = {
   HOME: '/',
-  PRODUCT: '/product/:id',
-  PRODUCTS: '/products',
-  USER: '/users/:id',
-  USERS: '/users',
+  ADMIN_PRODUCT: '/admin/product/:id',
+  ADMIN_PRODUCTS: '/admin/products',
+  ADMIN_USER: '/admin/users/:id',
+  ADMIN_USERS: '/admin/users',
   AUTH: '/auth',
   ADMIN: '/admin',
   RESET_PASSWORD: '/reset/submit/:id',
@@ -22,30 +24,40 @@ export const routePaths = {
 
 export const routeConfig = [
   {
-    path: routePaths.HOME,
-    element: <Layout />,
+    path: routePaths.ADMIN,
+    element: <AdminLayout />,
     children: [
       {
-        path: routePaths.HOME,
-        element: <Home />,
+        path: routePaths.ADMIN,
+        element: <AdminHome />,
       },
       {
-        path: routePaths.USER,
+        path: routePaths.ADMIN_USER,
         element: <User />,
       },
       {
-        path: routePaths.USERS,
+        path: routePaths.ADMIN_USERS,
         element: <Users />,
       },
       {
-        path: routePaths.PRODUCT,
+        path: routePaths.ADMIN_PRODUCT,
         element: <Product />,
       },
       {
-        path: routePaths.PRODUCTS,
+        path: routePaths.ADMIN_PRODUCTS,
         element: <Products />,
       },
     ],
+  },
+  {
+    path: routePaths.HOME,
+    element: <Layout/>,
+    children: [
+      {
+        path: routePaths.HOME,
+        element: <Home/>,
+      }
+    ]
   },
   {
     path: routePaths.AUTH,

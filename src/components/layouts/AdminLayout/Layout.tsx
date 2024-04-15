@@ -1,9 +1,9 @@
 import { FC, ReactNode, useState } from 'react';
-import Navbar from '../navbar/Navbar';
+import Navbar from '../../navbar/Navbar';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Menu from '../menu/Menu';
+import Menu from '../../menu/Menu';
 import { Outlet } from 'react-router-dom';
-import Footer from '../footer/Footer';
+import Footer from '../../footer/Footer';
 
 const queryClient = new QueryClient();
 

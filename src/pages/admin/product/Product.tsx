@@ -1,5 +1,5 @@
-import Single from '../../components/single/Single';
-import { singleProduct } from '../../staticDatas';
+import Single from '../../../components/single/Single';
+import { singleProduct } from '../../../staticDatas';
 import './product.scss';
 
 const Product = () => {

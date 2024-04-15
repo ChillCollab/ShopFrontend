@@ -6,13 +6,13 @@ export const menu = [
       {
         id: 1,
         title: 'Home',
-        url: '/',
+        url: '/admin',
         icon: '/home.svg',
       },
       {
         id: 2,
         title: 'Profile',
-        url: '/users/1',
+        url: '/admin/users/1',
         icon: '/user.svg',
       },
     ],
@@ -24,25 +24,25 @@ export const menu = [
       {
         id: 1,
         title: 'Users',
-        url: '/users',
+        url: '/admin/users',
         icon: '/user.svg',
       },
       {
         id: 2,
         title: 'Products',
-        url: '/products',
-        icon: '/product.svg',
+        url: '/admin/products',
+        icon: '/admin/product.svg',
       },
       {
         id: 3,
         title: 'Orders',
-        url: '/orders',
-        icon: '/order.svg',
+        url: '/admin/orders',
+        icon: '/admin/order.svg',
       },
       {
         id: 4,
         title: 'Posts',
-        url: '/posts',
+        url: '/admin/posts',
         icon: '/post2.svg',
       },
     ],
@@ -54,7 +54,7 @@ export const menu = [
       {
         id: 1,
         title: 'Elements',
-        url: '/admin/',
+        url: '/admin',
         icon: '/element.svg',
       },
       {
