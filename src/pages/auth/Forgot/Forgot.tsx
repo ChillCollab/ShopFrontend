@@ -1,7 +1,7 @@
 import React, { ChangeEvent, SetStateAction, useState } from 'react';
 import { LoadingButton } from '@mui/lab';
-import authRequests from './requests/auth.ts';
-import { InputLabelEmail } from '../../components/inputs/Inputs.tsx';
+import authRequests from '../requests/auth.ts';
+import InputLabelEmail from '../../../components/inputs/InputLabelEmail.tsx';
 
 interface Forgot {
   setForgot: React.Dispatch<SetStateAction<boolean>>;
@@ -54,7 +54,7 @@ const Forgot: React.FC<Forgot> = ({ setForgot, setSuccessfulRegister, setTitle }
         <h1>Recovery the password</h1>
         <p>Enter your authorized email address to receive a password reset link.</p>
       </div>
-      <InputLabelEmail error={isErr} label={'Email'} size={'medium'} event={handlerEmail} />
+      <InputLabelEmail error={isErr} label={'Email'} size={'medium'} onChange={handlerEmail} register />
       {isErr ? <div style={{ display: 'flex', justifyContent: 'center', color: 'red' }}>{isErrMsg}</div> : <></>}
       <div className="buttonsContainer">
         <LoadingButton

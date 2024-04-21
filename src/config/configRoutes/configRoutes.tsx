@@ -1,5 +1,4 @@
 import AdminLayout from '../../components/layouts/AdminLayout/Layout';
-import Auth from '../../pages/auth/Auth';
 import ResetPassword from '../../pages/auth/ResetPassword';
 import SubmitRegistration from '../../pages/auth/SubmitRegistration';
 import AdminHome from '../../pages/admin/home/Home';
@@ -9,6 +8,8 @@ import User from '../../pages/admin/user/User';
 import Users from '../../pages/admin/users/Users';
 import Layout from '../../components/layouts/Layout';
 import Home from '../../pages/Home';
+import Login from '../../pages/auth/Login/Login';
+import Register from '../../pages/auth/Register/Register';
 
 export const routePaths = {
   HOME: '/',
@@ -16,10 +17,11 @@ export const routePaths = {
   ADMIN_PRODUCTS: '/admin/products',
   ADMIN_USER: '/admin/users/:id',
   ADMIN_USERS: '/admin/users',
-  AUTH: '/auth',
   ADMIN: '/admin',
   RESET_PASSWORD: '/reset/submit/:id',
   SUBMIT_REGISTRATION: '/registration/submit/:id',
+  ADMIN_AUTH_LOGIN: '/admin/login',
+  REGISTER_AUTH: 'admin/register', // url пока как админ будет, потом надо менять
 };
 
 export const routeConfig = [
@@ -60,8 +62,12 @@ export const routeConfig = [
     ],
   },
   {
-    path: routePaths.AUTH,
-    element: <Auth />,
+    path: routePaths.ADMIN_AUTH_LOGIN,
+    element: <Login />,
+  },
+  {
+    path: routePaths.REGISTER_AUTH,
+    element: <Register />,
   },
   {
     path: routePaths.SUBMIT_REGISTRATION,

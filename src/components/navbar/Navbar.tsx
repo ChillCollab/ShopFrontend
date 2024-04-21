@@ -20,7 +20,7 @@ const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
       if (logoutResponse.status == 200) {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
-        navigate('/auth', { replace: true });
+        navigate('/admin/login', { replace: true });
       }
     });
   }, []);

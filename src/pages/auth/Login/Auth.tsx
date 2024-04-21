@@ -1,11 +1,10 @@
-import './auth.scss';
 import { useEffect, useState } from 'react';
 import Login from './Login.tsx';
-import Register from './Register.tsx';
-import authRequests from './requests/auth.ts';
+import Register from '../Register/Register.tsx';
+import authRequests from '../requests/auth.ts';
 import { useNavigate } from 'react-router-dom';
-import SuccessfulSend from './SuccessfulSend.tsx';
-import Forgot from './Forgot.tsx';
+import SuccessfulSend from '../SuccessfulSend.tsx';
+import Forgot from '../Forgot/Forgot.tsx';
 
 import { NavigateFunction } from 'react-router-dom';
 
@@ -43,25 +42,13 @@ const Auth = () => {
       });
     }
   }
-  function Manipulator() {
-    if (register)
-      return <Register setRegister={setRegister} setRegisterSuccess={setIsSuccessfulSend} setTitle={setIsTitle} />;
-    if (isSuccessfulSend) return <SuccessfulSend setRegisterSuccess={setIsSuccessfulSend} title={isTitle} />;
-    if (isForgot)
-      return <Forgot setForgot={setIsForgot} setSuccessfulRegister={setIsSuccessfulSend} setTitle={setIsTitle} />;
-    return <Login setRegister={setRegister} setIsForgot={setIsForgot} />;
-  }
 
   useEffect(() => {
     if (localStorage.getItem('access_token') !== null) {
       checkLogin(navigate);
     }
   }, []);
-  return (
-    <div className="loginContainer">
-      <Manipulator />
-    </div>
-  );
+  return <div className="loginContainer">{/* <Manipulator /> */}</div>;
 };
 
 export default Auth;

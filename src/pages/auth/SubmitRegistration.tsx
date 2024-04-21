@@ -1,10 +1,11 @@
-import { InputLabelMain, InputLabelPassword } from '../../components/inputs/Inputs.tsx';
+import { InputLabelMain } from '../../components/inputs/Inputs.tsx';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { MainSpinner } from '../../components/spinners/MainSpinner.tsx';
 import authRequests, { SuccessInterface, User } from './requests/auth.ts';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
 import { LoadingButton } from '@mui/lab';
+import { InputLabelPassword } from '../../components/inputs/InputLabelPassword.tsx';
 
 export default function SubmitRegistration() {
   const [isErr, setIsErr] = useState<boolean>(false);
@@ -113,20 +114,19 @@ export default function SubmitRegistration() {
           <InputLabelPassword
             error={isErr}
             isShow={isEyeFirst}
-            setIsShow={setIsEyeFirst}
+            setIsShow={() => setIsEyeFirst(!isEyeFirst)}
             label={'Password'}
             onFocus={() => setIsErr(false)}
-            event={handlerPassword}
             onKeyDown={handleKeyDown}
             size={'medium'}
           />
           <InputLabelPassword
             error={isErr}
             isShow={isEyeSecond}
-            setIsShow={setIsEyeSecond}
+            setIsShow={() => setIsEyeFirst(!isEyeFirst)}
             label={'Password'}
             onFocus={() => setIsErr(false)}
-            event={handlerPasswordSubmit}
+            // event={handlerPasswordSubmit}
             onKeyDown={handleKeyDown}
             size={'medium'}
           />

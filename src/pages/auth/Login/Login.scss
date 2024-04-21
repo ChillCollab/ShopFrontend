@@ -1,0 +1,51 @@
+@import './../../../styles/variables.scss';
+
+.login-adim-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login {
+  font-family: 'Inter', sans-serif;
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+}
+.login-title {
+  text-align: center;
+  margin-bottom: 64px;
+
+  & h1 {
+    margin-bottom: 16px;
+    color: white;
+  }
+  & p {
+    font-size: 20px;
+    color: $placeholder-color;
+  }
+}
+
+.login-question {
+  justify-content: center;
+  display: flex;
+  color: rgba(255, 255, 255, 0.73);
+  & p {
+    margin-right: 5px;
+    color: $soft-color;
+  }
+}
+.submit-button {
+  margin-top: '10px';
+  margin-bottom: '50px';
+  height: '60px';
+  background-color: rgba(139, 135, 214, 1);
+  color: white;
+  &:hover {
+    background: '#fff';
+    color: '#8B87D6';
+  }
+}

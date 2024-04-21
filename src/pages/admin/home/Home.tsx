@@ -24,7 +24,7 @@ const Home = () => {
   useEffect(() => {
     getAuth().then((res) => {
       if (!res) {
-        navigate('/auth', { replace: false });
+        navigate('/admin/login', { replace: false });
       }
       setIsLoading(false);
     });
