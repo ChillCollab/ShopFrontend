@@ -74,7 +74,7 @@ const LoginForm = () => {
           }}
           error={!!errors?.login || !hasServer}
           size="medium"
-          label="Login or email"
+          label="Login or Email"
           register={configLogin}
         />
         <div style={{ marginBottom: '20px', color: '#DC143C', fontSize: '14px' }}>
@@ -87,7 +87,7 @@ const LoginForm = () => {
           size="medium"
           isShow={isShow}
           setIsShow={toggleShowPassword}
-          label="password"
+          label="Password"
           style={{ width: '100%', marginBottom: '10px', display: 'flex', color: 'white' }}
           register={configPassword}
         />
