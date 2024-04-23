@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 // import { AxiosResponse } from 'axios';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { Alert, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { InputLabelMain } from '../../../components/inputs/Inputs.tsx';
 import './Register.scss';
 import { Link } from 'react-router-dom';
@@ -26,33 +26,7 @@ const Register: React.FC = () => {
   } = useForm();
 
   const configs = {
-    ['email']: {
-      ...conf('email', {
-        required: 'Поле электронной почты не должно быть пустым',
-        minLength: {
-          value: 6,
-          message: 'Поле адрес электронной почты должно быть больше 5',
-        },
-        maxLength: {
-          value: 100,
-          message: 'Поле электронной почты должно быть меньше 100',
-        },
-      }),
-    },
-    ['surname']: {
-      ...conf('surname', {
-        required: 'Поле фамилия не должно быть пустым',
-        minLength: {
-          value: 6,
-          message: 'Поле фамилия должно быть больше 5',
-        },
-        maxLength: {
-          value: 20,
-          message: 'Поле фамилия должно быть меньше 20',
-        },
-      }),
-    },
-    ['login']: {
+    ['Login']: {
       ...conf('login', {
         required: 'Поле логин не должно быть пустым',
         minLength: {
@@ -65,7 +39,7 @@ const Register: React.FC = () => {
         },
       }),
     },
-    ['name']: {
+    ['Name']: {
       ...conf('name', {
         required: 'Имя поля не должно быть пустым',
         minLength: {
@@ -78,19 +52,32 @@ const Register: React.FC = () => {
         },
       }),
     },
-    // ['password']: {
-    //   ...conf('password', {
-    //     required: 'Поле пароля должно быть больше 5',
-    //     minLength: {
-    //       value: 5,
-    //       message: 'Поле пароля должно быть больше 5',
-    //     },
-    //     maxLength: {
-    //       value: 20,
-    //       message: 'Поле пароля должно быть меньше 20',
-    //     },
-    //   }),
-    // },
+    ['Surname']: {
+      ...conf('surname', {
+        required: 'Поле фамилия не должно быть пустым',
+        minLength: {
+          value: 6,
+          message: 'Поле фамилия должно быть больше 5',
+        },
+        maxLength: {
+          value: 20,
+          message: 'Поле фамилия должно быть меньше 20',
+        },
+      }),
+    },
+    ['Email']: {
+      ...conf('email', {
+        required: 'Поле электронной почты не должно быть пустым',
+        minLength: {
+          value: 6,
+          message: 'Поле адрес электронной почты должно быть больше 5',
+        },
+        maxLength: {
+          value: 100,
+          message: 'Поле электронной почты должно быть меньше 100',
+        },
+      }),
+    },
   };
   type FieldKey = keyof typeof configs;
 
