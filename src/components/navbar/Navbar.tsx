@@ -3,6 +3,8 @@ import 'material-symbols/outlined.scss';
 import React, { useCallback } from 'react';
 import authRequests from '../../pages/auth/requests/auth.ts';
 import { useNavigate } from 'react-router-dom';
+import MailIcon from '@mui/icons-material/Mail';
+import { Badge } from '@mui/material';
 interface NavbarProps {
   setToggle: React.Dispatch<React.SetStateAction<boolean>>;
   toggle: boolean;
@@ -49,10 +51,9 @@ const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMen
         <img src="/search.svg" alt="" className="icon" />
         <img src="/app.svg" alt="" className="icon" />
         <img src="/expand.svg" alt="" className="icon" />
-        <div className="notification">
-          <img src="/notifications.svg" alt="" />
-          <span>1</span>
-        </div>
+        <Badge color="secondary" variant="dot">
+          <MailIcon style={{ height: '25px', width: '25px' }} />
+        </Badge>
         <div className="user">
           <img
             src="https://images.pexels.com/photos/11038549/pexels-photo-11038549.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
