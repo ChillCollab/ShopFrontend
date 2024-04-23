@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom';
 import Single from '../../../components/single/Single';
 import { singleUser } from '../../../staticDatas';
 import './user.scss';

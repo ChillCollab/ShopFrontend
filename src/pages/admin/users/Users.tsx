@@ -15,14 +15,14 @@ const columns: GridColDef[] = [
     width: 80,
   },
   {
-    field: 'img',
+    field: 'avatar_id',
     headerName: 'Avatar',
     headerAlign: 'center',
     cellClassName: 'nameCell',
     headerClassName: 'headerBox',
     width: 80,
     renderCell: (params) => {
-      return <img src={params.row.img || '/noavatar.png'} alt="" />;
+      return <img src={params.row.avatar_id || '/noavatar.png'} alt="" />;
     },
   },
   {
