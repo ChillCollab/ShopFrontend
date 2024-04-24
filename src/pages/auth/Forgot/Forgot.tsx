@@ -1,8 +1,9 @@
-import React, { ChangeEvent, SetStateAction, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { LoadingButton } from '@mui/lab';
 import authRequests from '../requests/auth.ts';
 import InputLabelEmail from '../../../components/inputs/InputLabelEmail.tsx';
 import { Link } from 'react-router-dom';
+import './forgot.scss';
 
 const Forgot: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

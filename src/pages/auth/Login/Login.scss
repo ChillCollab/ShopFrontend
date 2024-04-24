@@ -49,3 +49,31 @@
     color: '#8B87D6';
   }
 }
+
+.rememberContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+  p {
+    color: $soft_color;
+    line-height: 21.25px;
+    font-size: 17px;
+  }
+}
+
+.forget {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+
+  .forgot-btn {
+    color: $soft_color;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 21.25px;
+    text-align: right;
+  }
+}

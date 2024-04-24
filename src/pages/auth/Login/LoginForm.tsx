@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import authRequests from '../requests/auth';
 import { useForm } from 'react-hook-form';
 import { Button } from '@mui/material';
@@ -107,9 +107,9 @@ const LoginForm = () => {
           <CCheckBox size="small" />
           <p>Remember me</p>
         </div>
-        <div className="forgot-btn" onClick={() => setIsForgot(true)}>
+        <Link to="/admin/forgot" className="forgot-btn">
           Forgot your password?
-        </div>
+        </Link>
       </div>
       <Button
         sx={{
