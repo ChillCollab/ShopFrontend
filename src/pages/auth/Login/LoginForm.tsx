@@ -6,6 +6,7 @@ import { Button } from '@mui/material';
 import { ErrorMessage } from '@hookform/error-message';
 import { InputLabelPassword } from '../../../components/inputs/InputLabelPassword';
 import { InputLabelMain } from '../../../components/inputs/Inputs';
+import { CCheckBox } from '../../../components/checkBoxes/CheckBoxes.tsx';
 
 const LoginForm = () => {
   const [isShow, setIsShow] = useState(false);
@@ -101,6 +102,15 @@ const LoginForm = () => {
           <div>Incorrect login or password</div>
         </div>
       )}
+      <div className="forget">
+        <div className="rememberContainer">
+          <CCheckBox size="small" />
+          <p>Remember me</p>
+        </div>
+        <div className="forgot-btn" onClick={() => setIsForgot(true)}>
+          Forgot your password?
+        </div>
+      </div>
       <Button
         sx={{
           marginTop: '10px',
