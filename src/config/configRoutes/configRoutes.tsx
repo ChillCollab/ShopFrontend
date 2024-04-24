@@ -1,6 +1,6 @@
 import AdminLayout from '../../components/layouts/AdminLayout/Layout';
 import ResetPassword from '../../pages/auth/ResetPassword';
-import SubmitRegistration from '../../pages/auth/SubmitRegistration';
+import SubmitRegistration from '../../pages/auth/Register/SubmitRegistration.tsx';
 import AdminHome from '../../pages/admin/home/Home';
 import Product from '../../pages/admin/product/Product';
 import Products from '../../pages/admin/products/Products';

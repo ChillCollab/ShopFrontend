@@ -8,6 +8,7 @@ export interface InputPropsTypes {
   register?: any;
   error: boolean;
   label: string;
+  event?: any;
   size: 'small' | 'medium';
   onChange?: any;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
@@ -24,6 +25,7 @@ export type InputPropType = {
   error: boolean;
   type: string;
   label: string;
+  event?: any;
   size: 'small' | 'medium';
   onChange?: any;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;

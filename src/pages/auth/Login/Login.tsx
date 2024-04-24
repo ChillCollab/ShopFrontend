@@ -2,6 +2,7 @@ import './Login.scss';
 import React from 'react';
 import LoginForm from './LoginForm.tsx';
 import { Link } from 'react-router-dom';
+import { routePaths } from '../../../config/configRoutes/configRoutes.tsx';
 
 const Login: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const Login: React.FC = () => {
           <p>Login now and access your account.</p>
         </div>
         <LoginForm />
-        <Link to={'/admin/register'} className="login-question">
+        <Link to={routePaths.REGISTER_AUTH} className="login-question">
           <p>Don't have an account yet?</p>
           <div className="registerButton">Register</div>
         </Link>

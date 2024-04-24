@@ -1,5 +1,6 @@
 import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
 import { InputTypes } from './inputs.types';
+import React from 'react';
 
 export const InputLabelPassword: React.FC<InputTypes<'password'>> = ({
   error,
@@ -7,6 +8,7 @@ export const InputLabelPassword: React.FC<InputTypes<'password'>> = ({
   setIsShow,
   label,
   size,
+  event,
   onKeyDown,
   onFocus,
   register,
@@ -22,6 +24,7 @@ export const InputLabelPassword: React.FC<InputTypes<'password'>> = ({
         {...register}
         error={error}
         size={size}
+        event={event}
         id="outlined-adornment-password"
         type={isShow ? 'text' : 'password'}
         onKeyDown={onKeyDown}
