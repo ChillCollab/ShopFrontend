@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
-import Login from './Login.tsx';
-import Register from '../Register/Register.tsx';
 import authRequests from '../requests/auth.ts';
 import { useNavigate } from 'react-router-dom';
-import SuccessfulSend from '../SuccessfulSend.tsx';
-import Forgot from '../Forgot/Forgot.tsx';
 
 import { NavigateFunction } from 'react-router-dom';
 

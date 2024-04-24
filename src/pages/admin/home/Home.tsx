@@ -12,22 +12,14 @@ import {
   chartBoxUser,
 } from '../../../staticDatas.ts';
 import './home.scss';
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { MainSpinner } from '../../../components/spinners/MainSpinner.tsx';
-import { getAuth } from './Home.utils.ts';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    getAuth().then((res) => {
-      if (!res) {
-        navigate('/admin/login', { replace: false });
-      }
-      setIsLoading(false);
-    });
+    setIsLoading(false);
   }, []);
 
   return (

@@ -1,9 +1,4 @@
-// import { LoadingButton } from '@mui/lab';
 import React, { useState } from 'react';
-// import authRequests from '../requests/auth.ts';
-// import { InputLabelEmail, InputLabelMain } from '../../../components/inputs/Inputs.tsx';
-// import { RegistrationResponse, SendEmailResponse } from '../../../types/Auth.ts';
-// import { AxiosResponse } from 'axios';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { Button } from '@mui/material';

@@ -2,13 +2,9 @@ import React, { ChangeEvent, SetStateAction, useState } from 'react';
 import { LoadingButton } from '@mui/lab';
 import authRequests from '../requests/auth.ts';
 import InputLabelEmail from '../../../components/inputs/InputLabelEmail.tsx';
+import { Link } from 'react-router-dom';
 
-interface Forgot {
-  setForgot: React.Dispatch<SetStateAction<boolean>>;
-  setSuccessfulRegister: React.Dispatch<SetStateAction<boolean>>;
-  setTitle: React.Dispatch<SetStateAction<string>>;
-}
-const Forgot: React.FC<Forgot> = ({ setForgot, setSuccessfulRegister, setTitle }) => {
+const Forgot: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEmail, setIsEmail] = useState<string>('');
   const [isErrMsg, setIsErrMsg] = useState<string>('');
@@ -30,10 +26,7 @@ const Forgot: React.FC<Forgot> = ({ setForgot, setSuccessfulRegister, setTitle }
       .recovery(email)
       .then((recoveryResponse) => {
         if (recoveryResponse.status === 200) {
-          setTitle('Restore successful!');
-          setSuccessfulRegister(true);
           setIsLoading(false);
-          setForgot(false);
         }
       })
       .catch((e) => {
@@ -66,10 +59,10 @@ const Forgot: React.FC<Forgot> = ({ setForgot, setSuccessfulRegister, setTitle }
           Send email
         </LoadingButton>
       </div>
-      <div className="registerBox" onClick={() => setForgot(false)}>
+      <Link to="/admin/register" className="registerBox">
         <p>Do you have an account yet?</p>
         <div className="registerButton">Login</div>
-      </div>
+      </Link>
     </div>
   );
 };

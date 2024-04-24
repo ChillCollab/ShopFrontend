@@ -7,9 +7,10 @@ import Products from '../../pages/admin/products/Products';
 import User from '../../pages/admin/user/User';
 import Users from '../../pages/admin/users/Users';
 import Layout from '../../components/layouts/Layout';
-import Home from '../../pages/Home';
+import Home from '../../pages/home/Home';
 import Login from '../../pages/auth/Login/Login';
 import Register from '../../pages/auth/Register/Register';
+import Forgot from '../../pages/auth/Forgot/Forgot.tsx';
 
 export const routePaths = {
   HOME: '/',
@@ -22,6 +23,7 @@ export const routePaths = {
   SUBMIT_REGISTRATION: '/registration/submit/:id',
   ADMIN_AUTH_LOGIN: '/admin/login',
   REGISTER_AUTH: 'admin/register', // url пока как админ будет, потом надо менять
+  FORGOT_PASSWORD: '/admin/forgot',
 };
 
 export const routeConfig = [
@@ -76,5 +78,9 @@ export const routeConfig = [
   {
     path: routePaths.RESET_PASSWORD,
     element: <ResetPassword />,
+  },
+  {
+    path: routePaths.FORGOT_PASSWORD,
+    element: <Forgot />,
   },
 ];

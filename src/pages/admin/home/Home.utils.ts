@@ -8,11 +8,10 @@ export async function getAuth() {
       if (refreshResponse?.status === 200) {
         localStorage.setItem('access_token', refreshResponse?.data.access_token);
         localStorage.setItem('refresh_token', refreshResponse?.data.refresh_token);
-        authRequests.userInfo();
-        return true;
-      } else return false;
+        return await authRequests.userInfo();
+      } else return await authRequests.userInfo();
     } else {
-      return true;
+      return userResponse;
     }
   } catch (error) {
     console.error('Error during authentication:', error);

@@ -40,7 +40,7 @@ const LoginForm = () => {
         message: 'Поле должно быть не менее 5 символов',
       },
       maxLength: {
-        value: 20,
+        value: 50,
         message: 'Поле должно быть не более 20 символов',
       },
     }),
@@ -98,10 +98,7 @@ const LoginForm = () => {
 
       {!hasServer && (
         <div style={{ color: '#DC143C', fontSize: '14px', marginTop: '20px', marginBottom: '25px' }}>
-          <div>
-            адрес электронной почты или пароль неверен, пожалуйста, введите правильный адрес электронной почты или
-            пароль
-          </div>
+          <div>Incorrect login or password</div>
         </div>
       )}
       <Button

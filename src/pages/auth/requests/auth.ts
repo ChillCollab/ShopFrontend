@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import config from '../../../config/config.ts';
-import { RegistrationResponse, SendEmailResponse } from '../../../types/Auth.ts';
+import { SendEmailResponse } from '../../../types/Auth.ts';
 
 export interface User {
   id: number;
