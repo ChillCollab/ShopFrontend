@@ -89,6 +89,14 @@
   background: $menu-button-hover;
 }
 
+@media (max-width: 700px) {
+  .logo {
+    span{
+      display: none;
+    }
+  }
+}
+
 @media (max-width: 1024px) {
   .logo .material-symbols-outlined {
     display: block;

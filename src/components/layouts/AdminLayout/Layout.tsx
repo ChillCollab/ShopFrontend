@@ -5,6 +5,7 @@ import Menu from '../../menu/Menu';
 import { Outlet } from 'react-router-dom';
 import Footer from '../../footer/Footer';
 import { getAuth } from '../../../pages/admin/home/Home.utils.ts';
+import { routePaths } from '../../../config/configRoutes/configRoutes.tsx';
 
 const queryClient = new QueryClient();
 
@@ -18,15 +19,21 @@ const Layout = () => {
       if (res.status !== 200) {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
-        window.location.href = '/admin/login';
+        window.location.href = routePaths.ADMIN_AUTH_LOGIN;
       }
-      setIsName(res.data.name);
+      setIsName(res.data.login);
     });
   }, []);
 
   return (
     <div className="main">
-      <Navbar setToggle={setToggle} toggle={toggle} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      <Navbar
+        setToggle={setToggle}
+        toggle={toggle}
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        isName={isName}
+      />
       <div className="container" onClick={() => setIsMenuOpen(false)}>
         {toggle ? (
           <div className="menuContainer">

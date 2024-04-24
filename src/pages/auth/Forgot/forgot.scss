@@ -116,17 +116,6 @@
     font-weight: 700;
   }
 
-  .backContainer {
-    display: flex;
-    justify-content: start;
-
-    Button {
-      color: $main-button !important;
-      border-color: $main-button !important;
-      font-weight: 100;
-    }
-  }
-
   .loginButton:hover {
     background-color: $hover-button;
   }

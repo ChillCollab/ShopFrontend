@@ -11,6 +11,7 @@ import Home from '../../pages/home/Home';
 import Login from '../../pages/auth/Login/Login';
 import Register from '../../pages/auth/Register/Register';
 import Forgot from '../../pages/auth/Forgot/Forgot.tsx';
+import SuccessfulSend from '../../pages/auth/Forgot/SuccessfulSend.tsx';
 
 export const routePaths = {
   HOME: '/',
@@ -24,6 +25,7 @@ export const routePaths = {
   ADMIN_AUTH_LOGIN: '/admin/login',
   REGISTER_AUTH: 'admin/register', // url пока как админ будет, потом надо менять
   FORGOT_PASSWORD: '/admin/forgot',
+  FORGOT_PASSWORD_SUCCESS: '/admin/forgot/success',
 };
 
 export const routeConfig = [
@@ -82,5 +84,9 @@ export const routeConfig = [
   {
     path: routePaths.FORGOT_PASSWORD,
     element: <Forgot />,
+  },
+  {
+    path: routePaths.FORGOT_PASSWORD_SUCCESS,
+    element: <SuccessfulSend />,
   },
 ];

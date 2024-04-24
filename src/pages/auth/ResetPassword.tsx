@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { MainSpinner } from '../../components/spinners/MainSpinner.tsx';
 import { LoadingButton } from '@mui/lab';
 import { InputLabelPassword } from '../../components/inputs/InputLabelPassword.tsx';
+import { routePaths } from '../../config/configRoutes/configRoutes.tsx';
 
 export default function ResetPassword() {
   const [isErr, setIsErr] = useState<boolean>(false);
@@ -35,7 +36,7 @@ export default function ResetPassword() {
     if (code.length < 19) {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
-      navigate('/auth', { replace: true });
+      navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
     }
   }, []);
 

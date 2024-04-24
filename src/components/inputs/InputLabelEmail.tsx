@@ -2,7 +2,7 @@ import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { InputTypes } from './inputs.types';
 
 const InputLabelEmail: React.FC<InputTypes<'email'>> = (props) => {
-  const { error, label, size, onKeyDown, onFocus, register, style } = props;
+  const { onChange, error, label, size, onKeyDown, onFocus, register, style } = props;
   return (
     <FormControl className="custom-form-control" variant="outlined">
       <InputLabel htmlFor="outlined-adornment-password" style={{ display: 'flex', alignItems: 'center' }}>
@@ -18,6 +18,7 @@ const InputLabelEmail: React.FC<InputTypes<'email'>> = (props) => {
         label={label}
         onKeyDown={onKeyDown}
         onFocus={onFocus}
+        onChange={onChange}
       />
     </FormControl>
   );
