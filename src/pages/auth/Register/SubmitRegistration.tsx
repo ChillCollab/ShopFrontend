@@ -1,10 +1,12 @@
-import { InputLabelMain, InputLabelPassword } from '../../components/inputs/Inputs.tsx';
+import { InputLabelMain } from '../../../components/inputs/Inputs.tsx';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { MainSpinner } from '../../components/spinners/MainSpinner.tsx';
-import authRequests, { SuccessInterface, User } from './requests/auth.ts';
+import { MainSpinner } from '../../../components/spinners/MainSpinner.tsx';
+import authRequests, { SuccessInterface, User } from '../requests/auth.ts';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
 import { LoadingButton } from '@mui/lab';
+import { routePaths } from '../../../config/configRoutes/configRoutes.tsx';
+import { InputLabelPassword } from '../../../components/inputs/InputLabelPassword.tsx';
 
 export default function SubmitRegistration() {
   const [isErr, setIsErr] = useState<boolean>(false);
@@ -71,7 +73,7 @@ export default function SubmitRegistration() {
     if (code.length < 19) {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
-      navigate('/auth', { replace: true });
+      navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
     } else {
       authRequests
         .registerCodeCheck(code)
@@ -85,14 +87,14 @@ export default function SubmitRegistration() {
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             setIsLoading(false);
-            navigate('/auth', { replace: true });
+            navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
           }
         })
-        .catch((e) => {
+        .catch((e: AxiosError) => {
           console.error(e);
           localStorage.removeItem('access_token');
           localStorage.removeItem('refresh_token');
-          navigate('/auth', { replace: true });
+          navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
           setIsLoading(false);
         });
     }
@@ -113,17 +115,17 @@ export default function SubmitRegistration() {
           <InputLabelPassword
             error={isErr}
             isShow={isEyeFirst}
-            setIsShow={setIsEyeFirst}
+            setIsShow={() => setIsEyeFirst(!isEyeFirst)}
             label={'Password'}
             onFocus={() => setIsErr(false)}
-            event={handlerPassword}
             onKeyDown={handleKeyDown}
+            event={handlerPassword}
             size={'medium'}
           />
           <InputLabelPassword
             error={isErr}
             isShow={isEyeSecond}
-            setIsShow={setIsEyeSecond}
+            setIsShow={() => setIsEyeSecond(!isEyeSecond)}
             label={'Password'}
             onFocus={() => setIsErr(false)}
             event={handlerPasswordSubmit}

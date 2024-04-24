@@ -1,8 +1,9 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { MainSpinner } from '../../components/spinners/MainSpinner.tsx';
-import { InputLabelPassword } from '../../components/inputs/Inputs.tsx';
 import { LoadingButton } from '@mui/lab';
+import { InputLabelPassword } from '../../components/inputs/InputLabelPassword.tsx';
+import { routePaths } from '../../config/configRoutes/configRoutes.tsx';
 
 export default function ResetPassword() {
   const [isErr, setIsErr] = useState<boolean>(false);
@@ -35,7 +36,7 @@ export default function ResetPassword() {
     if (code.length < 19) {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
-      navigate('/auth', { replace: true });
+      navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
     }
   }, []);
 
@@ -55,21 +56,21 @@ export default function ResetPassword() {
           <InputLabelPassword
             error={isErr}
             isShow={isEyeFirst}
-            setIsShow={setIsEyeFirst}
+            setIsShow={() => setIsEyeFirst(!isEyeFirst)}
+            // setIsShow={setIsEyeFirst}
             label={'Password'}
             onFocus={() => setIsErr(false)}
-            event={handlerPassword}
+            // event={handlerPassword}
             onKeyDown={handleKeyDown}
             size={'medium'}
           />
           <InputLabelPassword
             error={isErr}
             isShow={isEyeSecond}
-            setIsShow={setIsEyeSecond}
+            setIsShow={() => setIsEyeFirst(!isEyeFirst)}
             label={'Password'}
             onFocus={() => setIsErr(false)}
             onKeyDown={handleKeyDown}
-            event={handlerPasswordSubmit}
             size={'medium'}
           />
           {isErr ? <div style={{ color: 'red', display: 'flex', justifyContent: 'center' }}>{isMsg}</div> : <></>}

@@ -5,11 +5,15 @@ import authRequests from '../../pages/auth/requests/auth.ts';
 import { useNavigate } from 'react-router-dom';
 import MailIcon from '@mui/icons-material/Mail';
 import { Badge } from '@mui/material';
+import { routePaths } from '../../config/configRoutes/configRoutes.tsx';
+
 interface NavbarProps {
   setToggle: React.Dispatch<React.SetStateAction<boolean>>;
   toggle: boolean;
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isMenuOpen: boolean;
+  isName: string;
+  isImage: string;
 }
 interface SettingsMenu {
   isOpen: boolean;
@@ -22,7 +26,7 @@ const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
       if (logoutResponse.status == 200) {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
-        navigate('/auth', { replace: true });
+        navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
       }
     });
   }, []);
@@ -37,7 +41,7 @@ const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
   } else return <></>;
 };
 
-const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMenuOpen }) => {
+const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMenuOpen, isName, isImage }) => {
   return (
     <div className="navbar">
       <div className="logo">
@@ -45,7 +49,7 @@ const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMen
           menu
         </span>
         <img src="/logo.svg" alt="" />
-        <span>lamadmin</span>
+        <span>Universal store</span>
       </div>
       <div className="icons">
         <img src="/search.svg" alt="" className="icon" />
@@ -55,11 +59,8 @@ const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMen
           <MailIcon style={{ height: '25px', width: '25px' }} />
         </Badge>
         <div className="user">
-          <img
-            src="https://images.pexels.com/photos/11038549/pexels-photo-11038549.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-            alt=""
-          />
-          <span>Jane</span>
+          <img src={isImage ? isImage : '/noavatar.png'} alt="" />
+          <span>{isName}</span>
         </div>
         <img src="/settings.svg" alt="" className="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} />
         <SettingsMenu isOpen={isMenuOpen} />
