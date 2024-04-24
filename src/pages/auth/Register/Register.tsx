@@ -4,9 +4,10 @@ import { ErrorMessage } from '@hookform/error-message';
 import { Button } from '@mui/material';
 import { InputLabelMain } from '../../../components/inputs/Inputs.tsx';
 import './Register.scss';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import authRequests from '../requests/auth.ts';
 import AlertSuccess from '../../../components/alerts/AlertSuccess/AlertSuccess.tsx';
+import { routePaths } from '../../../config/configRoutes/configRoutes.tsx';
 
 const Register: React.FC = () => {
   const [error, setError] = useState('');
@@ -19,6 +20,8 @@ const Register: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const navigate = useNavigate();
 
   const configs = {
     ['Login']: {
@@ -166,10 +169,10 @@ const Register: React.FC = () => {
           </Button>
         </form>
         {error && <div className="error">{error}</div>}
-        <Link to={'/admin/login'} className="login-question">
+        <div className="login-question" onClick={() => navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true })}>
           <p>Don have an account?</p>
           <div className="registerButton">Login</div>
-        </Link>
+        </div>
       </div>
     </div>
   );

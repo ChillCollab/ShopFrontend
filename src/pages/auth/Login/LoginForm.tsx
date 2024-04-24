@@ -7,6 +7,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import { InputLabelPassword } from '../../../components/inputs/InputLabelPassword';
 import { InputLabelMain } from '../../../components/inputs/Inputs';
 import { CCheckBox } from '../../../components/checkBoxes/CheckBoxes.tsx';
+import { routePaths } from '../../../config/configRoutes/configRoutes.tsx';
 
 const LoginForm = () => {
   const [isShow, setIsShow] = useState(false);
@@ -107,7 +108,7 @@ const LoginForm = () => {
           <CCheckBox size="small" />
           <p>Remember me</p>
         </div>
-        <Link to="/admin/forgot" className="forgot-btn">
+        <Link to={routePaths.FORGOT_PASSWORD} className="forgot-btn">
           Forgot your password?
         </Link>
       </div>

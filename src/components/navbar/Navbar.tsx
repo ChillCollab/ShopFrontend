@@ -10,6 +10,7 @@ interface NavbarProps {
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isMenuOpen: boolean;
   isName: string;
+  isImage: string;
 }
 interface SettingsMenu {
   isOpen: boolean;
@@ -37,7 +38,7 @@ const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
   } else return <></>;
 };
 
-const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMenuOpen, isName }) => {
+const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMenuOpen, isName, isImage }) => {
   return (
     <div className="navbar">
       <div className="logo">
@@ -56,10 +57,7 @@ const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMen
           <span>1</span>
         </div>
         <div className="user">
-          <img
-            src="https://images.pexels.com/photos/11038549/pexels-photo-11038549.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-            alt=""
-          />
+          <img src={isImage ? isImage : '/noavatar.png'} alt="" />
           <span>{isName}</span>
         </div>
         <img src="/settings.svg" alt="" className="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} />

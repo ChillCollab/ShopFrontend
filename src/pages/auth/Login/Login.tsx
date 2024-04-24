@@ -1,10 +1,12 @@
 import './Login.scss';
 import React from 'react';
 import LoginForm from './LoginForm.tsx';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { routePaths } from '../../../config/configRoutes/configRoutes.tsx';
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="login">
       <div className="login-container">
@@ -13,10 +15,15 @@ const Login: React.FC = () => {
           <p>Login now and access your account.</p>
         </div>
         <LoginForm />
-        <Link to={routePaths.REGISTER_AUTH} className="login-question">
+        <div
+          className="login-question"
+          onClick={() => {
+            navigate(routePaths.REGISTER_AUTH, { replace: false });
+          }}
+        >
           <p>Don't have an account yet?</p>
           <div className="registerButton">Register</div>
-        </Link>
+        </div>
       </div>
     </div>
   );

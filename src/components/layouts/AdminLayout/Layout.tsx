@@ -12,6 +12,7 @@ const queryClient = new QueryClient();
 const Layout = () => {
   const [toggle, setToggle] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isImage, setIsImage] = useState<string>('');
   const [isName, setIsName] = useState<string>('');
 
   useEffect(() => {
@@ -22,6 +23,8 @@ const Layout = () => {
         window.location.href = routePaths.ADMIN_AUTH_LOGIN;
       }
       setIsName(res.data.login);
+      console.log(res.data.avatar_id);
+      setIsImage(res.data.avatar_id);
     });
   }, []);
 
@@ -33,6 +36,7 @@ const Layout = () => {
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
         isName={isName}
+        isImage={isImage}
       />
       <div className="container" onClick={() => setIsMenuOpen(false)}>
         {toggle ? (

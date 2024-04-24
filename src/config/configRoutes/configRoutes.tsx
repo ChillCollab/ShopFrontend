@@ -23,7 +23,7 @@ export const routePaths = {
   RESET_PASSWORD: '/reset/submit/:id',
   SUBMIT_REGISTRATION: '/registration/submit/:id',
   ADMIN_AUTH_LOGIN: '/admin/login',
-  REGISTER_AUTH: 'admin/register', // url пока как админ будет, потом надо менять
+  REGISTER_AUTH: '/admin/register', // url пока как админ будет, потом надо менять
   FORGOT_PASSWORD: '/admin/forgot',
   FORGOT_PASSWORD_SUCCESS: '/admin/forgot/success',
 };
