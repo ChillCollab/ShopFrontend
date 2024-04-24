@@ -1,14 +1,17 @@
 import AdminLayout from '../../components/layouts/AdminLayout/Layout';
-import Auth from '../../pages/auth/Auth';
 import ResetPassword from '../../pages/auth/ResetPassword';
-import SubmitRegistration from '../../pages/auth/SubmitRegistration';
+import SubmitRegistration from '../../pages/auth/Register/SubmitRegistration.tsx';
 import AdminHome from '../../pages/admin/home/Home';
 import Product from '../../pages/admin/product/Product';
 import Products from '../../pages/admin/products/Products';
 import User from '../../pages/admin/user/User';
 import Users from '../../pages/admin/users/Users';
 import Layout from '../../components/layouts/Layout';
-import Home from '../../pages/Home';
+import Home from '../../pages/home/Home';
+import Login from '../../pages/auth/Login/Login';
+import Register from '../../pages/auth/Register/Register';
+import Forgot from '../../pages/auth/Forgot/Forgot.tsx';
+import SuccessfulSend from '../../pages/auth/Forgot/SuccessfulSend.tsx';
 
 export const routePaths = {
   HOME: '/',
@@ -16,10 +19,13 @@ export const routePaths = {
   ADMIN_PRODUCTS: '/admin/products',
   ADMIN_USER: '/admin/users/:id',
   ADMIN_USERS: '/admin/users',
-  AUTH: '/auth',
   ADMIN: '/admin',
   RESET_PASSWORD: '/reset/submit/:id',
   SUBMIT_REGISTRATION: '/registration/submit/:id',
+  ADMIN_AUTH_LOGIN: '/admin/login',
+  REGISTER_AUTH: '/admin/register', // url пока как админ будет, потом надо менять
+  FORGOT_PASSWORD: '/admin/forgot',
+  FORGOT_PASSWORD_SUCCESS: '/admin/forgot/success',
 };
 
 export const routeConfig = [
@@ -60,8 +66,12 @@ export const routeConfig = [
     ],
   },
   {
-    path: routePaths.AUTH,
-    element: <Auth />,
+    path: routePaths.ADMIN_AUTH_LOGIN,
+    element: <Login />,
+  },
+  {
+    path: routePaths.REGISTER_AUTH,
+    element: <Register />,
   },
   {
     path: routePaths.SUBMIT_REGISTRATION,
@@ -70,5 +80,13 @@ export const routeConfig = [
   {
     path: routePaths.RESET_PASSWORD,
     element: <ResetPassword />,
+  },
+  {
+    path: routePaths.FORGOT_PASSWORD,
+    element: <Forgot />,
+  },
+  {
+    path: routePaths.FORGOT_PASSWORD_SUCCESS,
+    element: <SuccessfulSend />,
   },
 ];

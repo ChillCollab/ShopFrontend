@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import '../../../styles/variables';
 
 .loginContainer {
   font-family: 'Inter', sans-serif;
@@ -114,17 +114,6 @@
     font-size: 17px;
     line-height: 17px;
     font-weight: 700;
-  }
-
-  .backContainer {
-    display: flex;
-    justify-content: start;
-
-    Button {
-      color: $main-button !important;
-      border-color: $main-button !important;
-      font-weight: 100;
-    }
   }
 
   .loginButton:hover {

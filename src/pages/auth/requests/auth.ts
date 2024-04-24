@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import config from '../../../config/config.ts';
-import { RegistrationResponse, SendEmailResponse } from '../../../types/Auth.ts';
+import { SendEmailResponse } from '../../../types/Auth.ts';
 
 export interface User {
   id: number;
@@ -33,7 +33,7 @@ const authRequests = {
         surname: surname,
         email: email,
       })
-      .then((registerResponse: AxiosResponse<RegistrationResponse>) => {
+      .then((registerResponse) => {
         return registerResponse;
       });
   },
@@ -65,13 +65,11 @@ const authRequests = {
         return loginResponse;
       });
   },
-  login: (login: string, password: string) => {
+  login: (loginData: { email: string; password: string }) => {
+    console.log(loginData);
     return axios
-      .post(config.HOST + '/auth/login', {
-        email: login,
-        password: password,
-      })
-      .then((loginResponse: AxiosResponse<LoginResponse>) => {
+      .post(config.HOST + '/auth/login', loginData)
+      .then((loginResponse) => {
         return loginResponse;
       })
       .catch((e) => {

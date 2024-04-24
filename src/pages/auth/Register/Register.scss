@@ -1,0 +1,27 @@
+@import './../Login/Login.scss';
+.register {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px;
+  height: calc(100vh - 100px);
+  & form {
+    width: 300px;
+  }
+  & .title {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 61px;
+  }
+  & .button {
+    display: block;
+    width: 100%;
+  }
+  & .error {
+    color: rgba(220, 20, 60, 1);
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+}
