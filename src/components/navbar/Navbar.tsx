@@ -52,14 +52,14 @@ const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMen
         <span>Universal store</span>
       </div>
       <div className="icons">
-        <img src="/search.svg" alt="" className="icon" />
-        <img src="/app.svg" alt="" className="icon" />
-        <img src="/expand.svg" alt="" className="icon" />
+        <img src="/search.svg" alt="search" className="icon" />
+        <img src="/app.svg" alt="app" className="icon" />
+        <img src="/expand.svg" alt="expand" className="icon" />
         <Badge color="secondary" variant="dot">
-          <MailIcon style={{ height: '25px', width: '25px' }} />
+          <img src="/notifications.svg" alt="notifications" />
         </Badge>
         <div className="user">
-          <img src={isImage ? isImage : '/noavatar.png'} alt="" />
+          <img src={isImage ? isImage : '/noavatar.png'} alt="avatar" />
           <span>{isName}</span>
         </div>
         <img src="/settings.svg" alt="" className="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} />
