@@ -7,13 +7,13 @@ export const menu = [
         id: 1,
         title: 'Home',
         url: '/admin',
-        icon: '/home.svg',
+        icon: '/public/assets/icons/home.svg',
       },
       {
         id: 2,
         title: 'Profile',
         url: '/users/1',
-        icon: '/user.svg',
+        icon: '/public/assets/icons/user.svg',
       },
     ],
   },
@@ -25,19 +25,19 @@ export const menu = [
         id: 1,
         title: 'Users',
         url: '/admin/users',
-        icon: '/user.svg',
+        icon: '/public/assets/icons/user.svg',
       },
       {
         id: 2,
         title: 'Products',
         url: '/admin/products',
-        icon: '/product.svg',
+        icon: '/public/assets/icons/product.svg',
       },
       {
         id: 3,
         title: 'Orders',
         url: '/admin/orders',
-        icon: '/order.svg',
+        icon: '/public/assets/icons/order.svg',
       },
     ],
   },
@@ -49,25 +49,25 @@ export const menu = [
         id: 1,
         title: 'Elements',
         url: '/admin/',
-        icon: '/element.svg',
+        icon: '/public/assets/icons/element.svg',
       },
       {
         id: 2,
         title: 'Notes',
         url: '/',
-        icon: '/note.svg',
+        icon: '/public/assets/icons/note.svg',
       },
       {
         id: 3,
         title: 'Forms',
         url: '/',
-        icon: '/form.svg',
+        icon: '/public/assets/icons/form.svg',
       },
       {
         id: 4,
         title: 'Calendar',
         url: '/',
-        icon: '/calendar.svg',
+        icon: '/public/assets/icons/calendar.svg',
       },
     ],
   },
@@ -79,13 +79,13 @@ export const menu = [
         id: 1,
         title: 'Settings',
         url: '/',
-        icon: '/setting.svg',
+        icon: '/public/assets/icons/setting.svg',
       },
       {
         id: 2,
         title: 'Backups',
         url: '/',
-        icon: '/backup.svg',
+        icon: '/public/assets/icons/backup.svg',
       },
     ],
   },
@@ -97,13 +97,13 @@ export const menu = [
         id: 1,
         title: 'Charts',
         url: '/',
-        icon: '/chart.svg',
+        icon: '/public/assets/icons/chart.svg',
       },
       {
         id: 2,
         title: 'Logs',
         url: '/',
-        icon: '/log.svg',
+        icon: '/public/assets/icons/log.svg',
       },
     ],
   },
@@ -196,6 +196,7 @@ export const chartBoxProduct = {
     { name: 'Sat', products: 450 },
   ],
 };
+
 export const chartBoxRevenue = {
   color: 'teal',
   icon: '/revenueIcon.svg',
@@ -213,6 +214,7 @@ export const chartBoxRevenue = {
     { name: 'Sat', revenue: 450 },
   ],
 };
+
 export const chartBoxConversion = {
   color: 'gold',
   icon: '/conversionIcon.svg',
@@ -636,6 +638,7 @@ export const singleUser = {
     },
   ],
 };
+
 export const singleProduct = {
   id: 1,
   title: 'Playstation 5 Digital Edition',

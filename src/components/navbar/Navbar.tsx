@@ -48,21 +48,21 @@ const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMen
         <span className="material-symbols-outlined" style={{ fontSize: '1.8rem' }} onClick={() => setToggle(!toggle)}>
           menu
         </span>
-        <img src="/logo.svg" alt="" />
+        <img src="/public/assets/icons/logo.svg" alt="" />
         <span>Universal store</span>
       </div>
       <div className="icons">
-        <img src="/search.svg" alt="search" className="icon" />
-        <img src="/app.svg" alt="app" className="icon" />
-        <img src="/expand.svg" alt="expand" className="icon" />
+        <img src="/public/assets/icons/search.svg" alt="search" className="icon" />
+        <img src="/public/assets/icons/app.svg" alt="app" className="icon" />
+        <img src="/public/assets/icons/expand.svg" alt="expand" className="icon" />
         <Badge color="secondary" variant="dot">
-          <img src="/notifications.svg" alt="notifications" />
+          <img src="/public/assets/icons/notifications.svg" alt="notifications" />
         </Badge>
         <div className="user">
           <img src={isImage ? isImage : '/noavatar.png'} alt="avatar" />
           <span>{isName}</span>
         </div>
-        <img src="/settings.svg" alt="" className="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} />
+        <img src="/public/assets/icons/settings.svg" alt="" className="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} />
         <SettingsMenu isOpen={isMenuOpen} />
       </div>
     </div>

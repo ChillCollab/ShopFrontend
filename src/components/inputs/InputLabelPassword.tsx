@@ -32,7 +32,7 @@ export const InputLabelPassword: React.FC<InputTypes<'password'>> = ({
         endAdornment={
           <InputAdornment position="end">
             <IconButton aria-label="toggle password visibility" onClick={setIsShow} edge="end">
-              {isShow ? <img src="/eye.svg" alt={'close-eye'} /> : <img src="/eye-off.svg" alt={''} />}
+              {isShow ? <img src="/public/assets/icons/eye.svg" alt={'close-eye'} /> : <img src="/public/assets/icons/eye-off.svg" alt={''} />}
             </IconButton>
           </InputAdornment>
         }

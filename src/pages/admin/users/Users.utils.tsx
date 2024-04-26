@@ -75,9 +75,9 @@ export const columns: GridColDef[] = [
     headerClassName: 'headerBox',
     renderCell: (params) => {
       return params.value ? (
-        <img src="/verified.svg" alt="Verified" />
+        <img src="/public/assets/icons/verified.svg" alt="Verified" />
       ) : (
-        <img src="/notverified.svg" alt="Not Verified" />
+        <img src="/public/assets/icons/notverified.svg" alt="Not Verified" />
       );
     },
   },
