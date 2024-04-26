@@ -43,7 +43,7 @@ const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
 
 const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMenuOpen, isName, isImage }) => {
   return (
-    <div className="navbar">
+    <div className="navbar" onClick={() => setIsMenuOpen(!isMenuOpen)}>
       <div className="logo">
         <span className="material-symbols-outlined" style={{ fontSize: '1.8rem' }} onClick={() => setToggle(!toggle)}>
           menu
