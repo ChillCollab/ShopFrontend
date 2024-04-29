@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .dataTable {
   display: flex;
@@ -8,7 +8,6 @@
   border: 0;
 
   .dataGrid {
-
     .MuiDataGrid-toolbarContainer {
       flex-direction: row-reverse;
     }
@@ -39,7 +38,6 @@
   }
 }
 
-
 .css-gl260s-MuiDataGrid-columnHeadersInner {
   background: rgba(0, 0, 0, 0.32) !important;
   flex: 1 !important;
@@ -55,7 +53,6 @@
 .css-i4bv87-MuiSvgIcon-root:hover {
   fill: $hover-button !important;
 }
-
 
 //column Arrow
 .css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root {

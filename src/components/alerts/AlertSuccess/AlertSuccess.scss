@@ -1,0 +1,19 @@
+.alert {
+  position: absolute;
+  top: 30px;
+  left: calc(50% - 150px);
+  animation-name: alert;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes alert {
+  from {
+    position: absolute;
+    top: -50px;
+  }
+  to {
+    position: absolute;
+    top: 30px;
+  }
+}

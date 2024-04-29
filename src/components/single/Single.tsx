@@ -1,13 +1,5 @@
-import {
-  Legend,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import "./single.scss";
+import { Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import './single.scss';
 
 type Props = {
   id: number;
@@ -32,12 +24,14 @@ const Single = (props: Props) => {
             <button>Update</button>
           </div>
           <div className="details">
-            {Object.entries(props.info).map((item) => (
-              <div className="item" key={item[0]}>
-                <span className="itemTitle">{item[0]}</span>
-                <span className="itemValue">{item[1]}</span>
-              </div>
-            ))}
+            {Object.entries(props.info).map(([key, value]) => {
+              return (
+                <div className="item" key={key}>
+                  <span className="itemTitle">{key}</span>
+                  <span className="itemValue">{value}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
         <hr />
@@ -59,12 +53,8 @@ const Single = (props: Props) => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                {props.chart.dataKeys.map((dataKey) => (
-                  <Line
-                    type="monotone"
-                    dataKey={dataKey.name}
-                    stroke={dataKey.color}
-                  />
+                {props.chart.dataKeys.map((dataKey, i) => (
+                  <Line key={i} type="monotone" dataKey={dataKey.name} stroke={dataKey.color} />
                 ))}
               </LineChart>
             </ResponsiveContainer>
@@ -75,8 +65,8 @@ const Single = (props: Props) => {
         <h2>Latest Activities</h2>
         {props.activities && (
           <ul>
-            {props.activities.map((activity) => (
-              <li key={activity.text}>
+            {props.activities.map((activity, i) => (
+              <li key={i}>
                 <div>
                   <p>{activity.text}</p>
                   <time>{activity.time}</time>
