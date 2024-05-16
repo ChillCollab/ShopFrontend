@@ -4,7 +4,6 @@ import SubmitRegistration from '../../pages/auth/Register/SubmitRegistration.tsx
 import AdminHome from '../../pages/admin/home/Home';
 import Product from '../../pages/admin/product/Product';
 import Products from '../../pages/admin/products/Products';
-import User from '../../pages/admin/user/User';
 import Users from '../../pages/admin/users/Users';
 import Layout from '../../components/layouts/Layout';
 import Home from '../../pages/home/Home';
@@ -12,12 +11,13 @@ import Login from '../../pages/auth/Login/Login';
 import Register from '../../pages/auth/Register/Register';
 import Forgot from '../../pages/auth/Forgot/Forgot.tsx';
 import SuccessfulSend from '../../pages/auth/Forgot/SuccessfulSend.tsx';
+import Profile from '../../pages/admin/profile/Profile.tsx';
 
 export const routePaths = {
   HOME: '/',
   ADMIN_PRODUCT: '/admin/product/:id',
   ADMIN_PRODUCTS: '/admin/products',
-  ADMIN_USER: '/admin/users/:id',
+  ADMIN_USER: '/admin/profile',
   ADMIN_USERS: '/admin/users',
   ADMIN: '/admin',
   RESET_PASSWORD: '/recovery/submit/:id',
@@ -39,7 +39,7 @@ export const routeConfig = [
       },
       {
         path: routePaths.ADMIN_USER,
-        element: <User />,
+        element: <Profile />,
       },
       {
         path: routePaths.ADMIN_USERS,

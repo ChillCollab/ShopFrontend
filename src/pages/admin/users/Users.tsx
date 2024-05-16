@@ -1,6 +1,6 @@
 import { GridColDef } from '@mui/x-data-grid';
 import DataTable from '../../../components/dataTable/DataTable.tsx';
-import './Users.scss';
+import './users.scss';
 import { useEffect, useState } from 'react';
 import Add from '../../../components/add/Add.tsx';
 import adminReqs from '../../../requests/admin/admin.ts';
