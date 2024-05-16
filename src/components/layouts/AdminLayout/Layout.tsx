@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 import Footer from '../../footer/Footer';
 import { getAuth } from '../../../pages/admin/home/Home.utils.ts';
 import { routePaths } from '../../../config/configRoutes/configRoutes.tsx';
+import { MainSpinner } from '../../spinners/MainSpinner.tsx';
 
 const queryClient = new QueryClient();
 
@@ -14,6 +15,7 @@ const Layout = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isImage, setIsImage] = useState<string>('');
   const [isName, setIsName] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getAuth().then((res) => {
@@ -25,10 +27,13 @@ const Layout = () => {
       setIsName(res.data.login);
       console.log(res.data.avatar_id);
       setIsImage(res.data.avatar_id);
+      setIsLoading(false);
     });
   }, []);
 
-  return (
+  return isLoading ? (
+    <MainSpinner isLoading={isLoading} />
+  ) : (
     <div className="main">
       <Navbar
         setToggle={setToggle}

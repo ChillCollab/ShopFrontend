@@ -1,5 +1,5 @@
 import AdminLayout from '../../components/layouts/AdminLayout/Layout';
-import ResetPassword from '../../pages/auth/ResetPassword';
+import ResetPassword from '../../pages/auth/Forgot/ResetPassword.tsx';
 import SubmitRegistration from '../../pages/auth/Register/SubmitRegistration.tsx';
 import AdminHome from '../../pages/admin/home/Home';
 import Product from '../../pages/admin/product/Product';
@@ -20,7 +20,7 @@ export const routePaths = {
   ADMIN_USER: '/admin/users/:id',
   ADMIN_USERS: '/admin/users',
   ADMIN: '/admin',
-  RESET_PASSWORD: '/reset/submit/:id',
+  RESET_PASSWORD: '/recovery/submit/:id',
   SUBMIT_REGISTRATION: '/registration/submit/:id',
   ADMIN_AUTH_LOGIN: '/admin/login',
   REGISTER_AUTH: '/admin/register', // url пока как админ будет, потом надо менять

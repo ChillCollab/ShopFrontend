@@ -22,7 +22,7 @@ const columns: GridColDef[] = [
     headerClassName: 'headerBox',
     width: 80,
     renderCell: (params) => {
-      return <img src={params.row.avatar_id || '/noavatar.png'} alt="" />;
+      return <img style={{ height: '38px', width: '38px' }} src={params.row.avatar_id || '/noavatar.png'} alt="" />;
     },
   },
   {

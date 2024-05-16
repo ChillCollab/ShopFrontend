@@ -22,8 +22,16 @@ export interface LoginResponse {
 export interface SuccessInterface {
   message: string;
   success: boolean;
-  code?: number;
+  code: number;
 }
+
+export interface RecoveryCodeCheck {
+  id: number;
+  name: string;
+  surname: string;
+  email: string;
+}
+
 const authRequests = {
   register: (login: string, name: string, surname: string, email: string) => {
     return axios
@@ -65,16 +73,14 @@ const authRequests = {
         return loginResponse;
       });
   },
-  login: (loginData: { email: string; password: string }) => {
-    console.log(loginData);
+  login: (email: string, password: string) => {
     return axios
-      .post(config.HOST + '/auth/login', loginData)
+      .post(config.HOST + '/auth/login', {
+        login: email,
+        password: password,
+      })
       .then((loginResponse) => {
         return loginResponse;
-      })
-      .catch((e) => {
-        console.error(e);
-        return e;
       });
   },
   logout: () => {
@@ -140,6 +146,25 @@ const authRequests = {
     } catch (e) {
       throw new Error(`${e}`);
     }
+  },
+  recoveryCheckCode: (code: string) => {
+    return axios
+      .post(config.HOST + '/auth/recovery/check', {
+        code: code,
+      })
+      .then((recoveryCheckCode: AxiosResponse<RecoveryCodeCheck>) => {
+        return recoveryCheckCode;
+      });
+  },
+  recoverySubmit: (code: string, password: string) => {
+    return axios
+      .post(config.HOST + '/auth/recovery/submit', {
+        code: code,
+        password: password,
+      })
+      .then((recoverySubmitResponse: AxiosResponse<SuccessInterface>) => {
+        return recoverySubmitResponse;
+      });
   },
 };
 

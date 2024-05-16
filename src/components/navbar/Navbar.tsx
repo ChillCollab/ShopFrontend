@@ -3,7 +3,6 @@ import 'material-symbols/outlined.scss';
 import React, { useCallback } from 'react';
 import authRequests from '../../pages/auth/requests/auth.ts';
 import { useNavigate } from 'react-router-dom';
-import MailIcon from '@mui/icons-material/Mail';
 import { Badge } from '@mui/material';
 import { routePaths } from '../../config/configRoutes/configRoutes.tsx';
 
@@ -29,7 +28,7 @@ const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
         navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
       }
     });
-  }, []);
+  }, [navigate]);
   if (isOpen) {
     return (
       <div className="settingsMenuContainer">

@@ -120,7 +120,7 @@ const Register: React.FC = () => {
       });
   }
 
-  const onHandleSubmit = (inputDatas: any) => {
+  const onHandleSubmit = (inputDatas) => {
     const { email, login, name, surname } = inputDatas;
     registerAccount(login, name, surname, email);
   };
@@ -169,7 +169,7 @@ const Register: React.FC = () => {
           </Button>
         </form>
         {error && <div className="error">{error}</div>}
-        <div className="login-question" onClick={() => navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true })}>
+        <div className="registerBox" onClick={() => navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true })}>
           <p>Don have an account?</p>
           <div className="registerButton">Login</div>
         </div>
