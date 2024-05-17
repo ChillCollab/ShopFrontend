@@ -26,6 +26,11 @@ h1 {
   gap: 10px;
 }
 
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 .fio {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
@@ -36,7 +41,7 @@ h1 {
 }
 
 .loginCase {
-  gap: 15px;
   display: flex;
   flex-direction: row;
 }
+

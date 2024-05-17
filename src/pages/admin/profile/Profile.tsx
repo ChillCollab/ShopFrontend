@@ -6,7 +6,7 @@ function Profile() {
       <h1>Profile</h1>
       <div className="userInfo">
         <img src={'https://i.pinimg.com/originals/78/73/70/787370e61c34dfbfb798ce08ac75a610.png'} className="avatar" />
-        <div className="info">
+        <div className="infoContainer">
           <div className="fioContainer">
             <div className="fio">Daniil Petrov</div>
           </div>
