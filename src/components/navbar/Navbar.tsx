@@ -32,6 +32,7 @@ const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
   if (isOpen) {
     return (
       <div className="settingsMenuContainer">
+        <span className="settingsButton">Edit profile</span>
         <span className="settingsButton" onClick={() => logout()}>
           Logout
         </span>
@@ -61,7 +62,7 @@ const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMen
           <img src={isImage ? isImage : '/noavatar.png'} alt="avatar" />
           <span>{isName}</span>
         </div>
-        <img src="/settings.svg" alt="" className="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} />
+        <img src="/settings.svg" alt="settings" className="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} />
         <SettingsMenu isOpen={isMenuOpen} />
       </div>
     </div>
