@@ -7,6 +7,7 @@ import Footer from '../../footer/Footer';
 import { getAuth } from '../../../pages/admin/home/Home.utils.ts';
 import { routePaths } from '../../../config/configRoutes/configRoutes.tsx';
 import { MainSpinner } from '../../spinners/MainSpinner.tsx';
+import { authLayout } from '../../../requests/layout.ts';
 
 const queryClient = new QueryClient();
 
@@ -18,14 +19,25 @@ const Layout = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getAuth().then((res) => {
+    // getAuth().then((res) => {
+    //   if (res.status !== 200) {
+    //     localStorage.removeItem('access_token');
+    //     localStorage.removeItem('refresh_token');
+    //     window.location.href = routePaths.ADMIN_AUTH_LOGIN;
+    //   }
+    //   setIsName(res.data.login);
+    //   console.log(res.data.avatar_id);
+    //   setIsImage(res.data.avatar_id);
+    //   setIsLoading(false);
+    // });
+    authLayout(getAuth).then((res) => {
       if (res.status !== 200) {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         window.location.href = routePaths.ADMIN_AUTH_LOGIN;
       }
+      localStorage.setItem('user', JSON.stringify(res.data));
       setIsName(res.data.login);
-      console.log(res.data.avatar_id);
       setIsImage(res.data.avatar_id);
       setIsLoading(false);
     });

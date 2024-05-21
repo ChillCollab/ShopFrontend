@@ -22,6 +22,7 @@ h1 {
   margin: 43px 0;
   display: flex;
 }
+
 .fioContainer {
   padding: 14px 0 14px 0;
   gap: 10px;
@@ -45,6 +46,22 @@ h1 {
 .loginCase {
   display: flex;
   flex-direction: row;
+  align-items: center;
+}
+
+.email-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 30px;
+}
+
+.email-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin: 45px 0;
 }
 
 .info-change {
@@ -55,6 +72,25 @@ h1 {
 
 .log {
  padding: 3px 15px 3px 0;
+}
+
+.change-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-info-btn {
+  cursor: pointer;
+  &:hover {
+    fill: $hover-button;
+  }
+}
+
+.change-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 
 .inputs {
@@ -83,6 +119,7 @@ h1 {
 }
 
 .change-password {
+  display: inline-block; /* Подстраивает ширину под содержимое */
   margin-top: 5px;
   font-size: 11px;
   font-weight: 400;
@@ -91,9 +128,99 @@ h1 {
   color: $soft-color;
   text-decoration: underline;
   cursor: pointer;
+  max-width: 510px;
 
   &:hover {
     color: $hover-button;
+  }
+}
+
+.change-password-modal, .edit-personal-modal {
+  display: flex;
+  padding: 58px 160px;
+}
+
+.change-email-modal {
+  display: flex;
+  padding: 118px 160px;
+}
+
+.change-email-submit-modal {
+  display: flex;
+  padding: 128px 160px;
+}
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.personal-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.change-password-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 30px;
+  margin: 45px 0;
+}
+
+.modal-avatar-container {
+  margin: 45px 0;
+}
+.modal-avatar-edit {
+  cursor: pointer;
+  position: absolute;
+  top: 254px;
+  left: 420px;
+  transform: translate(-50%, -50%);
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px
+}
+
+.inputs-container {
+  gap: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.submit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .repeat-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    p {
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 21.25px;
+    }
   }
 }
 
