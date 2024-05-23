@@ -11,6 +11,9 @@ import { authLayout } from '../../../requests/layout.ts';
 import auth from '../../auth/requests/auth.ts';
 import { MainSpinner } from '../../../components/spinners/MainSpinner.tsx';
 import AlertSuccess from '../../../components/alerts/AlertSuccess';
+import { setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 function Profile() {
   const [isUser, setIsUser] = useState<any>({});
@@ -20,6 +23,11 @@ function Profile() {
   const [isActiveEmail, setIsActiveEmail] = useState<boolean>(false);
   const [isActiveEmailSubmit, setIsActiveEmailSubmit] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const showAlert = useSelector((state: RootState) => state.alert.isSuccess);
+  const alertMessage = useSelector((state: RootState) => state.alert.isSuccessMsg);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const userInfo = localStorage.getItem('user');
@@ -38,12 +46,15 @@ function Profile() {
   }, []);
 
   useEffect(() => {
-    if (notify) {
-      setTimeout(() => {
-        setNotify(false);
-      }, 8000);
-    }
-  }, [notify, isUser, isActivePersonal, isActivePassword, isActiveEmail, isActiveEmailSubmit, isLoading]);
+    dispatch(setSuccess({ isSuccess: true }));
+    setTimeout(() => {
+      dispatch(setSuccess({ isSuccess: false }));
+    }, 8000);
+  }, [dispatch, notify]);
+
+  useEffect(() => {
+    console.log(showAlert);
+  }, [showAlert]);
 
   return isLoading ? (
     <MainSpinner isLoading={isLoading} />
@@ -58,7 +69,7 @@ function Profile() {
         setNotify={setNotify}
       />
       <ChangeEmailSubmitModal active={isActiveEmailSubmit} setIsActive={setIsActiveEmailSubmit} />
-      <AlertSuccess isShow={notify} message={'Email successfully sent. Please, check your email!'} />
+      <AlertSuccess isShow={showAlert} message={alertMessage} />
       <div className="profile">
         <h1>Profile</h1>
         <div className="userInfo">
@@ -73,7 +84,7 @@ function Profile() {
             </div>
             <div className="loginCase">
               <div className="log">{isUser?.login}</div>
-              <div onClick={() => setIsActivePersonal(true)}>
+              <div onClick={() => dispatch(setSuccess({ isSuccess: true }))}>
                 <svg
                   className={'edit-info-btn'}
                   width="20"

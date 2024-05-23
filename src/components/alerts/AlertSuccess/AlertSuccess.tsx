@@ -8,6 +8,7 @@ type AlertPropType = {
 };
 const AlertSuccess: FC<AlertPropType> = ({ isShow, message }) => {
   if (!isShow || !message) return null;
+
   return (
     <>
       <div className={'back-alert'}>
