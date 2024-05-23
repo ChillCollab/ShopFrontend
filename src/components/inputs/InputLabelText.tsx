@@ -7,8 +7,8 @@ interface InputLabelTextProps {
   label: string;
   type: string;
   size: 'small' | 'medium';
-  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  onFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   style?: React.CSSProperties | undefined;
 }
 

@@ -6,9 +6,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000;
+  z-index: 500;
   background: $main-modal;
-  //box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Тень */
+  //box-shad: 0 5px 15px rgba(0,0,0,0.3); /* Тень */
 }
 
 .backdrop {
@@ -19,7 +19,7 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(2px);
-  z-index: 999;
+  z-index: 499;
 }
 
 .close-modal {

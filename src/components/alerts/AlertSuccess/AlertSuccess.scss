@@ -1,19 +1,49 @@
+@import "../../../styles/variables.scss";
+
+.back-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 900;
+}
+
 .alert {
-  position: absolute;
-  top: 30px;
-  left: calc(50% - 150px);
-  animation-name: alert;
-  animation-duration: 0.4s;
-  animation-timing-function: ease-in-out;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 999;
+  bottom: 62px;
+  animation: alert 0.1s ease-in-out;
+  border-radius: 7px;
+}
+
+.css-svzhua-MuiPaper-root-MuiAlert-root {
+  background-color: $main-color-alert !important;
+  color: $main-color-alert-text !important;
+}
+
+.MuiAlert-icon {
+  color: $main-color-alert-text !important;
+}
+
+.MuiSvgIcon-root {
+ .MuiSvgIcon-fontSizeInherit {
+   .css-1vooibu-MuiSvgIcon-root {
+     svg {
+       fill: #8b87d6!important;
+     }
+   }
+ }
 }
 
 @keyframes alert {
   from {
     position: absolute;
-    top: -50px;
+    bottom: 20px;
   }
   to {
     position: absolute;
-    top: 30px;
+    bottom: 50px;
   }
 }

@@ -176,10 +176,7 @@ export default function ResetPassword() {
               error={state.isErr}
               onFocus={() => setState((prevState) => ({ ...prevState, isErr: false }))}
               onKeyDown={handleKeyDown}
-              register={{
-                value: state.passwords[field],
-                onChange: handleInputChange(field as keyof State['passwords']),
-              }}
+              onChange={handleInputChange(field as keyof State['passwords'])}
               size={'medium'}
             />
           ))}

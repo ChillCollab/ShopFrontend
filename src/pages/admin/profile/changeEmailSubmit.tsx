@@ -16,7 +16,7 @@ export const ChangeEmailSubmitModal: React.FC<ChangeEmailSubmitProps> = ({ activ
           <img src={'/letterSentImage.svg'} alt={'change-password-logo'} />
           <div className={'email-text-container'}>
             <div className={'email-title'}>Code confirmation</div>
-            <text className={'description-change-email'}>Enter the code that was sent to your email</text>
+            <p className={'description-change-email'}>Enter the code that was sent to your email</p>
           </div>
           <div className={'change-container'}>
             <div className={'inputs-container'}>
@@ -41,7 +41,7 @@ export const ChangeEmailSubmitModal: React.FC<ChangeEmailSubmitProps> = ({ activ
             <div className={'submit-container'}>
               <LoadingBtnModal title={'submit'} loading={false} />
               <div className={'repeat-container'}>
-                <text>Didn't receive the code?</text>
+                <h1>Didn't receive the code?</h1>
                 <p>Send again</p>
               </div>
             </div>

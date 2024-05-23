@@ -17,6 +17,9 @@ export const profileReqs = {
       )
       .then((loginResponse: AxiosResponse<any>) => {
         return loginResponse;
+      })
+      .catch((err) => {
+        return err;
       });
   },
   changeEmailSubmit: (code: number) => {

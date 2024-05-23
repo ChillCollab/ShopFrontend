@@ -122,7 +122,6 @@ const authRequests = {
         return infoResponse;
       })
       .catch((e) => {
-        console.error(e);
         return e;
       });
   },

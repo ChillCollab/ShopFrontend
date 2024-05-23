@@ -3,42 +3,76 @@ import InputLabelEmailChange from '../../../components/inputs/InputLabelEmailCha
 import { InputLabelPasswordClean } from '../../../components/inputs/InputLabelPasswordClean.tsx';
 import { InputPhoneNumberDisabled } from '../../../components/inputs/InputPhoneNumberDisabled.tsx';
 import { EditPersonalModal } from './editPersonal.tsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChangePasswordModal } from './changePassword.tsx';
 import { ChangeEmailModal } from './changeEmail.tsx';
 import { ChangeEmailSubmitModal } from './changeEmailSubmit.tsx';
+import { authLayout } from '../../../requests/layout.ts';
+import auth from '../../auth/requests/auth.ts';
+import { MainSpinner } from '../../../components/spinners/MainSpinner.tsx';
+import AlertSuccess from '../../../components/alerts/AlertSuccess';
 
 function Profile() {
+  const [isUser, setIsUser] = useState<any>({});
+  const [notify, setNotify] = useState<boolean>(false);
   const [isActivePersonal, setIsActivePersonal] = useState<boolean>(false);
   const [isActivePassword, setIsActivePassword] = useState<boolean>(false);
   const [isActiveEmail, setIsActiveEmail] = useState<boolean>(false);
-  const [isActiveEmailSubmit, setIsActiveEmailSubmit] = useState<boolean>(true);
+  const [isActiveEmailSubmit, setIsActiveEmailSubmit] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  return (
+  useEffect(() => {
+    const userInfo = localStorage.getItem('user');
+    if (userInfo === null) {
+      authLayout(auth.userInfo()).then((res: { status: number; data: any }) => {
+        if (res.status === 200) {
+          localStorage.setItem('user', JSON.stringify(res.data));
+          setIsUser(res.data);
+        }
+      });
+    }
+    if (userInfo !== null) {
+      setIsUser(JSON.parse(userInfo));
+    }
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    if (notify) {
+      setTimeout(() => {
+        setNotify(false);
+      }, 8000);
+    }
+  }, [notify, isUser, isActivePersonal, isActivePassword, isActiveEmail, isActiveEmailSubmit, isLoading]);
+
+  return isLoading ? (
+    <MainSpinner isLoading={isLoading} />
+  ) : (
     <>
       <EditPersonalModal active={isActivePersonal} setIsActive={setIsActivePersonal} />
       <ChangePasswordModal active={isActivePassword} setIsActive={setIsActivePassword} />
       <ChangeEmailModal
         active={isActiveEmail}
         setIsActive={setIsActiveEmail}
-        activeSub={isActiveEmailSubmit}
         setIsActiveSub={setIsActiveEmailSubmit}
+        setNotify={setNotify}
       />
       <ChangeEmailSubmitModal active={isActiveEmailSubmit} setIsActive={setIsActiveEmailSubmit} />
+      <AlertSuccess isShow={notify} message={'Email successfully sent. Please, check your email!'} />
       <div className="profile">
         <h1>Profile</h1>
         <div className="userInfo">
-          <img
-            src={'https://i.pinimg.com/originals/78/73/70/787370e61c34dfbfb798ce08ac75a610.png'}
-            className="avatar"
-            alt="avatar"
-          />
+          {isUser?.avatar_id === '' ? (
+            <img src={'/noavatar.png'} className="avatar" alt="avatar" />
+          ) : (
+            <img src={isUser?.avatar_id} className="avatar" alt="avatar" />
+          )}
           <div className="infoContainer">
             <div className="fioContainer">
-              <div className="fio">Daniil Petrov</div>
+              <div className="fio">{`${isUser?.name} ${isUser?.surname}`}</div>
             </div>
             <div className="loginCase">
-              <div className="log">dpetrov</div>
+              <div className="log">{isUser?.login}</div>
               <div onClick={() => setIsActivePersonal(true)}>
                 <svg
                   className={'edit-info-btn'}
@@ -61,7 +95,7 @@ function Profile() {
               error={false}
               label={'Email'}
               size={'medium'}
-              value={'daniilpietrov00@gmail.com'}
+              value={isUser?.email}
               style={{ maxWidth: '510px', minWidth: '320px', maxHeight: '56px' }}
               onChange={(e) => console.log(e)}
               onKeyDown={(e) => console.log(e)}
@@ -87,7 +121,7 @@ function Profile() {
             <InputPhoneNumberDisabled
               disabled={true}
               label={'Phone number'}
-              value={'79135954112'}
+              value={isUser?.phone}
               style={{ maxWidth: '510px', minWidth: '320px', maxHeight: '56px', color: 'white' }}
               size={'medium'}
               onChange={(e) => console.log(e)}

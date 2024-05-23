@@ -1,32 +1,54 @@
 @import '../Login/login';
-.register {
+
+.error {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+}
+
+.registerContainer {
   font-family: 'Inter', sans-serif;
   display: flex;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
-  padding: 100px;
-  height: calc(100vh - 100px);
-  & form {
-    width: 300px;
-  }
-  & .title {
-    text-align: center;
-    color: #fff;
-    margin-bottom: 61px;
-  }
-  & .button {
-    display: block;
-    width: 100%;
-  }
-  & .error {
-    color: rgba(220, 20, 60, 1);
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
+  height: 100%;
+}
+
+.inputs-container-reg {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  gap: 30px;
+}
+
+h1 {
+  color: $main-color;
+}
+
+.inputContainer {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  min-width: 325px;
+  height: 735px;
+  gap: 32px;
+}
+
+.loginContainer {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  min-width: 325px;
+  justify-content: center;
+  align-items: center;
+  background-color: $main_bg;
+  width: 100%;
+  height: 100%;
 }
 
 .registerBox {
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;

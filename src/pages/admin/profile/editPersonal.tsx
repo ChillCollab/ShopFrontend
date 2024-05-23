@@ -49,47 +49,54 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
 
   const inputs = [
     {
+      key: 'input-name',
       id: 'input-name',
       name: 'Name',
     },
     {
+      key: 'input-surname',
       id: 'input-surname',
       name: 'Surname',
     },
     {
+      key: 'input-email',
       id: 'input-login',
       name: 'Login',
     },
   ];
-
   return (
-    <ModalContainer active={active} setIsActive={setIsActive}>
-      <div className={'edit-personal-modal'}>
-        <div className={'data-container'}>
-          <div className={'personal-title'}>Personal data</div>
-          <AvatarUploader />
-          <div className={'info-container'}>
-            <div className={'inputs-container'}>
-              {inputs.map((input) => {
-                return (
-                  <InputLabelText
-                    id={input.id}
-                    onChange={(e) => console.log(e)}
-                    error={false}
-                    label={input.name}
-                    type={'text'}
-                    size={'medium'}
-                    onKeyDown={(e) => console.log(e)}
-                    onFocus={() => console.log()}
-                    style={{ width: '100%', maxWidth: '435px', minWidth: '435px', maxHeight: '56px', color: 'white' }}
-                  />
-                );
-              })}
+    <>
+      <ModalContainer key={'edit-personal-modal'} active={active} setIsActive={setIsActive}>
+        <div key={'edit-personal'} className={'edit-personal-modal'}>
+          <div key={'edit-personal-container'} className={'data-container'}>
+            <div key={'edit-personal22'} className={'personal-title'}>
+              Personal data
             </div>
-            <LoadingBtnModal title={'Save'} loading={false} />
+            <AvatarUploader key={'edit-per2sonal'} />
+            <div key={'edit-persona23l'} className={'info-container'}>
+              <div key={'edit-per23sonal'} className={'inputs-container'}>
+                {inputs.map((input) => {
+                  return (
+                    <InputLabelText
+                      key={input.key}
+                      id={input.id}
+                      onChange={(e) => console.log(e)}
+                      error={false}
+                      label={input.name}
+                      type={'text'}
+                      size={'medium'}
+                      onKeyDown={(e) => console.log(e)}
+                      onFocus={() => console.log()}
+                      style={{ width: '100%', maxWidth: '435px', minWidth: '435px', maxHeight: '56px', color: 'white' }}
+                    />
+                  );
+                })}
+              </div>
+              <LoadingBtnModal key={'edit-per23so23nal2'} title={'Save'} loading={false} />
+            </div>
           </div>
         </div>
-      </div>
-    </ModalContainer>
+      </ModalContainer>
+    </>
   );
 };

@@ -64,7 +64,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
 
   useEffect(() => {
     setState({ ...state, currentPassword: '', newPassword: '', repeatPassword: '' });
-  }, [active, state]);
+  }, [active]);
 
   useEffect(() => {
     if (
@@ -90,6 +90,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
               {inputs.map((input) => {
                 return (
                   <InputLabelPassword
+                    key={input.name}
                     error={false}
                     isShow={input.vision}
                     label={input.name}
