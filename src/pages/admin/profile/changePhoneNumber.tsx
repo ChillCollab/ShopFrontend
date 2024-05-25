@@ -7,29 +7,25 @@ import { profileReqs } from '../../../requests/profile/profileReqs.ts';
 import { useDispatch } from 'react-redux';
 import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
 
-interface ChangeEmailProps {
+interface ChangePhonerops {
   active: boolean;
   setIsActive: (active: boolean) => void;
-  setIsActiveSub: (active: boolean) => void;
 }
 
-export const ChangeEmailModal: React.FC<ChangeEmailProps> = ({ active, setIsActive, setIsActiveSub }) => {
+export const ChangePhoneNumber: React.FC<ChangePhonerops> = ({ active, setIsActive }) => {
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
-  const [isEmail, setIsEmail] = useState<string>('');
+  const [isNumber, setIsNumber] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
-  console.log(222);
-
   const dispatch = useDispatch();
 
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setIsEmail(e.target.value);
+  const handleNumber = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setIsNumber(e.target.value);
   };
 
-  const sendEmail = async () => {
-    setIsLoading(true);
-    await authLayout(profileReqs.changeEmail(isEmail))
+  const changeNumber = (number: string) => {
+    authLayout(profileReqs.changeNumber(number))
       .then((res: any) => {
         if (res?.response) {
           if (res?.response?.status !== 200) {
@@ -41,7 +37,6 @@ export const ChangeEmailModal: React.FC<ChangeEmailProps> = ({ active, setIsActi
           dispatch(setSuccessMsg({ isSuccessMsg: res.data.message }));
           dispatch(setSuccess({ isSuccess: true }));
           setIsActive(false);
-          setIsActiveSub(true);
           setIsLoading(false);
         }
       })
@@ -54,35 +49,35 @@ export const ChangeEmailModal: React.FC<ChangeEmailProps> = ({ active, setIsActi
   };
 
   useEffect(() => {
-    if (isEmail.length > 0) {
+    if (isNumber.length > 0) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
-  }, [isEmail]);
+  }, [isNumber]);
 
   return (
     <ModalContainer active={active} setIsActive={setIsActive}>
       <div className={'change-email-modal'}>
         <form className={'change-data-container'}>
-          <div className={'imgContainer'}>
-            <img src={'/letterImage.svg'} alt={'change-password-logo'} />
+          <div className={'img-phone-number'}>
+            <img src={'/phoneLogo.svg'} alt={'change-password-logo'} />
           </div>
           <div className={'email-text-container'}>
-            <div className={'email-title'}>Enter your email address</div>
-            <p className={'description-change-email'}>Enter a new email address</p>
+            <div className={'email-title'}>Enter your phone number</div>
+            <p className={'description-change-email'}>Enter a new phone number</p>
           </div>
           <div className={'change-container'}>
             <div className={'inputs-container'}>
               <InputLabelText
-                id={'input-email'}
-                type={'email'}
+                id={'input-phone'}
+                type={'phone'}
                 onFocus={(e) => {
                   console.log(e);
                 }}
                 error={isError}
-                label={'Email'}
-                onChange={handleEmail}
+                label={'Phone'}
+                onChange={handleNumber}
                 onKeyDown={(e) => {
                   console.log(e);
                 }}
@@ -90,7 +85,12 @@ export const ChangeEmailModal: React.FC<ChangeEmailProps> = ({ active, setIsActi
                 style={{ width: '100%', maxWidth: '435px', minWidth: '435px', maxHeight: '56px', color: 'white' }}
               />
             </div>
-            <LoadingBtnModal disabled={isDisabled} title={'send'} loading={isLoading} onClick={sendEmail} />
+            <LoadingBtnModal
+              disabled={isDisabled}
+              title={'save'}
+              loading={isLoading}
+              onClick={() => changeNumber(isNumber)}
+            />
           </div>
         </form>
       </div>

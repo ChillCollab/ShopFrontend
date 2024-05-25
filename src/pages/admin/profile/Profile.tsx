@@ -10,66 +10,36 @@ import { ChangeEmailSubmitModal } from './changeEmailSubmit.tsx';
 import { authLayout } from '../../../requests/layout.ts';
 import auth from '../../auth/requests/auth.ts';
 import { MainSpinner } from '../../../components/spinners/MainSpinner.tsx';
-import AlertSuccess from '../../../components/alerts/AlertSuccess';
-import { setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store';
+import { ChangePhoneNumber } from './changePhoneNumber.tsx';
 
 function Profile() {
-  const [isUser, setIsUser] = useState<any>({});
-  const [notify, setNotify] = useState<boolean>(false);
+  const [isUser, setIsUser] = useState<any>(false);
   const [isActivePersonal, setIsActivePersonal] = useState<boolean>(false);
   const [isActivePassword, setIsActivePassword] = useState<boolean>(false);
   const [isActiveEmail, setIsActiveEmail] = useState<boolean>(false);
   const [isActiveEmailSubmit, setIsActiveEmailSubmit] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const showAlert = useSelector((state: RootState) => state.alert.isSuccess);
-  const alertMessage = useSelector((state: RootState) => state.alert.isSuccessMsg);
-
-  const dispatch = useDispatch();
+  const [isActiveNumber, setIsActiveNumber] = useState<boolean>(false);
 
   useEffect(() => {
-    const userInfo = localStorage.getItem('user');
-    if (userInfo === null) {
-      authLayout(auth.userInfo()).then((res: { status: number; data: any }) => {
-        if (res.status === 200) {
-          localStorage.setItem('user', JSON.stringify(res.data));
-          setIsUser(res.data);
-        }
-      });
-    }
-    if (userInfo !== null) {
-      setIsUser(JSON.parse(userInfo));
-    }
+    authLayout(auth.userInfo()).then((res: { status: number; data: any }) => {
+      if (res.status === 200) {
+        localStorage.setItem('user', JSON.stringify(res.data));
+        setIsUser(res.data);
+      }
+    });
     setIsLoading(false);
-  }, []);
-
-  useEffect(() => {
-    dispatch(setSuccess({ isSuccess: true }));
-    setTimeout(() => {
-      dispatch(setSuccess({ isSuccess: false }));
-    }, 8000);
-  }, [dispatch, notify]);
-
-  useEffect(() => {
-    console.log(showAlert);
-  }, [showAlert]);
+  }, [isActiveNumber]);
 
   return isLoading ? (
     <MainSpinner isLoading={isLoading} />
-  ) : (
+  ) : isUser ? (
     <>
+      <ChangePhoneNumber active={isActiveNumber} setIsActive={setIsActiveNumber} />
       <EditPersonalModal active={isActivePersonal} setIsActive={setIsActivePersonal} />
       <ChangePasswordModal active={isActivePassword} setIsActive={setIsActivePassword} />
-      <ChangeEmailModal
-        active={isActiveEmail}
-        setIsActive={setIsActiveEmail}
-        setIsActiveSub={setIsActiveEmailSubmit}
-        setNotify={setNotify}
-      />
+      <ChangeEmailModal active={isActiveEmail} setIsActive={setIsActiveEmail} setIsActiveSub={setIsActiveEmailSubmit} />
       <ChangeEmailSubmitModal active={isActiveEmailSubmit} setIsActive={setIsActiveEmailSubmit} />
-      <AlertSuccess isShow={showAlert} message={alertMessage} />
       <div className="profile">
         <h1>Profile</h1>
         <div className="userInfo">
@@ -84,7 +54,7 @@ function Profile() {
             </div>
             <div className="loginCase">
               <div className="log">{isUser?.login}</div>
-              <div onClick={() => dispatch(setSuccess({ isSuccess: true }))}>
+              <div onClick={() => setIsActivePersonal(true)}>
                 <svg
                   className={'edit-info-btn'}
                   width="20"
@@ -138,14 +108,16 @@ function Profile() {
               onChange={(e) => console.log(e)}
               onKeyDown={(e) => console.log(e)}
               onFocus={(e) => console.log(e)}
-              onClick={(e) => {
-                console.log(e);
+              onClick={() => {
+                setIsActiveNumber(true);
               }}
             />
           </div>
         </div>
       </div>
     </>
+  ) : (
+    <></>
   );
 }
 

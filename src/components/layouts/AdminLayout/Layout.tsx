@@ -8,6 +8,8 @@ import { routePaths } from '../../../config/configRoutes/configRoutes.tsx';
 import { MainSpinner } from '../../spinners/MainSpinner.tsx';
 import { authLayout } from '../../../requests/layout.ts';
 import authRequests from '../../../pages/auth/requests/auth.ts';
+import AlertSuccess from '../../alerts/AlertSuccess';
+import AlertBad from '../../alerts/AlertSuccess/AlertBad.tsx';
 
 const queryClient = new QueryClient();
 
@@ -37,14 +39,16 @@ const Layout = () => {
           localStorage.removeItem('refresh_token');
           window.location.href = routePaths.ADMIN_AUTH_LOGIN;
         }
+        setIsLoading(false);
       });
-    setIsLoading(false);
   }, []);
 
   return isLoading ? (
     <MainSpinner isLoading={isLoading} />
   ) : (
     <div className="main">
+      <AlertSuccess />
+      <AlertBad />
       <Navbar
         setToggle={setToggle}
         toggle={toggle}

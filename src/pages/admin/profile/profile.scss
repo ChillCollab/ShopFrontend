@@ -173,6 +173,8 @@ h1 {
 }
 
 .modal-avatar-container {
+  width: 138px;
+  height: 138px;
   margin: 45px 0;
 }
 .modal-avatar-edit {
@@ -181,6 +183,35 @@ h1 {
   top: 254px;
   left: 420px;
   transform: translate(-50%, -50%);
+}
+
+.send-image-container {
+  width: 197px;
+  height: 82px;
+  display: flex;
+}
+
+.password-img-container {
+  width: 140px;
+  height: 140px;
+  display: flex;
+}
+
+.img-phone-number {
+  width: 140px;
+  height: 140px;
+}
+
+.edit-img-container {
+  width: 138px;
+  height: 138px;
+  display: flex;
+}
+
+.imgContainer {
+  width: 140px;
+  height: 140px;
+  display: flex;
 }
 
 .info-container {

@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { ModalContainer } from '../../../components/modals/ModalContainer.tsx';
 import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal.tsx';
 import { InputLabelPassword } from '../../../components/inputs/InputLabelPassword.tsx';
+import { authLayout } from '../../../requests/layout.ts';
+import { profileReqs } from '../../../requests/profile/profileReqs.ts';
+import { useDispatch } from 'react-redux';
+import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
 
 interface ChangePasswordProps {
   active: boolean;
@@ -14,27 +18,47 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
   const [isShowRepeat, setIsShowRepeat] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [state, setState] = useState({
-    currentPassword: '',
-    newPassword: '',
-    repeatPassword: '',
+    currentPassword: {
+      value: '',
+      error: false,
+    },
+    newPassword: {
+      value: '',
+      error: false,
+    },
+    repeatPassword: {
+      value: '',
+      error: false,
+    },
   });
+
+  const dispatch = useDispatch();
 
   const handleOldPassword = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setState({
       ...state,
-      currentPassword: e.target.value,
+      currentPassword: {
+        value: e.target.value,
+        error: false,
+      },
     });
   };
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setState({
       ...state,
-      newPassword: e.target.value,
+      newPassword: {
+        value: e.target.value,
+        error: false,
+      },
     });
   };
   const handleRepeatPassword = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setState({
       ...state,
-      repeatPassword: e.target.value,
+      repeatPassword: {
+        value: e.target.value,
+        error: false,
+      },
     });
   };
 
@@ -43,6 +67,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
       id: 'current-password',
       name: 'Current password',
       vision: isShowOld,
+      error: state.currentPassword.error,
       setVision: setIsShowOld,
       handler: handleOldPassword,
     },
@@ -50,6 +75,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
       id: 'new-password',
       name: 'Password',
       vision: isShow,
+      error: state.newPassword.error,
       setVision: setIsShow,
       handler: handlePassword,
     },
@@ -57,21 +83,68 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
       id: 'repeat-password',
       name: 'Repeat password',
       vision: isShowRepeat,
+      error: state.repeatPassword.error,
       setVision: setIsShowRepeat,
       handler: handleRepeatPassword,
     },
   ];
 
+  const changePassword = (oldPassword: string, newPassword: string) => {
+    authLayout(profileReqs.changePassword(oldPassword, newPassword))
+      .then((res: any) => {
+        if (res?.status === 200) {
+          setIsActive(false);
+          dispatch(setSuccess({ isSuccess: true }));
+          dispatch(setSuccessMsg({ isSuccessMsg: 'Password has been changed successfully' }));
+        }
+      })
+      .catch((e: any) => {
+        setState({
+          ...state,
+          currentPassword: {
+            value: '',
+            error: true,
+          },
+          newPassword: {
+            value: '',
+            error: true,
+          },
+          repeatPassword: {
+            value: '',
+            error: true,
+          },
+        });
+        setIsDisabled(true);
+        if (e?.response) {
+          dispatch(setError({ isError: true }));
+          dispatch(setErrorMsg({ isErrorMsg: e?.response?.data?.message }));
+        }
+      });
+  };
+
   useEffect(() => {
-    setState({ ...state, currentPassword: '', newPassword: '', repeatPassword: '' });
+    setState({
+      ...state,
+      currentPassword: {
+        value: '',
+        error: false,
+      },
+      newPassword: {
+        value: '',
+        error: false,
+      },
+      repeatPassword: {
+        value: '',
+        error: false,
+      },
+    });
   }, [active]);
 
   useEffect(() => {
     if (
-      state.currentPassword.length > 0 &&
-      state.newPassword.length > 0 &&
-      state.repeatPassword.length > 0 &&
-      state.newPassword === state.repeatPassword
+      state.currentPassword.value.length > 0 &&
+      state.newPassword.value.length > 0 &&
+      state.repeatPassword.value.length > 0
     ) {
       setIsDisabled(false);
     } else {
@@ -83,7 +156,9 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
     <ModalContainer active={active} setIsActive={setIsActive}>
       <div className={'change-password-modal'}>
         <div className={'change-data-container'}>
-          <img src={'/secureImage.svg'} alt={'change-password-logo'} />
+          <div className={'password-img-container'}>
+            <img src={'/secureImage.svg'} alt={'change-password-logo'} />
+          </div>
           <div className={'change-password-title'}>Change password</div>
           <div className={'change-container'}>
             <div className={'inputs-container'}>
@@ -91,21 +166,23 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
                 return (
                   <InputLabelPassword
                     key={input.name}
-                    error={false}
+                    error={input.error}
                     isShow={input.vision}
                     label={input.name}
                     setIsShow={() => input.setVision(!input.vision)}
                     onChange={input.handler}
-                    onKeyDown={(e) => {
-                      console.log(e);
-                    }}
                     size={'medium'}
                     style={{ width: '100%', maxWidth: '435px', minWidth: '435px', maxHeight: '56px', color: 'white' }}
                   />
                 );
               })}
             </div>
-            <LoadingBtnModal disabled={isDisabled} title={'change'} loading={false} />
+            <LoadingBtnModal
+              disabled={isDisabled}
+              title={'change'}
+              loading={false}
+              onClick={() => changePassword(state.currentPassword.value, state.newPassword.value)}
+            />
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { ModalContainer } from '../../../components/modals/ModalContainer.tsx';
 import InputLabelText from '../../../components/inputs/InputLabelText.tsx';
 import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal.tsx';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 interface EditPersonalProps {
   active: boolean;
@@ -9,8 +9,12 @@ interface EditPersonalProps {
 }
 
 export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsActive }) => {
+  const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [file, setFile] = useState<File | null>(null);
+
   const AvatarUploader = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const [avatarUrl, setAvatarUrl] = useState<string>('/editAvatar.svg'); // Состояние для URL аватара
 
     const handleButtonClick = () => {
       if (fileInputRef.current) {
@@ -22,14 +26,23 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
       const files = event.target.files;
       if (files && files.length > 0) {
         const file = files[0];
-        // Добавьте здесь обработку загруженного файла, например, загрузку на сервер или предпросмотр
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setAvatarUrl(reader.result as string); // Устанавливаем загруженный файл как URL аватара
+        };
+        reader.readAsDataURL(file); // Читаем файл как Data URL для предпросмотра
         console.log('Selected file:', file);
       }
     };
 
     return (
       <div className="modal-avatar-container">
-        <img src="/editAvatar.svg" className="modal-avatar" alt="no-avatar-edit-modal" />
+        <img
+          style={{ height: '138px', width: '138px', borderRadius: '50%' }}
+          src={avatarUrl}
+          className="modal-avatar"
+          alt="avatar"
+        />
         <img
           src="/changeAvatar.svg"
           className="modal-avatar-edit"
@@ -64,6 +77,13 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
       name: 'Login',
     },
   ];
+
+  // const sendData = () => {
+  //   if (file) {
+  //
+  //   }
+  // }
+
   return (
     <>
       <ModalContainer key={'edit-personal-modal'} active={active} setIsActive={setIsActive}>
