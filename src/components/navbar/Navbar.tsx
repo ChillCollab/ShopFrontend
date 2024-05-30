@@ -21,7 +21,8 @@ interface SettingsMenu {
 const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
   const navigate = useNavigate();
   const logout = useCallback(() => {
-    authRequests.logout().then((logoutResponse) => {
+    const logout = authRequests.logout();
+    logout().then((logoutResponse) => {
       if (logoutResponse.status == 200) {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');

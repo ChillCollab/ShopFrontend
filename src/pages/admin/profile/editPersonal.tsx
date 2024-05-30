@@ -1,7 +1,10 @@
 import { ModalContainer } from '../../../components/modals/ModalContainer.tsx';
 import InputLabelText from '../../../components/inputs/InputLabelText.tsx';
 import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal.tsx';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { profileReqs } from '../../../requests/profile/profileReqs.ts';
+import { useDispatch } from 'react-redux';
+import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
 
 interface EditPersonalProps {
   active: boolean;
@@ -10,7 +13,8 @@ interface EditPersonalProps {
 
 export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsActive }) => {
   const [isUploading, setIsUploading] = useState<boolean>(false);
-  const [file, setFile] = useState<File | null>(null);
+
+  const dispatch = useDispatch();
 
   const AvatarUploader = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -26,14 +30,27 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
       const files = event.target.files;
       if (files && files.length > 0) {
         const file = files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setAvatarUrl(reader.result as string); // Устанавливаем загруженный файл как URL аватара
-        };
-        reader.readAsDataURL(file); // Читаем файл как Data URL для предпросмотра
-        console.log('Selected file:', file);
+        if (file.size <= 3000000) {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setAvatarUrl(reader.result as string); // Устанавливаем загруженный файл как URL аватара
+          };
+          reader.readAsDataURL(file);
+          sendData(file);
+        } else {
+          dispatch(setErrorMsg({ isErrorMsg: 'File size should be less 3 MB' }));
+          dispatch(setError({ isError: true }));
+        }
       }
     };
+
+    useEffect(() => {
+      const user = localStorage.getItem('user');
+      if (user) {
+        const userData = JSON.parse(user);
+        setAvatarUrl(userData.avatar_id);
+      }
+    }, []);
 
     return (
       <div className="modal-avatar-container">
@@ -54,7 +71,9 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
           ref={fileInputRef}
           style={{ display: 'none' }}
           accept=".jpg, .jpeg, .png"
-          onChange={handleFileChange}
+          onChange={async (event) => {
+            handleFileChange(event);
+          }}
         />
       </div>
     );
@@ -78,11 +97,23 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
     },
   ];
 
-  // const sendData = () => {
-  //   if (file) {
-  //
-  //   }
-  // }
+  const sendData = (file: File) => {
+    // if (file) {
+    //   authLayout(profileReqs.uploadAvatar(file))
+    //       .then((uploadResponse: any) => {
+    //         if (uploadResponse) {
+    //           if (uploadResponse.response.status === 200) {
+    //             dispatch(setSuccessMsg({isSuccessMsg: uploadResponse?.data?.message}))
+    //             dispatch(setSuccess({isSuccess: true}))
+    //             setIsActive(false)
+    //           }
+    //         }
+    //       }).catch((e: any) => {
+    //         dispatch(setErrorMsg({isErrorMsg: e.response.data.message}))
+    //         dispatch(setError({isError: true}))
+    //   })
+    // }
+  };
 
   return (
     <>
@@ -112,7 +143,14 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
                   );
                 })}
               </div>
-              <LoadingBtnModal key={'edit-per23so23nal2'} title={'Save'} loading={false} />
+              <LoadingBtnModal
+                key={'edit-per23so23nal2'}
+                title={'Save'}
+                loading={false}
+                onClick={() => {
+                  console.log(1);
+                }}
+              />
             </div>
           </div>
         </div>

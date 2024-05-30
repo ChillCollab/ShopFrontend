@@ -1,39 +1,45 @@
-// type AxiosFunction = () => Promise<AxiosResponse<any>>;
-
 import authRequests from '../pages/auth/requests/auth.ts';
-import axios from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
+import { routePaths } from '../config/configRoutes/configRoutes.tsx';
+import { storage } from '../storage/storage.ts';
 
-export const authLayout = (axiosFunction: any) => {
-  return axiosFunction
-    .then((res: any) => {
-      if (res?.response && res?.response?.status === 401) {
-        return authRequests
-          .refreshToken()
-          .then((resRefresh) => {
-            if (resRefresh.status === 200) {
-              localStorage.setItem('access_token', resRefresh.data.access_token);
-              localStorage.setItem('refresh_token', resRefresh.data.refresh_token);
-
-              // Повторяем исходный запрос с обновленными токенами
-              return axios(axiosFunction.config)
-                .then((resRepeat: any) => {
-                  return resRepeat;
-                })
-                .catch((e: any) => {
-                  return Promise.reject(e);
-                });
-            } else {
-              return Promise.reject(resRefresh); // Возвращаем ответ обновления токена, если статус не 200
-            }
-          })
-          .catch((e) => {
-            return Promise.reject(e); // Возвращаем ошибку обновления токена
-          });
-      } else {
-        return res; // Возвращаем исходный ответ, если статус не 401
+export default function authLayout(axiosFunction: any) {
+  return axiosFunction()
+    .then((res: AxiosResponse<any>) => {
+      if (res.status === 200) {
+        return res;
       }
     })
-    .catch((error: any) => {
-      return Promise.reject(error); // Возвращаем ошибку исходного запроса
+    .catch(async (e: AxiosError<any>) => {
+      if (e?.response?.status !== 200) {
+        localStorage.removeItem(storage.userData);
+        if (e?.response?.status === 401) {
+          try {
+            const resRefresh = authRequests.refreshToken();
+            return resRefresh().then((res) => {
+              if (res?.status === 200 && res?.data) {
+                if (res?.data) {
+                  localStorage.setItem(storage.accessToken, res.data.access_token);
+                  localStorage.setItem(storage.refreshToken, res.data.refresh_token);
+
+                  return axiosFunction().then((resRetry: AxiosResponse<any>) => {
+                    return resRetry;
+                  });
+                }
+              }
+            });
+          } catch (refreshError) {
+            const refreshErr = refreshError as AxiosError;
+            if (refreshErr.response?.status !== 200) {
+              localStorage.removeItem(storage.accessToken);
+              localStorage.removeItem(storage.refreshToken);
+              window.location.href = routePaths.ADMIN_AUTH_LOGIN;
+              throw refreshErr;
+            }
+          }
+        } else {
+          throw e;
+        }
+      }
     });
-};
+}

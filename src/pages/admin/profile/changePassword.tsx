@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { ModalContainer } from '../../../components/modals/ModalContainer.tsx';
 import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal.tsx';
 import { InputLabelPassword } from '../../../components/inputs/InputLabelPassword.tsx';
-import { authLayout } from '../../../requests/layout.ts';
 import { profileReqs } from '../../../requests/profile/profileReqs.ts';
 import { useDispatch } from 'react-redux';
 import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
+import authLayout from '../../../requests/layout.ts';
 
 interface ChangePasswordProps {
   active: boolean;
@@ -144,7 +144,8 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
     if (
       state.currentPassword.value.length > 0 &&
       state.newPassword.value.length > 0 &&
-      state.repeatPassword.value.length > 0
+      state.repeatPassword.value.length > 0 &&
+      state.newPassword.value === state.repeatPassword.value
     ) {
       setIsDisabled(false);
     } else {

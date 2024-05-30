@@ -7,10 +7,10 @@ import { useEffect, useState } from 'react';
 import { ChangePasswordModal } from './changePassword.tsx';
 import { ChangeEmailModal } from './changeEmail.tsx';
 import { ChangeEmailSubmitModal } from './changeEmailSubmit.tsx';
-import { authLayout } from '../../../requests/layout.ts';
-import auth from '../../auth/requests/auth.ts';
 import { MainSpinner } from '../../../components/spinners/MainSpinner.tsx';
 import { ChangePhoneNumber } from './changePhoneNumber.tsx';
+import authRequests from '../../auth/requests/auth.ts';
+import authLayout from '../../../requests/layout.ts';
 
 function Profile() {
   const [isUser, setIsUser] = useState<any>(false);
@@ -22,14 +22,14 @@ function Profile() {
   const [isActiveNumber, setIsActiveNumber] = useState<boolean>(false);
 
   useEffect(() => {
-    authLayout(auth.userInfo()).then((res: { status: number; data: any }) => {
+    authLayout(authRequests.userInfo()).then((res: any) => {
       if (res.status === 200) {
         localStorage.setItem('user', JSON.stringify(res.data));
         setIsUser(res.data);
       }
+      setIsLoading(false);
     });
-    setIsLoading(false);
-  }, [isActiveNumber]);
+  }, [isActiveNumber, isActivePersonal]);
 
   return isLoading ? (
     <MainSpinner isLoading={isLoading} />

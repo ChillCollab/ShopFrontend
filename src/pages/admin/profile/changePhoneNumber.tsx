@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { ModalContainer } from '../../../components/modals/ModalContainer.tsx';
 import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal.tsx';
 import InputLabelText from '../../../components/inputs/InputLabelText.tsx';
-import { authLayout } from '../../../requests/layout.ts';
+import authLayout from '../../../requests/layout.ts';
 import { profileReqs } from '../../../requests/profile/profileReqs.ts';
 import { useDispatch } from 'react-redux';
 import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
 
-interface ChangePhonerops {
+interface ChangePhoneprops {
   active: boolean;
   setIsActive: (active: boolean) => void;
 }
 
-export const ChangePhoneNumber: React.FC<ChangePhonerops> = ({ active, setIsActive }) => {
+export const ChangePhoneNumber: React.FC<ChangePhoneprops> = ({ active, setIsActive }) => {
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [isNumber, setIsNumber] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -27,23 +27,15 @@ export const ChangePhoneNumber: React.FC<ChangePhonerops> = ({ active, setIsActi
   const changeNumber = (number: string) => {
     authLayout(profileReqs.changeNumber(number))
       .then((res: any) => {
-        if (res?.response) {
-          if (res?.response?.status !== 200) {
-            dispatch(setError({ isError: true }));
-            dispatch(setErrorMsg({ isErrorMsg: res.response.data.message }));
-            setIsLoading(false);
-          }
-        } else {
-          dispatch(setSuccessMsg({ isSuccessMsg: res.data.message }));
-          dispatch(setSuccess({ isSuccess: true }));
-          setIsActive(false);
-          setIsLoading(false);
-        }
+        dispatch(setSuccessMsg({ isSuccessMsg: res.data.message }));
+        dispatch(setSuccess({ isSuccess: true }));
+        setIsActive(false);
+        setIsLoading(false);
       })
       .catch((e: any) => {
         setIsError(true);
         dispatch(setError({ isError: true }));
-        dispatch(setErrorMsg({ isErrorMsg: e?.response?.message }));
+        dispatch(setErrorMsg({ isErrorMsg: e?.response?.data?.message }));
         setIsLoading(false);
       });
   };

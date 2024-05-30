@@ -26,23 +26,23 @@ export const ChangeEmailSubmitModal: React.FC<ChangeEmailSubmitProps> = ({ activ
 
   const sendCode = async (code: number) => {
     setIsLoading(true);
-    await authLayout(profileReqs.changeEmailSubmit(Number(code)))
-      .then((res: any) => {
-        if (res) {
-          if (res.status === 200) {
-            dispatch(setSuccessMsg({ isSuccessMsg: res.data.messages }));
-            dispatch(setSuccess({ isSuccess: true }));
-            setIsActive(false);
-            setIsLoading(false);
-          }
-        }
-      })
-      .catch((e: any) => {
-        setIsError(true);
-        dispatch(setErrorMsg({ isErrorMsg: e?.response?.message }));
-        dispatch(setError({ isError: true }));
-        setIsLoading(false);
-      });
+    // await authLayout(profileReqs.changeEmailSubmit(Number(code)))
+    //   .then((res: any) => {
+    //     if (res) {
+    //       if (res.status === 200) {
+    //         dispatch(setSuccessMsg({ isSuccessMsg: res.data.messages }));
+    //         dispatch(setSuccess({ isSuccess: true }));
+    //         setIsActive(false);
+    //         setIsLoading(false);
+    //       }
+    //     }
+    //   })
+    //   .catch((e: any) => {
+    //     setIsError(true);
+    //     dispatch(setErrorMsg({ isErrorMsg: e?.response?.message }));
+    //     dispatch(setError({ isError: true }));
+    //     setIsLoading(false);
+    //   });
   };
 
   return (
