@@ -5,7 +5,6 @@ import { InputLabelPassword } from '../../../components/inputs/InputLabelPasswor
 import { profileReqs } from '../../../requests/profile/profileReqs.ts';
 import { useDispatch } from 'react-redux';
 import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
-import authLayout from '../../../requests/layout.ts';
 
 interface ChangePasswordProps {
   active: boolean;
@@ -90,7 +89,8 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
   ];
 
   const changePassword = (oldPassword: string, newPassword: string) => {
-    authLayout(profileReqs.changePassword(oldPassword, newPassword))
+    profileReqs
+      .changePassword(oldPassword, newPassword)
       .then((res: any) => {
         if (res?.status === 200) {
           setIsActive(false);

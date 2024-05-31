@@ -10,10 +10,12 @@ import { ChangeEmailSubmitModal } from './changeEmailSubmit.tsx';
 import { MainSpinner } from '../../../components/spinners/MainSpinner.tsx';
 import { ChangePhoneNumber } from './changePhoneNumber.tsx';
 import authRequests from '../../auth/requests/auth.ts';
-import authLayout from '../../../requests/layout.ts';
+import { AxiosError, AxiosResponse } from 'axios';
+import { useDispatch } from 'react-redux';
+import { setError, setErrorMsg } from '../../../store/systemAlertSlices.ts';
 
 function Profile() {
-  const [isUser, setIsUser] = useState<any>(false);
+  const [isUser, setIsUser] = useState<boolean | any>(false);
   const [isActivePersonal, setIsActivePersonal] = useState<boolean>(false);
   const [isActivePassword, setIsActivePassword] = useState<boolean>(false);
   const [isActiveEmail, setIsActiveEmail] = useState<boolean>(false);
@@ -21,14 +23,27 @@ function Profile() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isActiveNumber, setIsActiveNumber] = useState<boolean>(false);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    authLayout(authRequests.userInfo()).then((res: any) => {
-      if (res.status === 200) {
-        localStorage.setItem('user', JSON.stringify(res.data));
-        setIsUser(res.data);
-      }
-      setIsLoading(false);
-    });
+    authRequests
+      .userInfo()
+      .then((res: AxiosResponse<any>) => {
+        if (res.status === 200) {
+          localStorage.setItem('user', JSON.stringify(res.data));
+          setIsUser(res.data);
+        }
+      })
+      .catch((e: AxiosError<any>) => {
+        if (e?.response?.status === 500) {
+          dispatch(setErrorMsg({ isErrorMsg: 'Internal server error' }));
+          dispatch(setError({ isError: true }));
+          return;
+        }
+        dispatch(setErrorMsg({ isErrorMsg: e?.response?.data?.message }));
+        dispatch(setError({ isError: true }));
+      });
+    setIsLoading(false);
   }, [isActiveNumber, isActivePersonal]);
 
   return isLoading ? (

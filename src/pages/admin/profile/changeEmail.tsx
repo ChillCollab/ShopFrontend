@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { ModalContainer } from '../../../components/modals/ModalContainer.tsx';
 import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal.tsx';
 import InputLabelText from '../../../components/inputs/InputLabelText.tsx';
-import { authLayout } from '../../../requests/layout.ts';
 import { profileReqs } from '../../../requests/profile/profileReqs.ts';
 import { useDispatch } from 'react-redux';
 import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
@@ -27,28 +26,23 @@ export const ChangeEmailModal: React.FC<ChangeEmailProps> = ({ active, setIsActi
 
   const sendEmail = async () => {
     setIsLoading(true);
-    // await authLayout(profileReqs.changeEmail(isEmail))
-    //   .then((res: any) => {
-    //     if (res?.response) {
-    //       if (res?.response?.status !== 200) {
-    //         dispatch(setError({ isError: true }));
-    //         dispatch(setErrorMsg({ isErrorMsg: res.response.data.message }));
-    //         setIsLoading(false);
-    //       }
-    //     } else {
-    //       dispatch(setSuccessMsg({ isSuccessMsg: 'An email with a confirmation code has been sent to your email.' }));
-    //       dispatch(setSuccess({ isSuccess: true }));
-    //       setIsActive(false);
-    //       setIsActiveSub(true);
-    //       setIsLoading(false);
-    //     }
-    //   })
-    //   .catch((e: any) => {
-    //     setIsError(true);
-    //     dispatch(setError({ isError: true }));
-    //     dispatch(setErrorMsg({ isErrorMsg: e?.response?.message }));
-    //     setIsLoading(false);
-    //   });
+    profileReqs
+      .changeEmail(isEmail)
+      .then((res: any) => {
+        if (res.status === 200) {
+          dispatch(setSuccessMsg({ isSuccessMsg: 'An email with a confirmation code has been sent to your email.' }));
+          dispatch(setSuccess({ isSuccess: true }));
+          setIsActive(false);
+          setIsActiveSub(true);
+          setIsLoading(false);
+        }
+      })
+      .catch((e: any) => {
+        setIsError(true);
+        dispatch(setError({ isError: true }));
+        dispatch(setErrorMsg({ isErrorMsg: e?.response?.message }));
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {

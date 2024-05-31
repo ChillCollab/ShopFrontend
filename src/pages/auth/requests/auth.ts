@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../../../config/config.ts';
+import { axiosInstance } from '../../../requests/axiosInstance.ts';
 
 export interface User {
   id: number;
@@ -86,12 +87,7 @@ const authRequests = {
       });
   },
   userInfo: () => {
-    return () =>
-      axios.get(config.HOST + '/user/info', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-        },
-      });
+    return axiosInstance.get('/user/info');
   },
   refreshToken: () => {
     return () =>

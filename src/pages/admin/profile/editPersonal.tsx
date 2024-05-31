@@ -2,9 +2,9 @@ import { ModalContainer } from '../../../components/modals/ModalContainer.tsx';
 import InputLabelText from '../../../components/inputs/InputLabelText.tsx';
 import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal.tsx';
 import React, { useEffect, useRef, useState } from 'react';
-import { profileReqs } from '../../../requests/profile/profileReqs.ts';
 import { useDispatch } from 'react-redux';
 import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
+import { profileReqs } from '../../../requests/profile/profileReqs.ts';
 
 interface EditPersonalProps {
   active: boolean;
@@ -12,7 +12,7 @@ interface EditPersonalProps {
 }
 
 export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsActive }) => {
-  const [isUploading, setIsUploading] = useState<boolean>(false);
+  // const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -98,21 +98,21 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
   ];
 
   const sendData = (file: File) => {
-    // if (file) {
-    //   authLayout(profileReqs.uploadAvatar(file))
-    //       .then((uploadResponse: any) => {
-    //         if (uploadResponse) {
-    //           if (uploadResponse.response.status === 200) {
-    //             dispatch(setSuccessMsg({isSuccessMsg: uploadResponse?.data?.message}))
-    //             dispatch(setSuccess({isSuccess: true}))
-    //             setIsActive(false)
-    //           }
-    //         }
-    //       }).catch((e: any) => {
-    //         dispatch(setErrorMsg({isErrorMsg: e.response.data.message}))
-    //         dispatch(setError({isError: true}))
-    //   })
-    // }
+    if (file) {
+      profileReqs
+        .uploadAvatar(file)
+        .then((uploadResponse: any) => {
+          if (uploadResponse.status === 200) {
+            dispatch(setSuccessMsg({ isSuccessMsg: uploadResponse?.data?.message }));
+            dispatch(setSuccess({ isSuccess: true }));
+            setIsActive(false);
+          }
+        })
+        .catch((e: any) => {
+          dispatch(setErrorMsg({ isErrorMsg: e.response.data.message }));
+          dispatch(setError({ isError: true }));
+        });
+    }
   };
 
   return (

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { ModalContainer } from '../../../components/modals/ModalContainer.tsx';
 import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal.tsx';
 import InputLabelText from '../../../components/inputs/InputLabelText.tsx';
-import authLayout from '../../../requests/layout.ts';
 import { profileReqs } from '../../../requests/profile/profileReqs.ts';
 import { useDispatch } from 'react-redux';
 import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
@@ -25,7 +24,8 @@ export const ChangePhoneNumber: React.FC<ChangePhoneprops> = ({ active, setIsAct
   };
 
   const changeNumber = (number: string) => {
-    authLayout(profileReqs.changeNumber(number))
+    profileReqs
+      .changeNumber(number)
       .then((res: any) => {
         dispatch(setSuccessMsg({ isSuccessMsg: res.data.message }));
         dispatch(setSuccess({ isSuccess: true }));
