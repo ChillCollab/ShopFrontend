@@ -103,9 +103,9 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
         .uploadAvatar(file)
         .then((uploadResponse: any) => {
           if (uploadResponse.status === 200) {
+            setIsActive(false);
             dispatch(setSuccessMsg({ isSuccessMsg: uploadResponse?.data?.message }));
             dispatch(setSuccess({ isSuccess: true }));
-            setIsActive(false);
           }
         })
         .catch((e: any) => {
