@@ -34,32 +34,28 @@ export interface RecoveryCodeCheck {
 
 const authRequests = {
   register: (login: string, name: string, surname: string, email: string) => {
-    return () =>
-      axios.post(config.HOST + '/auth/register', {
-        login: login,
-        name: name,
-        surname: surname,
-        email: email,
-      });
+    return axios.post(config.HOST + '/auth/register', {
+      login: login,
+      name: name,
+      surname: surname,
+      email: email,
+    });
   },
   registerCodeCheck: (code: string) => {
-    return () =>
-      axios.post(config.HOST + '/auth/register/check', {
-        code: code,
-      });
+    return axios.post(config.HOST + '/auth/register/check', {
+      code: code,
+    });
   },
   registerSubmit: (code: string, password: string) => {
-    return () =>
-      axios.post(config.HOST + '/auth/activate', {
-        code: code,
-        password: password,
-      });
+    return axios.post(config.HOST + '/auth/activate', {
+      code: code,
+      password: password,
+    });
   },
   recovery: (email: string) => {
-    return () =>
-      axios.post(config.HOST + '/auth/recovery', {
-        email: email,
-      });
+    return axios.post(config.HOST + '/auth/recovery', {
+      email: email,
+    });
   },
   login: (email: string, password: string) => {
     return () =>
@@ -72,40 +68,36 @@ const authRequests = {
     return axiosInstance.post('/auth/logout');
   },
   sendMail: (email: string) => {
-    return () =>
-      axios.post(config.HOST + '/auth/activate/send', {
-        email: email,
-      });
+    return axios.post(config.HOST + '/auth/activate/send', {
+      email: email,
+    });
   },
   userInfo: () => {
     return axiosInstance.get('/user/info');
   },
   refreshToken: () => {
-    return () =>
-      axios.post(
-        config.HOST + '/auth/refresh',
-        {
-          token: localStorage.getItem('refresh_token'),
+    return axios.post(
+      config.HOST + '/auth/refresh',
+      {
+        token: localStorage.getItem('refresh_token'),
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('access_token'),
         },
-        {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-          },
-        }
-      );
+      }
+    );
   },
   recoveryCheckCode: (code: string) => {
-    return () =>
-      axios.post(config.HOST + '/auth/recovery/check', {
-        code: code,
-      });
+    return axios.post(config.HOST + '/auth/recovery/check', {
+      code: code,
+    });
   },
   recoverySubmit: (code: string, password: string) => {
-    return () =>
-      axios.post(config.HOST + '/auth/recovery/submit', {
-        code: code,
-        password: password,
-      });
+    return axios.post(config.HOST + '/auth/recovery/submit', {
+      code: code,
+      password: password,
+    });
   },
 };
 

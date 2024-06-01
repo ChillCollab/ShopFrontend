@@ -30,7 +30,7 @@ axiosInstance.interceptors.response.use(
       const { status } = error.response;
       if (status === 401) {
         try {
-          const resRefresh = await authRequests.refreshToken()(); // Assuming refreshToken is a function returning a function
+          const resRefresh = await authRequests.refreshToken(); // Assuming refreshToken is a function returning a function
           if (resRefresh?.status === 200 && resRefresh?.data) {
             const { access_token, refresh_token } = resRefresh.data;
             localStorage.setItem(storage.accessToken, access_token);

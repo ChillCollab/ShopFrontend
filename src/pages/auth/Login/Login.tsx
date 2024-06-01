@@ -143,13 +143,12 @@ const Login: React.FC = () => {
     const access = localStorage.getItem(storage.accessToken);
     const refresh = localStorage.getItem(storage.refreshToken);
     if (access !== null || refresh !== null) {
-      const info = authRequests.userInfo();
-      info()
+      authRequests
+        .userInfo()
         .then((res) => {
           if (res.status !== 200) {
             if (res.status === 401) {
-              const refresh = authRequests.refreshToken();
-              refresh().then((refreshResponse) => {
+              authRequests.refreshToken().then((refreshResponse) => {
                 if (refreshResponse.status !== 200) {
                   localStorage.removeItem(storage.accessToken);
                   localStorage.removeItem(storage.refreshToken);

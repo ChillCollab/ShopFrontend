@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import authRequests from '../requests/auth.ts';
 import { useNavigate } from 'react-router-dom';
 
 import { NavigateFunction } from 'react-router-dom';
 
 const Auth = () => {
-  const [register, setRegister] = useState<boolean>(false);
-  const [isSuccessfulSend, setIsSuccessfulSend] = useState(false);
-  const [isForgot, setIsForgot] = useState(false);
-  const [isTitle, setIsTitle] = useState<string>('');
+  // const [register, setRegister] = useState<boolean>(false);
+  // const [isSuccessfulSend, setIsSuccessfulSend] = useState(false);
+  // const [isForgot, setIsForgot] = useState(false);
+  // const [isTitle, setIsTitle] = useState<string>('');
   const navigate = useNavigate();
   function checkLogin(nav: NavigateFunction) {
     const access = localStorage.getItem('access_token');
