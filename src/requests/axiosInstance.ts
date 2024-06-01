@@ -21,7 +21,6 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-// Add a response interceptor
 axiosInstance.interceptors.response.use(
   (response) => {
     return response;
@@ -36,7 +35,7 @@ axiosInstance.interceptors.response.use(
             const { access_token, refresh_token } = resRefresh.data;
             localStorage.setItem(storage.accessToken, access_token);
             localStorage.setItem(storage.refreshToken, refresh_token);
-            // Retry the original request
+
             return axiosInstance(error.config);
           }
         } catch (refreshError) {

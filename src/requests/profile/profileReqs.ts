@@ -34,4 +34,11 @@ export const profileReqs = {
       new_password: newPassword,
     });
   },
+  changePersonalData: (name?: string, surname?: string, login?: string) => {
+    return axiosInstance.patch('/user/change', {
+      name: name,
+      surname: surname,
+      login: login,
+    });
+  },
 };

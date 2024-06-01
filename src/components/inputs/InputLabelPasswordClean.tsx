@@ -12,11 +12,11 @@ interface InputLabelClean {
     | null
     | undefined;
   style: React.CSSProperties | undefined;
-  onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
+  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
   size: 'small' | 'medium' | undefined;
-  onKeyDown: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
-  onFocus: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
-  onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
+  onFocus?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   value?: string;
   disabled?: boolean;
 }

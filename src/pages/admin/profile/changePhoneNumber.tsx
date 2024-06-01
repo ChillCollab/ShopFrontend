@@ -20,24 +20,39 @@ export const ChangePhoneNumber: React.FC<ChangePhoneprops> = ({ active, setIsAct
   const dispatch = useDispatch();
 
   const handleNumber = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setIsError(false);
     setIsNumber(e.target.value);
   };
 
+  const validateNumber = (value: string): boolean => {
+    const regex = /^[0-9]{1,32}$/;
+    return regex.test(value);
+  };
+
   const changeNumber = (number: string) => {
-    profileReqs
-      .changeNumber(number)
-      .then((res: any) => {
-        dispatch(setSuccessMsg({ isSuccessMsg: res.data.message }));
-        dispatch(setSuccess({ isSuccess: true }));
-        setIsActive(false);
-        setIsLoading(false);
-      })
-      .catch((e: any) => {
-        setIsError(true);
-        dispatch(setError({ isError: true }));
-        dispatch(setErrorMsg({ isErrorMsg: e?.response?.data?.message }));
-        setIsLoading(false);
-      });
+    setIsLoading(true);
+    number = number.replace('+', '');
+    if (validateNumber(number)) {
+      profileReqs
+        .changeNumber(number)
+        .then((res: any) => {
+          dispatch(setSuccessMsg({ isSuccessMsg: res.data.message }));
+          dispatch(setSuccess({ isSuccess: true }));
+          setIsActive(false);
+          setIsLoading(false);
+        })
+        .catch((e: any) => {
+          setIsError(true);
+          dispatch(setError({ isError: true }));
+          dispatch(setErrorMsg({ isErrorMsg: e?.response?.data?.message }));
+          setIsLoading(false);
+        });
+    } else {
+      setIsError(true);
+      dispatch(setError({ isError: true }));
+      dispatch(setErrorMsg({ isErrorMsg: 'Invalid phone number. Use only numbers and number of digits less than 32' }));
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {

@@ -5,6 +5,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
 import { profileReqs } from '../../../requests/profile/profileReqs.ts';
+import { storage } from '../../../storage/storage.ts';
+import { setImage } from '../../../store/navbarSlices.ts';
+import { AxiosError, AxiosResponse } from 'axios';
 
 interface EditPersonalProps {
   active: boolean;
@@ -13,6 +16,10 @@ interface EditPersonalProps {
 
 export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsActive }) => {
   // const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [name, setName] = useState<string>('');
+  const [surname, setSurname] = useState<string>('');
+  const [login, setLogin] = useState<string>('');
+  const [errorLogin, setErrorLogin] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -33,10 +40,11 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
         if (file.size <= 3000000) {
           const reader = new FileReader();
           reader.onloadend = () => {
-            setAvatarUrl(reader.result as string); // Устанавливаем загруженный файл как URL аватара
+            setAvatarUrl(reader.result as string);
+            dispatch(setImage({ isImage: reader.result as string })); // Устанавливаем загруженный файл как URL аватара
           };
           reader.readAsDataURL(file);
-          sendData(file);
+          uploadFile(file);
         } else {
           dispatch(setErrorMsg({ isErrorMsg: 'File size should be less 3 MB' }));
           dispatch(setError({ isError: true }));
@@ -45,7 +53,7 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
     };
 
     useEffect(() => {
-      const user = localStorage.getItem('user');
+      const user = localStorage.getItem(storage.userData);
       if (user) {
         const userData = JSON.parse(user);
         setAvatarUrl(userData.avatar_id);
@@ -79,25 +87,68 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
     );
   };
 
+  const handleName = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setName(e.target.value);
+  };
+
+  const handleSurname = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setSurname(e.target.value);
+  };
+
+  const handleLogin = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setLogin(e.target.value);
+  };
+
+  const updateData = (name: string, surname: string, login: string) => {
+    profileReqs
+      .changePersonalData(name, surname, login)
+      .then((changeDataResponse: AxiosResponse<any>) => {
+        if (changeDataResponse.status === 200) {
+          window.location.reload();
+          dispatch(setSuccessMsg({ isSuccessMsg: 'Personal data has been changed' }));
+          dispatch(setSuccess({ isSuccess: true }));
+          setIsActive(false);
+        }
+      })
+      .catch((e: AxiosError<any>) => {
+        if (e?.response?.status === 500) {
+          dispatch(setErrorMsg({ isErrorMsg: 'Something went wrong' }));
+          dispatch(setError({ isError: true }));
+          return;
+        }
+        if (e?.response?.data?.code === 24) {
+          setErrorLogin(true);
+        }
+        dispatch(setErrorMsg({ isErrorMsg: e?.response?.data?.message }));
+        dispatch(setError({ isError: true }));
+      });
+  };
+
   const inputs = [
     {
       key: 'input-name',
       id: 'input-name',
       name: 'Name',
+      error: false,
+      onChange: handleName,
     },
     {
       key: 'input-surname',
       id: 'input-surname',
       name: 'Surname',
+      error: false,
+      onChange: handleSurname,
     },
     {
       key: 'input-email',
       id: 'input-login',
       name: 'Login',
+      error: errorLogin,
+      onChange: handleLogin,
     },
   ];
 
-  const sendData = (file: File) => {
+  const uploadFile = (file: File) => {
     if (file) {
       profileReqs
         .uploadAvatar(file)
@@ -131,13 +182,11 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
                     <InputLabelText
                       key={input.key}
                       id={input.id}
-                      onChange={(e) => console.log(e)}
-                      error={false}
+                      onChange={input.onChange}
+                      error={input.error}
                       label={input.name}
                       type={'text'}
                       size={'medium'}
-                      onKeyDown={(e) => console.log(e)}
-                      onFocus={() => console.log()}
                       style={{ width: '100%', maxWidth: '435px', minWidth: '435px', maxHeight: '56px', color: 'white' }}
                     />
                   );
@@ -148,7 +197,7 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
                 title={'Save'}
                 loading={false}
                 onClick={() => {
-                  console.log(1);
+                  updateData(name, surname, login);
                 }}
               />
             </div>

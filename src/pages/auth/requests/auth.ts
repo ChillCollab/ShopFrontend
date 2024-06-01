@@ -69,16 +69,7 @@ const authRequests = {
       });
   },
   logout: () => {
-    return () =>
-      axios.post(
-        config.HOST + '/auth/logout',
-        {},
-        {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-          },
-        }
-      );
+    return axiosInstance.post('/auth/logout');
   },
   sendMail: (email: string) => {
     return () =>

@@ -13,6 +13,7 @@ import authRequests from '../../auth/requests/auth.ts';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useDispatch } from 'react-redux';
 import { setError, setErrorMsg } from '../../../store/systemAlertSlices.ts';
+import { storage } from '../../../storage/storage.ts';
 
 function Profile() {
   const [isUser, setIsUser] = useState<boolean | any>(false);
@@ -30,7 +31,7 @@ function Profile() {
       .userInfo()
       .then((res: AxiosResponse<any>) => {
         if (res.status === 200) {
-          localStorage.setItem('user', JSON.stringify(res.data));
+          localStorage.setItem(storage.userData, JSON.stringify(res.data));
           setIsUser(res.data);
         }
       })
@@ -105,10 +106,6 @@ function Profile() {
                 value={'password'}
                 style={{ maxWidth: '510px', minWidth: '320px', maxHeight: '56px' }}
                 size={'medium'}
-                onChange={(e) => console.log(e)}
-                onKeyDown={(e) => console.log(e)}
-                onFocus={(e) => console.log(e)}
-                onClick={(e) => console.log(e)}
               />
               <div className="change-password" onClick={() => setIsActivePassword(true)}>
                 Change password
