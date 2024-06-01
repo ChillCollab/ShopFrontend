@@ -8,9 +8,9 @@ export const InputLabelPassword: React.FC<InputTypes<'password'>> = ({
   setIsShow,
   label,
   size,
-  event,
   onKeyDown,
   onFocus,
+  onChange,
   register,
   style,
 }) => {
@@ -22,9 +22,9 @@ export const InputLabelPassword: React.FC<InputTypes<'password'>> = ({
       <OutlinedInput
         style={style}
         {...register}
+        onChange={onChange}
         error={error}
         size={size}
-        event={event}
         id="outlined-adornment-password"
         type={isShow ? 'text' : 'password'}
         onKeyDown={onKeyDown}

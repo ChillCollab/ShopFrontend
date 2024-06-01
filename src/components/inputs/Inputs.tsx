@@ -3,7 +3,16 @@ import React from 'react';
 import './inputs.scss';
 import { InputPropType } from './inputs.types';
 
-export const InputLabelMain: React.FC<InputPropType> = ({ error, type, label, size, register, style }) => {
+export const InputLabelMain: React.FC<InputPropType> = ({
+  error,
+  type,
+  label,
+  size,
+  register,
+  style,
+  onChange,
+  onKeyDown,
+}) => {
   return (
     <FormControl style={{ width: '100%' }} className="custom-form-control" variant="outlined">
       <InputLabel htmlFor="outlined-adornment-password" style={{ display: 'flex', alignItems: 'center' }}>
@@ -17,6 +26,8 @@ export const InputLabelMain: React.FC<InputPropType> = ({ error, type, label, si
         id="outlined-adornment-password"
         type={type}
         label={label}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
       />
     </FormControl>
   );

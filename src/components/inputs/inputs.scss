@@ -18,6 +18,41 @@
     }
   }
 }
+
+.css-1q6at85-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
+  border-color: $soft-color !important;
+}
+
+.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
+  opacity: 1;
+  -webkit-text-fill-color: $soft-color !important;
+}
+
+.adornment-button {
+  color: $hover-button !important; /* Изменяем цвет кнопки IconButton */
+}
+
+.adornment-icon:hover {
+  fill: currentColor !important; /* Применяем текущий цвет родительского элемента (IconButton) */
+}
+
+img {
+  fill: red !important;
+}
+
+.phone-adornment {
+  color: $soft-color;
+  font-weight: 400;
+}
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
+  border-color: $soft-color !important;
+}
+
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
+  -webkit-text-fill-color: $soft-color !important;
+}
+
 .custom-form-control .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
   border-radius: 7px;
   border-color: $soft-color;
@@ -31,3 +66,5 @@
 .custom-form-control:focus-within .MuiInputLabel-root {
   color: #8b87d6;
 }
+
+

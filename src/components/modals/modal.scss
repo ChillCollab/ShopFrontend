@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+
+.modal-container {
+  border-radius: 7px;
+  position: fixed; /* Фиксируем позицию, чтобы модальное окно было поверх всего */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 500;
+  background: $main-modal;
+  //box-shad: 0 5px 15px rgba(0,0,0,0.3); /* Тень */
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 499;
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}

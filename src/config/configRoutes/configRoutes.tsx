@@ -1,10 +1,9 @@
 import AdminLayout from '../../components/layouts/AdminLayout/Layout';
-import ResetPassword from '../../pages/auth/ResetPassword';
+import ResetPassword from '../../pages/auth/Forgot/ResetPassword.tsx';
 import SubmitRegistration from '../../pages/auth/Register/SubmitRegistration.tsx';
 import AdminHome from '../../pages/admin/home/Home';
 import Product from '../../pages/admin/product/Product';
 import Products from '../../pages/admin/products/Products';
-import User from '../../pages/admin/user/User';
 import Users from '../../pages/admin/users/Users';
 import Layout from '../../components/layouts/Layout';
 import Home from '../../pages/home/Home';
@@ -12,18 +11,21 @@ import Login from '../../pages/auth/Login/Login';
 import Register from '../../pages/auth/Register/Register';
 import Forgot from '../../pages/auth/Forgot/Forgot.tsx';
 import SuccessfulSend from '../../pages/auth/Forgot/SuccessfulSend.tsx';
+import Profile from '../../pages/admin/profile/Profile.tsx';
+import SuccessfulRegister from '../../pages/auth/Register/SuccessfulRegister.tsx';
 
 export const routePaths = {
   HOME: '/',
   ADMIN_PRODUCT: '/admin/product/:id',
   ADMIN_PRODUCTS: '/admin/products',
-  ADMIN_USER: '/admin/users/:id',
+  ADMIN_USER: '/admin/profile',
   ADMIN_USERS: '/admin/users',
   ADMIN: '/admin',
-  RESET_PASSWORD: '/reset/submit/:id',
+  RESET_PASSWORD: '/recovery/submit/:id',
   SUBMIT_REGISTRATION: '/registration/submit/:id',
   ADMIN_AUTH_LOGIN: '/admin/login',
   REGISTER_AUTH: '/admin/register', // url пока как админ будет, потом надо менять
+  REGISTER_SUCCESSFUL: '/admin/register/success',
   FORGOT_PASSWORD: '/admin/forgot',
   FORGOT_PASSWORD_SUCCESS: '/admin/forgot/success',
 };
@@ -39,7 +41,7 @@ export const routeConfig = [
       },
       {
         path: routePaths.ADMIN_USER,
-        element: <User />,
+        element: <Profile />,
       },
       {
         path: routePaths.ADMIN_USERS,
@@ -72,6 +74,10 @@ export const routeConfig = [
   {
     path: routePaths.REGISTER_AUTH,
     element: <Register />,
+  },
+  {
+    path: routePaths.REGISTER_SUCCESSFUL,
+    element: <SuccessfulRegister />,
   },
   {
     path: routePaths.SUBMIT_REGISTRATION,

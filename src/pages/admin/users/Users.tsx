@@ -1,6 +1,6 @@
 import { GridColDef } from '@mui/x-data-grid';
 import DataTable from '../../../components/dataTable/DataTable.tsx';
-import './Users.scss';
+import './users.scss';
 import { useEffect, useState } from 'react';
 import Add from '../../../components/add/Add.tsx';
 import adminReqs from '../../../requests/admin/admin.ts';
@@ -22,7 +22,7 @@ const columns: GridColDef[] = [
     headerClassName: 'headerBox',
     width: 80,
     renderCell: (params) => {
-      return <img src={params.row.avatar_id || '/noavatar.png'} alt="" />;
+      return <img style={{ height: '38px', width: '38px' }} src={params.row.avatar_id || '/noavatar.png'} alt="" />;
     },
   },
   {
@@ -93,10 +93,7 @@ const Users = () => {
   const [isUsers, setIsUsers] = useState([]);
 
   useEffect(() => {
-    adminReqs
-      .getUsers()
-      .then((res) => setIsUsers(res.data))
-      .catch(console.error);
+    adminReqs.getUsers().then((res) => setIsUsers(res.data));
   }, []);
 
   return (

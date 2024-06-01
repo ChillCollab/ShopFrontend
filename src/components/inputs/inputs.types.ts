@@ -27,6 +27,7 @@ export type InputPropType = {
   label: string;
   event?: any;
   size: 'small' | 'medium';
+  onClick?: void;
   onChange?: any;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
   disabled?: boolean | undefined;

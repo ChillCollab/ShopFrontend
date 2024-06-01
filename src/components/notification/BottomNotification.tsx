@@ -1,0 +1,3 @@
+export const BottomNotification = () => {
+  return;
+};
