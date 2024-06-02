@@ -8,13 +8,13 @@
 
 .custom-form-control {
   .MuiInputLabel-root {
-    color: $placeholder-color;
+    color: $placeholder-color !important;
   }
   .MuiOutlinedInput-root.Mui-focused {
     border-color: $soft-color;
     .MuiOutlinedInput-notchedOutline {
       color: $main-button !important;
-      border-color: $soft-color;
+      border-color: $soft-color !important;
     }
   }
 }
@@ -41,7 +41,7 @@ img {
 }
 
 .phone-adornment {
-  color: $soft-color;
+  color: $soft-color !important;
   font-weight: 400;
 }
 
@@ -54,14 +54,14 @@ img {
 }
 
 .custom-form-control .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-  border-radius: 7px;
-  border-color: $soft-color;
+  border-radius: 7px !important;
+  border-color: $soft-color !important;
 }
 .custom-form-control:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-  border-color: $soft-color;
+  border-color: $soft-color !important;
 }
 .custom-form-control:focus-within .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-  border-color: $soft-color;
+  border-color: $soft-color !important;
 }
 .custom-form-control:focus-within .MuiInputLabel-root {
   color: #8b87d6;
