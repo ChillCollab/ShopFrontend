@@ -22,7 +22,7 @@ export type InputTypes<T extends 'email' | 'password' | 'text'> = T extends 'pas
 export type InputPropType = {
   register?: any;
   style?: CSSProperties;
-  error: boolean;
+  error?: boolean;
   type: string;
   label: string;
   event?: any;
