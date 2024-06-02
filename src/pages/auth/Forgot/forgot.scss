@@ -24,6 +24,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 16px;
 
     p {
       display: flex;
@@ -38,7 +39,6 @@
   h1 {
     text-align: center;
     color: $main-color;
-    margin-bottom: 2rem;
   }
 
   Input {
@@ -130,7 +130,7 @@
 
 @media (max-width: 900px) {
   .inputContainer {
-    padding: 2rem 2rem;
+    padding: 0 20px;
 
     .registerBox {
       margin-top: 25px;

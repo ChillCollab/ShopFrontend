@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import authRequests from '../requests/auth';
 import { routePaths } from '../../../config/configRoutes/configRoutes';
 import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal';
-import InputLabelText from '../../../components/inputs/InputLabelText.tsx';
+import { InputLabelMain } from '../../../components/inputs/Inputs.tsx';
 
 // Определяем тип для данных формы
 interface FormData {
@@ -82,31 +82,19 @@ const Register: React.FC = () => {
 
   return (
     <div className={'registerContainer'}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <h1 className="title">Registration</h1>
+      <div className={'inputRegContainer'}>
+        <h1>Registration</h1>
         <form style={{ display: 'flex', flexDirection: 'column' }}>
           <div className="inputs-container-reg">
             {inputs.map((fieldName) => {
               return (
-                <div className="register-field" key={fieldName.name}>
-                  <InputLabelText
-                    id={fieldName.name}
-                    style={{
-                      marginBottom: '10px',
-                      color: 'white',
-                      display: 'flex',
-                      minWidth: '700px',
-                      minHeight: '56px',
-                    }}
-                    error={false}
-                    size="medium"
-                    type="text"
-                    label={fieldName.label}
-                    onChange={(e) => {
-                      fieldName.onChange(e);
-                    }}
-                  />
-                </div>
+                <InputLabelMain
+                  error={false}
+                  size="medium"
+                  type="text"
+                  label={fieldName.label}
+                  onChange={fieldName.onChange}
+                />
               );
             })}
           </div>

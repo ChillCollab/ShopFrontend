@@ -1,4 +1,4 @@
-@import '../Login/login';
+@import '../../../styles/variables.scss';
 
 .error {
   margin-bottom: 20px;
@@ -17,6 +17,8 @@
 }
 
 .inputs-container-reg {
+  display: flex;
+  flex-direction: column;
   margin-top: 50px;
   margin-bottom: 50px;
   gap: 30px;
@@ -26,14 +28,23 @@ h1 {
   color: $main-color;
 }
 
-.inputContainer {
+.inputRegContainer {
   justify-content: center;
   display: flex;
   flex-direction: column;
   width: 700px;
   min-width: 325px;
   height: 735px;
-  gap: 32px;
+  padding: 0 20px;
+
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  Input {
+    color: $soft-color;
+  }
 }
 
 .loginContainer {
