@@ -50,13 +50,16 @@ export default function SubmitRegistration() {
           }
         })
         .catch((error: AxiosError<SuccessInterface>) => {
-          console.log(error.response?.status);
-          if (error.response?.status === 403) {
+          if (error.response?.status === 403 || error?.response?.status === 400) {
             if (error.response?.data?.code === 13) {
               setIsMsg('Password should be include Digits and Symbols');
               setIsErr(true);
-              setIsButtonLoading(false);
             }
+            if (error.response?.data?.code === 8) {
+              setIsMsg("Password can't be empty");
+              setIsErr(true);
+            }
+            setIsButtonLoading(false);
           } else {
             setIsMsg('Unexpected error!');
             setIsErr(true);
@@ -78,9 +81,7 @@ export default function SubmitRegistration() {
       authRequests
         .registerCodeCheck(code)
         .then((checkResponse: AxiosResponse<User>) => {
-          console.log(checkResponse.data);
           if (checkResponse.status === 200) {
-            console.log(1);
             setIsName(checkResponse.data.name);
             setIsSurname(checkResponse.data.surname);
             setIsEmail(checkResponse.data.email);
@@ -135,7 +136,7 @@ export default function SubmitRegistration() {
             label={'Password'}
             onFocus={() => setIsErr(false)}
             onKeyDown={handleKeyDown}
-            event={handlerPassword}
+            onChange={handlerPassword}
             size={'medium'}
           />
           <InputLabelPassword
@@ -144,7 +145,7 @@ export default function SubmitRegistration() {
             setIsShow={() => setIsEyeSecond(!isEyeSecond)}
             label={'Password'}
             onFocus={() => setIsErr(false)}
-            event={handlerPasswordSubmit}
+            onChange={handlerPasswordSubmit}
             onKeyDown={handleKeyDown}
             size={'medium'}
           />
