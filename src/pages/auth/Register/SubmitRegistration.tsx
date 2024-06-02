@@ -78,7 +78,9 @@ export default function SubmitRegistration() {
       authRequests
         .registerCodeCheck(code)
         .then((checkResponse: AxiosResponse<User>) => {
+          console.log(checkResponse.data);
           if (checkResponse.status === 200) {
+            console.log(1);
             setIsName(checkResponse.data.name);
             setIsSurname(checkResponse.data.surname);
             setIsEmail(checkResponse.data.email);
@@ -109,9 +111,23 @@ export default function SubmitRegistration() {
           <div className="titleContainer">
             <h1>Confirmation of registration</h1>
           </div>
-          <InputLabelMain itemID={'name'} error={false} type={'text'} label={''} size={'medium'} value={isName} />
-          <InputLabelMain itemID={'surname'} error={false} type={'text'} label={''} size={'medium'} value={isSurname} />
-          <InputLabelMain itemID={'email'} error={false} type={'email'} label={''} size={'medium'} value={isEmail} />
+          <InputLabelMain disabled={true} itemID={'name'} type={'text'} label={'Name'} size={'medium'} value={isName} />
+          <InputLabelMain
+            disabled={true}
+            itemID={'surname'}
+            type={'text'}
+            label={'Surname'}
+            size={'medium'}
+            value={isSurname}
+          />
+          <InputLabelMain
+            disabled={true}
+            itemID={'email'}
+            type={'email'}
+            label={'Email'}
+            size={'medium'}
+            value={isEmail}
+          />
           <InputLabelPassword
             error={isErr}
             isShow={isEyeFirst}
