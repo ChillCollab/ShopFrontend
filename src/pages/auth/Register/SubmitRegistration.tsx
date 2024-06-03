@@ -7,6 +7,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { LoadingButton } from '@mui/lab';
 import { routePaths } from '../../../config/configRoutes/configRoutes.tsx';
 import { InputLabelPassword } from '../../../components/inputs/InputLabelPassword.tsx';
+import { storage } from '../../../storage/storage.ts';
 
 export default function SubmitRegistration() {
   const [isErr, setIsErr] = useState<boolean>(false);
@@ -74,8 +75,9 @@ export default function SubmitRegistration() {
 
   useEffect(() => {
     if (code.length < 19) {
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
+      localStorage.removeItem(storage.accessToken);
+      localStorage.removeItem(storage.refreshToken);
+      localStorage.removeItem(storage.userData);
       navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
     } else {
       authRequests
@@ -87,16 +89,18 @@ export default function SubmitRegistration() {
             setIsEmail(checkResponse.data.email);
             setIsLoading(false);
           } else {
-            localStorage.removeItem('access_token');
-            localStorage.removeItem('refresh_token');
+            localStorage.removeItem(storage.accessToken);
+            localStorage.removeItem(storage.refreshToken);
+            localStorage.removeItem(storage.userData);
             setIsLoading(false);
             navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
           }
         })
         .catch((e: AxiosError) => {
           console.error(e);
-          localStorage.removeItem('access_token');
-          localStorage.removeItem('refresh_token');
+          localStorage.removeItem(storage.accessToken);
+          localStorage.removeItem(storage.refreshToken);
+          localStorage.removeItem(storage.userData);
           navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
           setIsLoading(false);
         });
