@@ -27,6 +27,7 @@ const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
       if (logoutResponse.status == 200) {
         localStorage.removeItem(storage.accessToken);
         localStorage.removeItem(storage.refreshToken);
+        localStorage.removeItem(storage.userData);
         navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
       }
     });
