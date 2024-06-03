@@ -45,7 +45,7 @@ export default function SubmitRegistration() {
         .registerSubmit(code, password)
         .then((submitRegister: AxiosResponse<SuccessInterface>) => {
           if (submitRegister.data.success) {
-            navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
+            navigate(routePaths.REGISTER_SUCCESSFUL, { replace: true });
             setIsButtonLoading(false);
           }
         })
@@ -76,7 +76,7 @@ export default function SubmitRegistration() {
     if (code.length < 19) {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
-      navigate(routePaths.REGISTER_SUCCESSFUL, { replace: true });
+      navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
     } else {
       authRequests
         .registerCodeCheck(code)
