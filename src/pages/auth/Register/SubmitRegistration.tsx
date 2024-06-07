@@ -7,6 +7,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { LoadingButton } from '@mui/lab';
 import { routePaths } from '../../../config/configRoutes/configRoutes.tsx';
 import { InputLabelPassword } from '../../../components/inputs/InputLabelPassword.tsx';
+import { storage } from '../../../storage/storage.ts';
 
 export default function SubmitRegistration() {
   const [isErr, setIsErr] = useState<boolean>(false);
@@ -45,18 +46,21 @@ export default function SubmitRegistration() {
         .registerSubmit(code, password)
         .then((submitRegister: AxiosResponse<SuccessInterface>) => {
           if (submitRegister.data.success) {
-            navigate('/auth', { replace: true });
+            navigate(routePaths.REGISTER_SUCCESSFUL, { replace: true });
             setIsButtonLoading(false);
           }
         })
         .catch((error: AxiosError<SuccessInterface>) => {
-          console.log(error.response?.status);
-          if (error.response?.status === 403) {
+          if (error.response?.status === 403 || error?.response?.status === 400) {
             if (error.response?.data?.code === 13) {
               setIsMsg('Password should be include Digits and Symbols');
               setIsErr(true);
-              setIsButtonLoading(false);
             }
+            if (error.response?.data?.code === 8) {
+              setIsMsg("Password can't be empty");
+              setIsErr(true);
+            }
+            setIsButtonLoading(false);
           } else {
             setIsMsg('Unexpected error!');
             setIsErr(true);
@@ -71,8 +75,9 @@ export default function SubmitRegistration() {
 
   useEffect(() => {
     if (code.length < 19) {
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
+      localStorage.removeItem(storage.accessToken);
+      localStorage.removeItem(storage.refreshToken);
+      localStorage.removeItem(storage.userData);
       navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
     } else {
       authRequests
@@ -84,16 +89,18 @@ export default function SubmitRegistration() {
             setIsEmail(checkResponse.data.email);
             setIsLoading(false);
           } else {
-            localStorage.removeItem('access_token');
-            localStorage.removeItem('refresh_token');
+            localStorage.removeItem(storage.accessToken);
+            localStorage.removeItem(storage.refreshToken);
+            localStorage.removeItem(storage.userData);
             setIsLoading(false);
             navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
           }
         })
         .catch((e: AxiosError) => {
           console.error(e);
-          localStorage.removeItem('access_token');
-          localStorage.removeItem('refresh_token');
+          localStorage.removeItem(storage.accessToken);
+          localStorage.removeItem(storage.refreshToken);
+          localStorage.removeItem(storage.userData);
           navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
           setIsLoading(false);
         });
@@ -109,9 +116,23 @@ export default function SubmitRegistration() {
           <div className="titleContainer">
             <h1>Confirmation of registration</h1>
           </div>
-          <InputLabelMain itemID={'name'} error={false} type={'text'} label={''} size={'medium'} value={isName} />
-          <InputLabelMain itemID={'surname'} error={false} type={'text'} label={''} size={'medium'} value={isSurname} />
-          <InputLabelMain itemID={'email'} error={false} type={'email'} label={''} size={'medium'} value={isEmail} />
+          <InputLabelMain disabled={true} itemID={'name'} type={'text'} label={'Name'} size={'medium'} value={isName} />
+          <InputLabelMain
+            disabled={true}
+            itemID={'surname'}
+            type={'text'}
+            label={'Surname'}
+            size={'medium'}
+            value={isSurname}
+          />
+          <InputLabelMain
+            disabled={true}
+            itemID={'email'}
+            type={'email'}
+            label={'Email'}
+            size={'medium'}
+            value={isEmail}
+          />
           <InputLabelPassword
             error={isErr}
             isShow={isEyeFirst}
@@ -119,7 +140,7 @@ export default function SubmitRegistration() {
             label={'Password'}
             onFocus={() => setIsErr(false)}
             onKeyDown={handleKeyDown}
-            event={handlerPassword}
+            onChange={handlerPassword}
             size={'medium'}
           />
           <InputLabelPassword
@@ -128,7 +149,7 @@ export default function SubmitRegistration() {
             setIsShow={() => setIsEyeSecond(!isEyeSecond)}
             label={'Password'}
             onFocus={() => setIsErr(false)}
-            event={handlerPasswordSubmit}
+            onChange={handlerPasswordSubmit}
             onKeyDown={handleKeyDown}
             size={'medium'}
           />

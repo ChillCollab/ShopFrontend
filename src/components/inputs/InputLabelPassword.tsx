@@ -12,7 +12,9 @@ export const InputLabelPassword: React.FC<InputTypes<'password'>> = ({
   onFocus,
   onChange,
   register,
+  value,
   style,
+  id,
 }) => {
   return (
     <FormControl className="custom-form-control" variant="outlined">
@@ -25,9 +27,10 @@ export const InputLabelPassword: React.FC<InputTypes<'password'>> = ({
         onChange={onChange}
         error={error}
         size={size}
-        id="outlined-adornment-password"
+        id={id}
         type={isShow ? 'text' : 'password'}
         onKeyDown={onKeyDown}
+        value={value}
         onFocus={onFocus}
         endAdornment={
           <InputAdornment position="end">

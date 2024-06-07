@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import config from '../../../config/config.ts';
-import { SendEmailResponse } from '../../../types/Auth.ts';
+import { axiosInstance } from '../../../requests/axiosInstance.ts';
 
 export interface User {
   id: number;
@@ -34,137 +34,70 @@ export interface RecoveryCodeCheck {
 
 const authRequests = {
   register: (login: string, name: string, surname: string, email: string) => {
-    return axios
-      .post(config.HOST + '/auth/register', {
-        login: login,
-        name: name,
-        surname: surname,
-        email: email,
-      })
-      .then((registerResponse) => {
-        return registerResponse;
-      });
+    return axios.post(config.HOST + '/auth/register', {
+      login: login,
+      name: name,
+      surname: surname,
+      email: email,
+    });
   },
   registerCodeCheck: (code: string) => {
-    return axios
-      .post(config.HOST + '/auth/register/check', {
-        code: code,
-      })
-      .then((registerCodeCheck: AxiosResponse<User>) => {
-        return registerCodeCheck;
-      });
+    return axios.post(config.HOST + '/auth/register/check', {
+      code: code,
+    });
   },
   registerSubmit: (code: string, password: string) => {
-    return axios
-      .post(config.HOST + '/auth/activate', {
-        code: code,
-        password: password,
-      })
-      .then((registerSubmitResponse: AxiosResponse<SuccessInterface>) => {
-        return registerSubmitResponse;
-      });
+    return axios.post(config.HOST + '/auth/activate', {
+      code: code,
+      password: password,
+    });
   },
   recovery: (email: string) => {
-    return axios
-      .post(config.HOST + '/auth/recovery', {
-        email: email,
-      })
-      .then((loginResponse: AxiosResponse<any>) => {
-        return loginResponse;
-      });
+    return axios.post(config.HOST + '/auth/recovery', {
+      email: email,
+    });
   },
   login: (email: string, password: string) => {
-    return axios
-      .post(config.HOST + '/auth/login', {
+    return () =>
+      axios.post(config.HOST + '/auth/login', {
         login: email,
         password: password,
-      })
-      .then((loginResponse) => {
-        return loginResponse;
       });
   },
   logout: () => {
-    return axios
-      .post(
-        config.HOST + '/auth/logout',
-        {},
-        {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-          },
-        }
-      )
-      .then((logoutResponse: AxiosResponse<any>) => {
-        return logoutResponse;
-      })
-      .catch((e) => {
-        console.error(e);
-        return e;
-      });
+    return axiosInstance.post('/auth/logout');
   },
   sendMail: (email: string) => {
-    return axios
-      .post(config.HOST + '/auth/activate/send', {
-        email: email,
-      })
-      .then((sendResponse: AxiosResponse<SendEmailResponse>) => {
-        return sendResponse;
-      });
+    return axios.post(config.HOST + '/auth/activate/send', {
+      email: email,
+    });
   },
   userInfo: () => {
-    return axios
-      .get(config.HOST + '/user/info', {
+    return axiosInstance.get('/user/info');
+  },
+  refreshToken: () => {
+    return axios.post(
+      config.HOST + '/auth/refresh',
+      {
+        token: localStorage.getItem('refresh_token'),
+      },
+      {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('access_token'),
         },
-      })
-      .then((infoResponse: AxiosResponse<User>) => {
-        return infoResponse;
-      })
-      .catch((e) => {
-        console.error(e);
-        return e;
-      });
-  },
-  refreshToken: () => {
-    try {
-      return axios
-        .post(
-          config.HOST + '/auth/refresh',
-          {
-            token: localStorage.getItem('refresh_token'),
-          },
-          {
-            headers: {
-              Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-            },
-          }
-        )
-        .then((infoResponse: AxiosResponse<LoginResponse>) => {
-          return infoResponse;
-        });
-    } catch (e) {
-      throw new Error(`${e}`);
-    }
+      }
+    );
   },
   recoveryCheckCode: (code: string) => {
-    return axios
-      .post(config.HOST + '/auth/recovery/check', {
-        code: code,
-      })
-      .then((recoveryCheckCode: AxiosResponse<RecoveryCodeCheck>) => {
-        return recoveryCheckCode;
-      });
+    return axios.post(config.HOST + '/auth/recovery/check', {
+      code: code,
+    });
   },
   recoverySubmit: (code: string, password: string) => {
-    return axios
-      .post(config.HOST + '/auth/recovery/submit', {
-        code: code,
-        password: password,
-      })
-      .then((recoverySubmitResponse: AxiosResponse<SuccessInterface>) => {
-        return recoverySubmitResponse;
-      });
+    return axios.post(config.HOST + '/auth/recovery/submit', {
+      code: code,
+      password: password,
+    });
   },
 };
 

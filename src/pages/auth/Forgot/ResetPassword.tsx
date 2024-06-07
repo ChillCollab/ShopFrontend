@@ -24,6 +24,8 @@ interface State {
   };
 }
 
+type Field = 'password' | 'confirmPassword';
+
 export default function ResetPassword() {
   const [state, setState] = useState<State>({
     isErr: false,
@@ -171,15 +173,12 @@ export default function ResetPassword() {
             <InputLabelPassword
               key={index}
               label={field === 'password' ? 'Password' : 'Confirm password'}
-              isShow={state.visibility[field]}
-              setIsShow={toggleVisibility(field)}
+              isShow={state.visibility[field as Field]}
+              setIsShow={toggleVisibility(field as Field)}
               error={state.isErr}
               onFocus={() => setState((prevState) => ({ ...prevState, isErr: false }))}
               onKeyDown={handleKeyDown}
-              register={{
-                value: state.passwords[field],
-                onChange: handleInputChange(field as keyof State['passwords']),
-              }}
+              onChange={handleInputChange(field as keyof State['passwords'])}
               size={'medium'}
             />
           ))}

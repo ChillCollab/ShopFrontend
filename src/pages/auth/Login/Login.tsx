@@ -9,6 +9,7 @@ import { LoadingButton } from '@mui/lab';
 import authRequests, { SuccessInterface } from '../requests/auth.ts';
 import { AxiosError } from 'axios';
 import { MainSpinner } from '../../../components/spinners/MainSpinner.tsx';
+import { storage } from '../../../storage/storage.ts';
 
 interface State {
   isErr: boolean;
@@ -97,6 +98,7 @@ const Login: React.FC = () => {
   const handleLoginError = (e: AxiosError<SuccessInterface>) => {
     const status = e.response?.status;
     const code = e.response?.data?.code as ErrorCode | undefined; // Уточнение типа для code
+    console.log(code);
 
     // Определите сообщение об ошибке
     const message =
@@ -106,7 +108,6 @@ const Login: React.FC = () => {
           ? errorMessages[500]
           : 'An unexpected error occurred';
 
-    // Обновите состояние
     setState({
       ...state,
       isErr: true,
@@ -122,12 +123,12 @@ const Login: React.FC = () => {
       return;
     }
     setState({ ...state, loading: { page: false, button: true } });
-    authRequests
-      .login(state.isEmail.value, state.isPassword.value)
+    const authReq = authRequests.login(state.isEmail.value, state.isPassword.value);
+    authReq()
       .then((loginResponse) => {
         if (loginResponse.status === 200) {
-          localStorage.setItem('access_token', loginResponse.data.access_token);
-          localStorage.setItem('refresh_token', loginResponse.data.refresh_token);
+          localStorage.setItem(storage.accessToken, loginResponse.data.access_token);
+          localStorage.setItem(storage.refreshToken, loginResponse.data.refresh_token);
           const path = loginResponse.data.role <= 0 ? routePaths.HOME : routePaths.ADMIN;
           navigate(path, { replace: true });
           setState({ ...state, loading: { page: false, button: false } });
@@ -139,9 +140,8 @@ const Login: React.FC = () => {
   };
 
   useEffect(() => {
-    const access = localStorage.getItem('access_token');
-    const refresh = localStorage.getItem('refresh_token');
-    console.log(access, refresh);
+    const access = localStorage.getItem(storage.accessToken);
+    const refresh = localStorage.getItem(storage.refreshToken);
     if (access !== null || refresh !== null) {
       authRequests
         .userInfo()
@@ -150,11 +150,11 @@ const Login: React.FC = () => {
             if (res.status === 401) {
               authRequests.refreshToken().then((refreshResponse) => {
                 if (refreshResponse.status !== 200) {
-                  localStorage.removeItem('access_token');
-                  localStorage.removeItem('refresh_token');
+                  localStorage.removeItem(storage.accessToken);
+                  localStorage.removeItem(storage.refreshToken);
                 } else {
-                  localStorage.setItem('access_token', refreshResponse.data.access_token);
-                  localStorage.setItem('refresh_token', refreshResponse.data.refresh_token);
+                  localStorage.setItem(storage.accessToken, refreshResponse.data.access_token);
+                  localStorage.setItem(storage.refreshToken, refreshResponse.data.refresh_token);
                   if (res.data?.role <= 0) {
                     navigate(routePaths.HOME, { replace: true });
                   } else {

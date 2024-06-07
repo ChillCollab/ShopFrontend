@@ -12,6 +12,7 @@ import Register from '../../pages/auth/Register/Register';
 import Forgot from '../../pages/auth/Forgot/Forgot.tsx';
 import SuccessfulSend from '../../pages/auth/Forgot/SuccessfulSend.tsx';
 import Profile from '../../pages/admin/profile/Profile.tsx';
+import SuccessfulRegister from '../../pages/auth/Register/SuccessfulRegister.tsx';
 
 export const routePaths = {
   HOME: '/',
@@ -24,6 +25,7 @@ export const routePaths = {
   SUBMIT_REGISTRATION: '/registration/submit/:id',
   ADMIN_AUTH_LOGIN: '/admin/login',
   REGISTER_AUTH: '/admin/register', // url пока как админ будет, потом надо менять
+  REGISTER_SUCCESSFUL: '/admin/register/success',
   FORGOT_PASSWORD: '/admin/forgot',
   FORGOT_PASSWORD_SUCCESS: '/admin/forgot/success',
 };
@@ -72,6 +74,10 @@ export const routeConfig = [
   {
     path: routePaths.REGISTER_AUTH,
     element: <Register />,
+  },
+  {
+    path: routePaths.REGISTER_SUCCESSFUL,
+    element: <SuccessfulRegister />,
   },
   {
     path: routePaths.SUBMIT_REGISTRATION,

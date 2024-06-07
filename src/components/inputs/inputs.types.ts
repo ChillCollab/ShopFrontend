@@ -10,6 +10,8 @@ export interface InputPropsTypes {
   label: string;
   event?: any;
   size: 'small' | 'medium';
+  value?: unknown;
+  id?: string;
   onChange?: any;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
   onFocus?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
@@ -22,11 +24,13 @@ export type InputTypes<T extends 'email' | 'password' | 'text'> = T extends 'pas
 export type InputPropType = {
   register?: any;
   style?: CSSProperties;
-  error: boolean;
+  error?: boolean;
   type: string;
   label: string;
   event?: any;
+  id?: string;
   size: 'small' | 'medium';
+  onClick?: void;
   onChange?: any;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
   disabled?: boolean | undefined;

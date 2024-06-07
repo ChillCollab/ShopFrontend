@@ -12,6 +12,8 @@ export const InputLabelMain: React.FC<InputPropType> = ({
   style,
   onChange,
   onKeyDown,
+  disabled,
+  value,
 }) => {
   return (
     <FormControl style={{ width: '100%' }} className="custom-form-control" variant="outlined">
@@ -26,6 +28,8 @@ export const InputLabelMain: React.FC<InputPropType> = ({
         id="outlined-adornment-password"
         type={type}
         label={label}
+        value={value}
+        disabled={disabled}
         onChange={onChange}
         onKeyDown={onKeyDown}
       />

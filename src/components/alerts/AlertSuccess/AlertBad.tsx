@@ -1,13 +1,13 @@
 import { Alert } from '@mui/material';
-import './AlertSuccess.scss';
+import './AlertBad.scss';
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { setSuccess } from '../../../store/systemAlertSlices.ts';
+import { setError } from '../../../store/systemAlertSlices.ts';
 
-const AlertSuccess: FC<any> = () => {
-  const isShow = useSelector((state: RootState) => state.alert.isSuccess);
-  const message = useSelector((state: RootState) => state.alert.isSuccessMsg);
+const AlertBad: FC<any> = () => {
+  const isShow = useSelector((state: RootState) => state.alert.isError);
+  const message = useSelector((state: RootState) => state.alert.isErrorMsg);
   const dispatch = useDispatch();
 
   const [isVisible, setIsVisible] = useState(isShow);
@@ -30,7 +30,7 @@ const AlertSuccess: FC<any> = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(setSuccess({ isSuccess: false }));
+      dispatch(setError({ isError: false }));
     }, 8000);
   }, [isShow]);
 
@@ -39,10 +39,12 @@ const AlertSuccess: FC<any> = () => {
   return (
     <div className={'back-alert'}>
       <div className={`alert ${isExiting ? 'alert-exit' : ''}`}>
-        <Alert severity="success">{message}</Alert>
+        <Alert color="error" severity="error">
+          {message}
+        </Alert>
       </div>
     </div>
   );
 };
 
-export default AlertSuccess;
+export default AlertBad;

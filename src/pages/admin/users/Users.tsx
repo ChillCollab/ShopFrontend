@@ -93,10 +93,7 @@ const Users = () => {
   const [isUsers, setIsUsers] = useState([]);
 
   useEffect(() => {
-    adminReqs
-      .getUsers()
-      .then((res) => setIsUsers(res.data))
-      .catch(console.error);
+    adminReqs.getUsers().then((res) => setIsUsers(res.data));
   }, []);
 
   return (
