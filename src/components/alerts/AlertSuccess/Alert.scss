@@ -2,43 +2,45 @@
 
 .back-alert {
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
-  z-index: 900;
+  z-index: 1000;
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column-reverse; /* Сообщения будут появляться снизу */
   align-items: center;
+  padding-bottom: 20px; /* Отступ снизу */
+  pointer-events: none; /* Чтобы элементы под alert были кликабельными */
 }
 
 .alert {
-  position: fixed;
-  bottom: 50px; /* Отступ снизу */
-  z-index: 999;
-  width: 100%;
+  margin-top: 10px; /* Отступ между сообщениями */
   display: flex;
   justify-content: center;
   align-items: center;
   animation: alert-in 0.3s ease-in-out forwards;
   border-radius: 7px;
+  pointer-events: auto; /* Чтобы alert был кликабельным */
 }
 
 .alert-exit {
   animation: alert-out 0.3s ease-in-out forwards;
 }
 
+.MuiAlert-colorSuccess {
+  background-color: $main-color-alert !important;
+  color: $main-color-alert-text !important;
+
+  .MuiAlert-icon {
+    color: $main-color-alert-text !important;
+  }
+}
+
 .MuiAlert-colorError {
   color: $main-color-alert-text !important;
   background-color: $bad-color-alert !important;
-}
-
-.MuiSvgIcon-root {
-  .MuiSvgIcon-fontSizeInherit {
-    .css-1vooibu-MuiSvgIcon-root {
-      svg {
-        fill: #8b87d6 !important;
-      }
-    }
+  .MuiSvgIcon-root {
+    color: $main-color-alert-text !important;
   }
 }
 

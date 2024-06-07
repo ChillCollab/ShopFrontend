@@ -4,7 +4,7 @@ import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal.tsx
 import InputLabelText from '../../../components/inputs/InputLabelText.tsx';
 import { profileReqs } from '../../../requests/profile/profileReqs.ts';
 import { useDispatch } from 'react-redux';
-import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
+import { addAlert } from '../../../store/systemAlertSlices.ts';
 
 interface ChangeEmailProps {
   active: boolean;
@@ -30,8 +30,9 @@ export const ChangeEmailModal: React.FC<ChangeEmailProps> = ({ active, setIsActi
       .changeEmail(isEmail)
       .then((res: any) => {
         if (res.status === 200) {
-          dispatch(setSuccessMsg({ isSuccessMsg: 'An email with a confirmation code has been sent to your email.' }));
-          dispatch(setSuccess({ isSuccess: true }));
+          dispatch(
+            addAlert({ message: 'An email with a confirmation code has been sent to your email.', type: 'success' })
+          );
           setIsActive(false);
           setIsActiveSub(true);
           setIsLoading(false);
@@ -39,8 +40,7 @@ export const ChangeEmailModal: React.FC<ChangeEmailProps> = ({ active, setIsActi
       })
       .catch((e: any) => {
         setIsError(true);
-        dispatch(setError({ isError: true }));
-        dispatch(setErrorMsg({ isErrorMsg: e?.response?.message }));
+        dispatch(addAlert({ message: e?.response?.message, type: 'error' }));
         setIsLoading(false);
       });
   };

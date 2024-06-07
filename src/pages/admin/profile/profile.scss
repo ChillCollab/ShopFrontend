@@ -96,11 +96,8 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 45px;
-
-  .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled {
-    max-width: 510px;
-  }
 }
+
 .pass-cnt {
   display: flex;
   flex-direction: column;
@@ -112,14 +109,6 @@ h1 {
   max-height: 56px;
 }
 
-.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
-  opacity: 1;
-  -webkit-text-fill-color: $soft-color !important;
-}
-
-.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
-  border-color: $soft-color !important;
-}
 
 .change-password {
   display: inline-block; /* Подстраивает ширину под содержимое */
@@ -286,16 +275,12 @@ h1 {
   }
 
   .inputs {
-    .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled {
       min-width: 500px ;
-    }
   }
 }
 
 @media (max-width: 600px) {
   .inputs {
-    .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled {
-      min-width: 350px ;
-    }
+      min-width: 350px;
   }
 }

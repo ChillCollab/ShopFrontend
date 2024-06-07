@@ -1,37 +1,37 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+interface Alert {
+  id: number;
+  message: string;
+  type: 'error' | 'success';
+}
+
 interface AlertState {
-  isError: boolean;
-  isErrorMsg: string;
-  isSuccess: boolean;
-  isSuccessMsg: string;
+  alerts: Alert[];
 }
 
 const initialState: AlertState = {
-  isError: false,
-  isErrorMsg: '',
-  isSuccess: false,
-  isSuccessMsg: '',
+  alerts: [],
 };
+
+let nextAlertId = 0;
 
 const systemAlertSlices = createSlice({
   name: 'alert',
   initialState,
   reducers: {
-    setError(state, action: PayloadAction<{ isError: boolean }>) {
-      state.isError = action.payload.isError;
+    addAlert: (state, action: PayloadAction<{ message: string; type: 'error' | 'success' }>) => {
+      state.alerts.push({
+        id: nextAlertId++,
+        message: action.payload.message,
+        type: action.payload.type,
+      });
     },
-    setErrorMsg(state, action: PayloadAction<{ isErrorMsg: string }>) {
-      state.isErrorMsg = action.payload.isErrorMsg;
-    },
-    setSuccess(state, action: PayloadAction<{ isSuccess: boolean }>) {
-      state.isSuccess = action.payload.isSuccess;
-    },
-    setSuccessMsg(state, action: PayloadAction<{ isSuccessMsg: string }>) {
-      state.isSuccessMsg = action.payload.isSuccessMsg;
+    removeAlert: (state, action: PayloadAction<{ id: number }>) => {
+      state.alerts = state.alerts.filter((alert) => alert.id !== action.payload.id);
     },
   },
 });
 
-export const { setError, setErrorMsg, setSuccess, setSuccessMsg } = systemAlertSlices.actions;
+export const { addAlert, removeAlert } = systemAlertSlices.actions;
 export default systemAlertSlices.reducer;

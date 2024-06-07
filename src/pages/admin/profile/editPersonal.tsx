@@ -3,11 +3,13 @@ import InputLabelText from '../../../components/inputs/InputLabelText.tsx';
 import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal.tsx';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
+import { addAlert } from '../../../store/systemAlertSlices.ts';
 import { profileReqs } from '../../../requests/profile/profileReqs.ts';
 import { storage } from '../../../storage/storage.ts';
 import { setImage } from '../../../store/navbarSlices.ts';
 import { AxiosError, AxiosResponse } from 'axios';
+import { isLogin } from '../../../store/userDataSlices.ts';
+import authRequests from '../../auth/requests/auth.ts';
 
 interface EditPersonalProps {
   active: boolean;
@@ -46,8 +48,7 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
           reader.readAsDataURL(file);
           uploadFile(file);
         } else {
-          dispatch(setErrorMsg({ isErrorMsg: 'File size should be less 3 MB' }));
-          dispatch(setError({ isError: true }));
+          dispatch(addAlert({ message: 'File size should be less 3 MB', type: 'error' }));
         }
       }
     };
@@ -104,23 +105,27 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
       .changePersonalData(name, surname, login)
       .then((changeDataResponse: AxiosResponse<any>) => {
         if (changeDataResponse.status === 200) {
-          window.location.reload();
-          dispatch(setSuccessMsg({ isSuccessMsg: 'Personal data has been changed' }));
-          dispatch(setSuccess({ isSuccess: true }));
+          if (login) {
+            dispatch(isLogin({ isLogin: login }));
+          }
+          authRequests.userInfo().then((res: AxiosResponse<any>) => {
+            if (res.status === 200) {
+              localStorage.setItem(storage.userData, JSON.stringify(res.data));
+            }
+          });
+          dispatch(addAlert({ message: 'Personal data has been changed', type: 'success' }));
           setIsActive(false);
         }
       })
       .catch((e: AxiosError<any>) => {
         if (e?.response?.status === 500) {
-          dispatch(setErrorMsg({ isErrorMsg: 'Something went wrong' }));
-          dispatch(setError({ isError: true }));
+          dispatch(addAlert({ message: 'Something went wrong', type: 'error' }));
           return;
         }
         if (e?.response?.data?.code === 24) {
           setErrorLogin(true);
         }
-        dispatch(setErrorMsg({ isErrorMsg: e?.response?.data?.message }));
-        dispatch(setError({ isError: true }));
+        dispatch(addAlert({ message: e?.response?.data?.message, type: 'error' }));
       });
   };
 
@@ -155,13 +160,11 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
         .then((uploadResponse: any) => {
           if (uploadResponse.status === 200) {
             setIsActive(false);
-            dispatch(setSuccessMsg({ isSuccessMsg: uploadResponse?.data?.message }));
-            dispatch(setSuccess({ isSuccess: true }));
+            dispatch(addAlert({ message: uploadResponse?.data?.message, type: 'success' }));
           }
         })
         .catch((e: any) => {
-          dispatch(setErrorMsg({ isErrorMsg: e.response.data.message }));
-          dispatch(setError({ isError: true }));
+          dispatch(addAlert({ message: e.response.data.message, type: 'error' }));
         });
     }
   };

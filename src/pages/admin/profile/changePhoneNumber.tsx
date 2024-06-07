@@ -4,7 +4,7 @@ import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal.tsx
 import InputLabelText from '../../../components/inputs/InputLabelText.tsx';
 import { profileReqs } from '../../../requests/profile/profileReqs.ts';
 import { useDispatch } from 'react-redux';
-import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
+import { addAlert } from '../../../store/systemAlertSlices.ts';
 
 interface ChangePhoneprops {
   active: boolean;
@@ -36,21 +36,20 @@ export const ChangePhoneNumber: React.FC<ChangePhoneprops> = ({ active, setIsAct
       profileReqs
         .changeNumber(number)
         .then((res: any) => {
-          dispatch(setSuccessMsg({ isSuccessMsg: res.data.message }));
-          dispatch(setSuccess({ isSuccess: true }));
+          dispatch(addAlert({ message: res.data.message, type: 'success' }));
           setIsActive(false);
           setIsLoading(false);
         })
         .catch((e: any) => {
           setIsError(true);
-          dispatch(setError({ isError: true }));
-          dispatch(setErrorMsg({ isErrorMsg: e?.response?.data?.message }));
+          dispatch(addAlert({ message: e?.response?.data?.message, type: 'error' }));
           setIsLoading(false);
         });
     } else {
       setIsError(true);
-      dispatch(setError({ isError: true }));
-      dispatch(setErrorMsg({ isErrorMsg: 'Invalid phone number. Use only numbers and number of digits less than 32' }));
+      dispatch(
+        addAlert({ message: 'Invalid phone number. Use only numbers and number of digits less than 32', type: 'error' })
+      );
       setIsLoading(false);
     }
   };
