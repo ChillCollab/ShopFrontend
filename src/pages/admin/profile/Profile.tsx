@@ -93,6 +93,7 @@ function Profile() {
               label={'Email'}
               size={'medium'}
               value={isUser?.email}
+              style={{ maxWidth: '510px', minWidth: '320px', maxHeight: '56px' }}
               onChange={(e) => console.log(e)}
               onKeyDown={(e) => console.log(e)}
               onFocus={(e) => console.log(e)}
