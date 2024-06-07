@@ -63,9 +63,13 @@ img {
   -webkit-text-fill-color: $soft-color !important;
 }
 
-.custom-form-control .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-  border-radius: 7px !important;
-  border-color: $soft-color !important;
+.custom-form-control {
+  .MuiOutlinedInput-root {
+    .MuiOutlinedInput-notchedOutline {
+      border-radius: 7px !important;
+      border-color: $soft-color;
+    }
+  }
 }
 .custom-form-control:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
   border-color: $soft-color !important;

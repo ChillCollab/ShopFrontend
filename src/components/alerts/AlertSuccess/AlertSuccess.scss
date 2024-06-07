@@ -27,18 +27,13 @@
   animation: alert-out 0.3s ease-in-out forwards;
 }
 
-.css-svzhua-MuiPaper-root-MuiAlert-root {
+.MuiAlert-colorSuccess {
   background-color: $main-color-alert !important;
   color: $main-color-alert-text !important;
-}
 
-.css-1sbxxjg {
-  background-color: $main-color-alert !important;
-  color: $main-color-alert-text !important;
-}
-
-.MuiAlert-icon {
-  color: $main-color-alert-text !important;
+  .MuiAlert-icon {
+    color: $main-color-alert-text !important;
+  }
 }
 
 .MuiSvgIcon-root {

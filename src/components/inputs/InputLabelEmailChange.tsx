@@ -10,7 +10,7 @@ interface InputLabelEmailChange {
     | Iterable<React.ReactNode>
     | null
     | undefined;
-  style: React.CSSProperties | undefined;
+  style?: React.CSSProperties | undefined;
   onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
   error: boolean | undefined;
   size: 'small' | 'medium' | undefined;
