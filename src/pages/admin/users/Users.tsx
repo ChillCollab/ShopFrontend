@@ -4,6 +4,7 @@ import './users.scss';
 import { useEffect, useState } from 'react';
 import Add from '../../../components/add/Add.tsx';
 import adminReqs from '../../../requests/admin/admin.ts';
+import { MainSpinner } from '../../../components/spinners/MainSpinner.tsx';
 
 const columns: GridColDef[] = [
   {
@@ -91,12 +92,22 @@ const columns: GridColDef[] = [
 const Users = () => {
   const [open, setOpen] = useState(false);
   const [isUsers, setIsUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    adminReqs.getUsers().then((res) => setIsUsers(res.data));
+    adminReqs
+      .getUsers()
+      .then((res) => {
+        setIsUsers(res.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
-  return (
+  return isLoading ? (
+    <MainSpinner isLoading={isLoading} />
+  ) : (
     <div className="users">
       <div className="info">
         <h1>Users</h1>
