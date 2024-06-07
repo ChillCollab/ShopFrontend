@@ -10,6 +10,8 @@ export interface InputPropsTypes {
   label: string;
   event?: any;
   size: 'small' | 'medium';
+  value?: unknown;
+  id?: string;
   onChange?: any;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
   onFocus?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
@@ -26,6 +28,7 @@ export type InputPropType = {
   type: string;
   label: string;
   event?: any;
+  id?: string;
   size: 'small' | 'medium';
   onClick?: void;
   onChange?: any;

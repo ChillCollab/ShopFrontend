@@ -69,6 +69,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
       error: state.currentPassword.error,
       setVision: setIsShowOld,
       handler: handleOldPassword,
+      value: state.currentPassword.value,
     },
     {
       id: 'new-password',
@@ -77,6 +78,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
       error: state.newPassword.error,
       setVision: setIsShow,
       handler: handlePassword,
+      value: state.newPassword.value,
     },
     {
       id: 'repeat-password',
@@ -85,6 +87,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
       error: state.repeatPassword.error,
       setVision: setIsShowRepeat,
       handler: handleRepeatPassword,
+      value: state.repeatPassword.value,
     },
   ];
 
@@ -162,13 +165,15 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
           </div>
           <div className={'change-password-title'}>Change password</div>
           <div className={'change-container'}>
-            <div className={'inputs-container'}>
+            <form className={'inputs-container'}>
               {inputs.map((input) => {
                 return (
                   <InputLabelPassword
                     key={input.name}
+                    id={input.id}
                     error={input.error}
                     isShow={input.vision}
+                    value={input.value}
                     label={input.name}
                     setIsShow={() => input.setVision(!input.vision)}
                     onChange={input.handler}
@@ -177,7 +182,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
                   />
                 );
               })}
-            </div>
+            </form>
             <LoadingBtnModal
               disabled={isDisabled}
               title={'change'}

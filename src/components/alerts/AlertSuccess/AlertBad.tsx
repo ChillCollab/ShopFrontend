@@ -39,7 +39,9 @@ const AlertBad: FC<any> = () => {
   return (
     <div className={'back-alert'}>
       <div className={`alert ${isExiting ? 'alert-exit' : ''}`}>
-        <Alert severity="error">{message}</Alert>
+        <Alert color="error" severity="error">
+          {message}
+        </Alert>
       </div>
     </div>
   );
