@@ -4,7 +4,7 @@ import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal.tsx
 import { InputLabelPassword } from '../../../components/inputs/InputLabelPassword.tsx';
 import { profileReqs } from '../../../requests/profile/profileReqs.ts';
 import { useDispatch } from 'react-redux';
-import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
+import { addAlert } from '../../../store/systemAlertSlices.ts';
 
 interface ChangePasswordProps {
   active: boolean;
@@ -97,8 +97,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
       .then((res: any) => {
         if (res?.status === 200) {
           setIsActive(false);
-          dispatch(setSuccess({ isSuccess: true }));
-          dispatch(setSuccessMsg({ isSuccessMsg: 'Password has been changed successfully' }));
+          dispatch(addAlert({ message: 'Password has been changed successfully', type: 'success' }));
         }
       })
       .catch((e: any) => {
@@ -119,8 +118,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
         });
         setIsDisabled(true);
         if (e?.response) {
-          dispatch(setError({ isError: true }));
-          dispatch(setErrorMsg({ isErrorMsg: e?.response?.data?.message }));
+          dispatch(addAlert({ message: e?.response?.data?.message, type: 'error' }));
         }
       });
   };

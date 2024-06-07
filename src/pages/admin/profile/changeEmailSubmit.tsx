@@ -4,7 +4,7 @@ import { LoadingBtnModal } from '../../../components/buttons/LoadingBtnModal.tsx
 import InputLabelText from '../../../components/inputs/InputLabelText.tsx';
 import { useDispatch } from 'react-redux';
 import { profileReqs } from '../../../requests/profile/profileReqs.ts';
-import { setError, setErrorMsg, setSuccess, setSuccessMsg } from '../../../store/systemAlertSlices.ts';
+import { addAlert } from '../../../store/systemAlertSlices.ts';
 
 interface ChangeEmailSubmitProps {
   active: boolean;
@@ -30,8 +30,7 @@ export const ChangeEmailSubmitModal: React.FC<ChangeEmailSubmitProps> = ({ activ
       .then((res: any) => {
         if (res) {
           if (res.status === 200) {
-            dispatch(setSuccessMsg({ isSuccessMsg: res.data.messages }));
-            dispatch(setSuccess({ isSuccess: true }));
+            dispatch(addAlert({ message: res.data.messages, type: 'success' }));
             setIsActive(false);
             setIsLoading(false);
           }
@@ -39,8 +38,7 @@ export const ChangeEmailSubmitModal: React.FC<ChangeEmailSubmitProps> = ({ activ
       })
       .catch((e: any) => {
         setIsError(true);
-        dispatch(setErrorMsg({ isErrorMsg: e?.response?.message }));
-        dispatch(setError({ isError: true }));
+        dispatch(addAlert({ message: e?.response?.message, type: 'error' }));
         setIsLoading(false);
       });
   };

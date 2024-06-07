@@ -19,24 +19,6 @@
   }
 }
 
-.css-1q6at85-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
-  border-color: $soft-color !important;
-}
-
-.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
-  opacity: 1;
-  -webkit-text-fill-color: $soft-color !important;
-}
-
-.css-1uvydh2.Mui-disabled {
-  opacity: 1;
-  -webkit-text-fill-color: $soft-color !important;
-}
-
-.css-1x5jdmq.Mui-disabled {
-  opacity: 1;
-  -webkit-text-fill-color: $soft-color !important;
-}
 
 .adornment-button {
   color: $hover-button !important; /* Изменяем цвет кнопки IconButton */
@@ -55,12 +37,26 @@ img {
   font-weight: 400;
 }
 
-.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
-  border-color: $soft-color !important;
+.MuiOutlinedInput-root {
+  .MuiOutlinedInput-notchedOutline {
+    border-color: $soft-color !important;
+  }
+  .Mui-disabled {
+    -webkit-text-fill-color: $placeholder-color !important;
+  }
 }
 
-.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
-  -webkit-text-fill-color: $soft-color !important;
+
+.MuiInputBase-input {
+  .Mui-disabled {
+    color: $placeholder-color !important;
+    background-color: #8b87d6;
+  }
+  .MuiOutlinedInput-input {
+      .Mui-disabled {
+        color: $placeholder-color !important;
+      }
+  }
 }
 
 .custom-form-control .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {

@@ -12,7 +12,7 @@ import { ChangePhoneNumber } from './changePhoneNumber.tsx';
 import authRequests from '../../auth/requests/auth.ts';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useDispatch } from 'react-redux';
-import { setError, setErrorMsg } from '../../../store/systemAlertSlices.ts';
+import { addAlert } from '../../../store/systemAlertSlices.ts';
 import { storage } from '../../../storage/storage.ts';
 
 function Profile() {
@@ -37,12 +37,10 @@ function Profile() {
       })
       .catch((e: AxiosError<any>) => {
         if (e?.response?.status === 500) {
-          dispatch(setErrorMsg({ isErrorMsg: 'Internal server error' }));
-          dispatch(setError({ isError: true }));
+          dispatch(addAlert({ message: 'Internal server error', type: 'error' }));
           return;
         }
-        dispatch(setErrorMsg({ isErrorMsg: e?.response?.data?.message }));
-        dispatch(setError({ isError: true }));
+        dispatch(addAlert({ message: e?.response?.data?.message, type: 'error' }));
       });
     setIsLoading(false);
   }, [isActiveNumber, isActivePersonal]);
