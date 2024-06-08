@@ -59,12 +59,12 @@ export const Logs: React.FC<any> = () => {
         <div className="logs">
             <div className="logs-page">
                 <h1>Logs</h1>
-                <DataTable
-                    slug="logs"
-                    columns={logsGrid}
-                    rows={isLogs}
-                />
             </div>
+            <DataTable
+                slug="logs"
+                columns={logsGrid}
+                rows={isLogs}
+            />
         </div>
     )
 }
