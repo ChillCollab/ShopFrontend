@@ -102,7 +102,7 @@ export const menu = [
       {
         id: 2,
         title: 'Logs',
-        url: '/',
+        url: '/admin/logs',
         icon: '/log.svg',
       },
     ],
