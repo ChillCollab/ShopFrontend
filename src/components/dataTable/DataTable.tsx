@@ -6,6 +6,8 @@ type Props = {
   columns: GridColDef[];
   rows: object[];
   slug: string;
+  useAction?: boolean;
+  useCheckbox?: boolean;
 };
 
 const DataTable = (props: Props) => {
@@ -39,7 +41,7 @@ const DataTable = (props: Props) => {
         style={{ border: 2, borderStyle: 'solid', borderColor: '#384256', borderRadius: 10 }}
         className="dataGrid"
         rows={props.rows}
-        columns={[...props.columns, actionColumn]}
+        columns={props.useAction ? [...props.columns, actionColumn] : [...props.columns]}
         initialState={{
           pagination: {
             paginationModel: {
@@ -55,7 +57,7 @@ const DataTable = (props: Props) => {
           },
         }}
         pageSizeOptions={[5]}
-        checkboxSelection
+        checkboxSelection={props.useCheckbox}
         disableRowSelectionOnClick
         disableColumnFilter
         disableDensitySelector

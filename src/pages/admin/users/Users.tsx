@@ -116,7 +116,7 @@ const Users = () => {
           Add User
         </button>
       </div>
-      <DataTable slug="users" columns={columns} rows={isUsers} />
+      <DataTable useAction={true} slug="users" columns={columns} rows={isUsers} useCheckbox={true} />
       {open && <Add slug="user" columns={columns} setOpen={setOpen} />}
     </div>
   );
