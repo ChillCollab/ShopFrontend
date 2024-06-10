@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import './products.scss';
 import DataTable from '../../../components/dataTable/DataTable';
-import Add from '../users/Add';
 import { GridColDef } from '@mui/x-data-grid';
 import { products } from '../../../staticDatas';
 
@@ -80,7 +79,6 @@ const Products = () => {
       ) : (
         <DataTable slug="products" columns={columns} rows={data} />
       )} */}
-      {open && <Add slug="product" columns={columns} setOpen={setOpen} />}
     </div>
   );
 };
