@@ -84,9 +84,10 @@ function Profile() {
           </div>
         </div>
         <div className="info-change">
-          <div className="inputs">
+          <form className="inputs">
             <InputLabelEmailChange
               disabled={true}
+              id={'email'}
               error={false}
               label={'Email'}
               size={'medium'}
@@ -111,6 +112,7 @@ function Profile() {
             </div>
             <InputPhoneNumberDisabled
               disabled={true}
+              id={'phone'}
               label={'Phone number'}
               value={isUser?.phone}
               style={{ maxWidth: '510px', minWidth: '320px', maxHeight: '56px', color: 'white' }}
@@ -122,7 +124,7 @@ function Profile() {
                 setIsActiveNumber(true);
               }}
             />
-          </div>
+          </form>
         </div>
       </div>
     </>

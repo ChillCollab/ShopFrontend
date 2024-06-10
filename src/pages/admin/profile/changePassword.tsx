@@ -176,7 +176,6 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
                     setIsShow={() => input.setVision(!input.vision)}
                     onChange={input.handler}
                     size={'medium'}
-                    style={{ width: '100%', maxWidth: '435px', minWidth: '435px', maxHeight: '56px', color: 'white' }}
                   />
                 );
               })}

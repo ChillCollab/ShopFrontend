@@ -1,99 +1,139 @@
-import { GridColDef } from '@mui/x-data-grid';
 import DataTable from '../../../components/dataTable/DataTable.tsx';
 import './users.scss';
 import { useEffect, useState } from 'react';
-import Add from '../../../components/add/Add.tsx';
+import Add from './Add.tsx';
 import adminReqs from '../../../requests/admin/admin.ts';
 import { MainSpinner } from '../../../components/spinners/MainSpinner.tsx';
 import { Button } from '@mui/material';
-
-const columns: GridColDef[] = [
-  {
-    field: 'id',
-    headerAlign: 'center',
-    headerClassName: 'headerBox',
-    cellClassName: 'idClass',
-    headerName: 'ID',
-    width: 80,
-  },
-  {
-    field: 'avatar_id',
-    headerName: 'Avatar',
-    headerAlign: 'center',
-    cellClassName: 'nameCell',
-    headerClassName: 'headerBox',
-    width: 80,
-    renderCell: (params) => {
-      return <img style={{ height: '38px', width: '38px' }} src={params.row.avatar_id || '/noavatar.png'} alt="" />;
-    },
-  },
-  {
-    field: 'name',
-    type: 'string',
-    headerName: 'First name',
-    width: 175,
-    headerAlign: 'center',
-    headerClassName: 'headerBox',
-    cellClassName: 'nameCell',
-  },
-  {
-    field: 'surname',
-    type: 'string',
-    headerName: 'Last name',
-    width: 175,
-    cellClassName: 'nameCell',
-    headerAlign: 'center',
-    headerClassName: 'headerBox',
-  },
-  {
-    field: 'email',
-    type: 'string',
-    headerName: 'Email',
-    width: 200,
-    cellClassName: 'emailCell',
-    headerAlign: 'center',
-    headerClassName: 'headerBox',
-  },
-  {
-    field: 'created',
-    headerName: 'Created At',
-    flex: 0.05,
-    type: 'string',
-    cellClassName: 'createCell',
-    headerAlign: 'center',
-    headerClassName: 'headerBox',
-  },
-  {
-    field: 'updated',
-    headerName: 'Updated At',
-    flex: 0.05,
-    type: 'string',
-    cellClassName: 'createCell',
-    headerAlign: 'center',
-    headerClassName: 'headerBox',
-  },
-  {
-    field: 'active',
-    headerName: 'Activated',
-    flex: 0.05,
-    type: 'boolean',
-    cellClassName: 'verifiedCell',
-    headerAlign: 'center',
-    headerClassName: 'headerBox',
-    renderCell: (params) => {
-      return params.value ? (
-        <img src="/verified.svg" alt="Verified" />
-      ) : (
-        <img src="/notverified.svg" alt="Not Verified" />
-      );
-    },
-  },
-];
+import { Delete } from './Delete.tsx';
+import { GridColDef } from '@mui/x-data-grid';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { isDeleteId, isDeleteLogin } from '../../../store/deleteUserSlices.ts';
+import { RootState } from '../../../store';
 
 const Users = () => {
   const [open, setOpen] = useState(false);
   const [isUsers, setIsUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDelete, setIsDelete] = useState(false);
+
+  const isId = useSelector((state: RootState) => state.deleteUser.isDeleteId);
+
+  const dispatch = useDispatch();
+  const handleDelete = (id: number, login: any) => {
+    console.log(isId);
+    dispatch(isDeleteLogin({ isDeleteLogin: login }));
+    dispatch(isDeleteId({ isDeleteId: [id] }));
+
+    setIsDelete(true);
+  };
+
+  const columns: GridColDef[] = [
+    {
+      field: 'id',
+      headerAlign: 'center',
+      headerClassName: 'headerBox',
+      cellClassName: 'idClass',
+      headerName: 'ID',
+      width: 80,
+    },
+    {
+      field: 'avatar_id',
+      headerName: 'Avatar',
+      headerAlign: 'center',
+      cellClassName: 'nameCell',
+      headerClassName: 'headerBox',
+      width: 80,
+      renderCell: (params) => {
+        return <img style={{ height: '38px', width: '38px' }} src={params.row.avatar_id || '/noavatar.png'} alt="" />;
+      },
+    },
+    {
+      field: 'name',
+      type: 'string',
+      headerName: 'First name',
+      width: 175,
+      headerAlign: 'center',
+      headerClassName: 'headerBox',
+      cellClassName: 'nameCell',
+    },
+    {
+      field: 'surname',
+      type: 'string',
+      headerName: 'Last name',
+      width: 175,
+      cellClassName: 'nameCell',
+      headerAlign: 'center',
+      headerClassName: 'headerBox',
+    },
+    {
+      field: 'email',
+      type: 'string',
+      headerName: 'Email',
+      width: 200,
+      cellClassName: 'emailCell',
+      headerAlign: 'center',
+      headerClassName: 'headerBox',
+    },
+    {
+      field: 'created',
+      headerName: 'Created At',
+      flex: 0.05,
+      type: 'string',
+      cellClassName: 'createCell',
+      headerAlign: 'center',
+      headerClassName: 'headerBox',
+    },
+    {
+      field: 'updated',
+      headerName: 'Updated At',
+      flex: 0.05,
+      type: 'string',
+      cellClassName: 'createCell',
+      headerAlign: 'center',
+      headerClassName: 'headerBox',
+    },
+    {
+      field: 'active',
+      headerName: 'Activated',
+      flex: 0.05,
+      type: 'boolean',
+      cellClassName: 'verifiedCell',
+      headerAlign: 'center',
+      headerClassName: 'headerBox',
+      renderCell: (params) => {
+        return params.value ? (
+          <img src="/verified.svg" alt="Verified" />
+        ) : (
+          <img src="/notverified.svg" alt="Not Verified" />
+        );
+      },
+    },
+    {
+      field: 'action',
+      headerName: 'Action',
+      width: 100,
+      headerAlign: 'center',
+      headerClassName: 'headerBox',
+      renderCell: (params) => {
+        return (
+          <div className="action">
+            <Link key={params.row.id + '-link'} to={`${params.row.id}`}>
+              <img key={params.row.id + '-img'} src="/view.svg" alt="" />
+            </Link>
+            <div
+              key={params.row.id + '-div'}
+              className="delete"
+              onClick={() => handleDelete(params.row.id, params.row.name + ' ' + params.row.surname)}
+            >
+              <img key={params.row.id + '-img-delete'} src="/delete.svg" alt="" />
+            </div>
+          </div>
+        );
+      },
+    },
+  ];
 
   useEffect(() => {
     adminReqs
@@ -137,11 +177,13 @@ const Users = () => {
     <MainSpinner isLoading={isLoading} />
   ) : (
     <div className="users">
+      <Add slug="user" columns={columns} setOpen={setOpen} open={open} />
+      <Delete isUsers={isUsers} setIsUsers={setIsUsers} open={isDelete} setOpen={setIsDelete} />
       <div className="info">
         <h1>Users</h1>
         <Button
           className={'add-user'}
-          component={'text'}
+          component={'label'}
           role={undefined}
           variant={'contained'}
           tabIndex={-1}
@@ -154,8 +196,14 @@ const Users = () => {
           <div className={'add-user-text'}>Add User</div>
         </Button>
       </div>
-      <DataTable useAction={true} slug="users" columns={columns} rows={isUsers} useCheckbox={true} />
-      {open && <Add slug="user" columns={columns} setOpen={setOpen} />}
+      <DataTable
+        setIsDelete={setIsDelete}
+        useAction={true}
+        slug="users"
+        columns={columns}
+        rows={isUsers}
+        useCheckbox={false}
+      />
     </div>
   );
 };

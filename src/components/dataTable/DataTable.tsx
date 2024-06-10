@@ -8,40 +8,17 @@ type Props = {
   slug: string;
   useAction?: boolean;
   useCheckbox?: boolean;
+  setIsDelete?: (arg: boolean) => void;
 };
 
 const DataTable = (props: Props) => {
-  const handleDelete = (id: number) => {
-    console.log(id);
-  };
-
-  const actionColumn: GridColDef = {
-    field: 'action',
-    headerName: 'Action',
-    width: 100,
-    headerAlign: 'center',
-    headerClassName: 'headerBox',
-    renderCell: (params) => {
-      return (
-        <div className="action">
-          <Link to={`/${props.slug}/${params.row.id}`}>
-            <img src="/view.svg" alt="" />
-          </Link>
-          <div className="delete" onClick={() => handleDelete(params.row.id)}>
-            <img src="/delete.svg" alt="" />
-          </div>
-        </div>
-      );
-    },
-  };
-
   return (
     <div className="dataTable">
       <DataGrid
-        style={{ border: 2, borderStyle: 'solid', borderColor: '#384256', borderRadius: 10 }}
+        style={{ borderColor: 'transparent' }}
         className="dataGrid"
         rows={props.rows}
-        columns={props.useAction ? [...props.columns, actionColumn] : [...props.columns]}
+        columns={[...props.columns]}
         initialState={{
           pagination: {
             paginationModel: {
@@ -56,7 +33,7 @@ const DataTable = (props: Props) => {
             quickFilterProps: { debounceMs: 500 },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[10]}
         checkboxSelection={props.useCheckbox}
         disableRowSelectionOnClick
         disableColumnFilter
