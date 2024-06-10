@@ -4,13 +4,13 @@ const deleteUserSlices = createSlice({
   name: 'deleteUser',
   initialState: {
     isDeleteLogin: [],
-    isDeleteId: [],
+    isDeleteId: [0],
   },
   reducers: {
     isDeleteLogin(state, action) {
       state.isDeleteLogin = action.payload.isDeleteLogin;
     },
-    isDeleteId(state, action: { payload: { isDeleteId: never[] }; type: string | [number] }) {
+    isDeleteId(state, action: { payload: { isDeleteId: never[] | number[] }; type: string | [number] }) {
       state.isDeleteId = action.payload.isDeleteId;
     },
   },
