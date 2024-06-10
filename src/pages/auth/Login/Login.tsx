@@ -177,7 +177,7 @@ const Login: React.FC = () => {
     } else {
       setState({ ...state, loading: { page: false, button: false } });
     }
-  }, [navigate]);
+  }, [state, navigate]);
 
   return state.loading.page ? (
     <MainSpinner isLoading={state.loading.page} />

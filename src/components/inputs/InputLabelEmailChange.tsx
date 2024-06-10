@@ -2,14 +2,7 @@ import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } fr
 import React from 'react';
 
 interface InputLabelEmailChange {
-  label:
-    | string
-    | number
-    | boolean
-    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-    | Iterable<React.ReactNode>
-    | null
-    | undefined;
+  label: string | number | boolean | Iterable<React.ReactNode> | null | undefined;
   style?: React.CSSProperties | undefined;
   onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
   error: boolean | undefined;

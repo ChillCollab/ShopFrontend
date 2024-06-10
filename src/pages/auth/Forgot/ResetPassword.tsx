@@ -6,6 +6,7 @@ import { InputLabelPassword } from '../../../components/inputs/InputLabelPasswor
 import { routePaths } from '../../../config/configRoutes/configRoutes.tsx';
 import authRequests, { RecoveryCodeCheck, SuccessInterface } from '../requests/auth.ts';
 import { AxiosResponse } from 'axios';
+import { storage } from '../../../storage/storage.ts';
 
 interface State {
   isErr: boolean;
@@ -125,26 +126,24 @@ export default function ResetPassword() {
     });
   };
 
-  const redirect = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
-  };
-
   useEffect(() => {
+    const redirect = () => {
+      localStorage.removeItem(storage.accessToken);
+      localStorage.removeItem(storage.refreshToken);
+      navigate(routePaths.ADMIN_AUTH_LOGIN, { replace: true });
+    };
+
     if (code.length < 19) {
       redirect();
     }
     authRequests
       .recoveryCheckCode(code)
       .then((response: AxiosResponse<RecoveryCodeCheck | SuccessInterface>) => {
-        console.log(response.status);
         if (response.status !== 200) {
           redirect();
         }
       })
-      .catch((e) => {
-        console.error(e);
+      .catch(() => {
         redirect();
       });
     setState((prevState) => ({
@@ -153,8 +152,9 @@ export default function ResetPassword() {
         ...prevState.loading,
         initial: false,
       },
+
     }));
-  }, [code, redirect]);
+  }, [navigate, code]);
 
   return (
     <div className="loginContainer">

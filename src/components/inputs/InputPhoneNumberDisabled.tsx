@@ -2,14 +2,7 @@ import React from 'react';
 import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
 
 interface InputPhoneNumberDisabled {
-  label:
-    | string
-    | number
-    | boolean
-    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-    | Iterable<React.ReactNode>
-    | null
-    | undefined;
+  label: string | number | boolean | Iterable<React.ReactNode> | null | undefined;
   style: React.CSSProperties | undefined;
   onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
   size: 'small' | 'medium' | undefined;

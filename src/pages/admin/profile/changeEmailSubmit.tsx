@@ -27,7 +27,7 @@ export const ChangeEmailSubmitModal: React.FC<ChangeEmailSubmitProps> = ({ activ
     setIsLoading(true);
     profileReqs
       .changeEmailSubmit(Number(code))
-      .then((res: any) => {
+      .then((res) => {
         if (res) {
           if (res.status === 200) {
             dispatch(addAlert({ message: res.data.messages, type: 'success' }));
@@ -36,7 +36,7 @@ export const ChangeEmailSubmitModal: React.FC<ChangeEmailSubmitProps> = ({ activ
           }
         }
       })
-      .catch((e: any) => {
+      .catch((e) => {
         setIsError(true);
         dispatch(addAlert({ message: e?.response?.message, type: 'error' }));
         setIsLoading(false);

@@ -3,14 +3,7 @@ import React from 'react';
 import './inputs.scss';
 
 interface InputLabelClean {
-  label:
-    | string
-    | number
-    | boolean
-    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-    | Iterable<React.ReactNode>
-    | null
-    | undefined;
+  label: string | number | boolean | Iterable<React.ReactNode> | null | undefined;
   style: React.CSSProperties | undefined;
   onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
   size: 'small' | 'medium' | undefined;

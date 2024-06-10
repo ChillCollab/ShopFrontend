@@ -5,7 +5,7 @@ import { RootState } from '../../../store';
 import { removeAlert } from '../../../store/systemAlertSlices.ts';
 import { Alert as MUIAlert } from '@mui/material';
 
-const Alert: FC<any> = () => {
+const Alert: FC = () => {
   const alerts = useSelector((state: RootState) => state.alert.alerts);
   const dispatch = useDispatch();
   const [activeTimers, setActiveTimers] = useState<Set<number>>(new Set());

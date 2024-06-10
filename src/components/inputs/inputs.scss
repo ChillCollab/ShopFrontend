@@ -19,7 +19,6 @@
   }
 }
 
-
 .adornment-button {
   color: $hover-button !important; /* Изменяем цвет кнопки IconButton */
 }
@@ -46,22 +45,21 @@ img {
   }
 }
 
-
 .MuiInputBase-input {
   .Mui-disabled {
     color: $placeholder-color !important;
     background-color: #8b87d6;
   }
   .MuiOutlinedInput-input {
-      .Mui-disabled {
-        color: $placeholder-color !important;
-      }
+    .Mui-disabled {
+      color: $placeholder-color !important;
+    }
   }
 }
 
 .custom-form-control .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-      border-radius: 7px !important;
-      border-color: $soft-color;
+  border-radius: 7px !important;
+  border-color: $soft-color;
 }
 .custom-form-control:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
   border-color: $soft-color !important;

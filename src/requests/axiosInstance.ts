@@ -9,7 +9,7 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config: any) => {
+  (config) => {
     const accessToken = localStorage.getItem(storage.accessToken);
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
@@ -25,7 +25,7 @@ axiosInstance.interceptors.response.use(
   (response) => {
     return response;
   },
-  async (error: any) => {
+  async (error) => {
     if (error.response) {
       const { status } = error.response;
       if (status === 401) {

@@ -9,14 +9,14 @@ import { ChangeEmailModal } from './changeEmail.tsx';
 import { ChangeEmailSubmitModal } from './changeEmailSubmit.tsx';
 import { MainSpinner } from '../../../components/spinners/MainSpinner.tsx';
 import { ChangePhoneNumber } from './changePhoneNumber.tsx';
-import authRequests from '../../auth/requests/auth.ts';
+import authRequests, { User } from '../../auth/requests/auth.ts';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useDispatch } from 'react-redux';
 import { addAlert } from '../../../store/systemAlertSlices.ts';
 import { storage } from '../../../storage/storage.ts';
 
 function Profile() {
-  const [isUser, setIsUser] = useState<boolean | any>(false);
+  const [isUser, setIsUser] = useState<User>({} as User);
   const [isActivePersonal, setIsActivePersonal] = useState<boolean>(false);
   const [isActivePassword, setIsActivePassword] = useState<boolean>(false);
   const [isActiveEmail, setIsActiveEmail] = useState<boolean>(false);
@@ -29,25 +29,25 @@ function Profile() {
   useEffect(() => {
     authRequests
       .userInfo()
-      .then((res: AxiosResponse<any>) => {
+      .then((res: AxiosResponse) => {
         if (res.status === 200) {
           localStorage.setItem(storage.userData, JSON.stringify(res.data));
           setIsUser(res.data);
         }
       })
-      .catch((e: AxiosError<any>) => {
+      .catch((e: AxiosError<{ message: string }>) => {
         if (e?.response?.status === 500) {
           dispatch(addAlert({ message: 'Internal server error', type: 'error' }));
           return;
         }
-        dispatch(addAlert({ message: e?.response?.data?.message, type: 'error' }));
+        if (e?.response) dispatch(addAlert({ message: e?.response?.data?.message, type: 'error' }));
       });
     setIsLoading(false);
-  }, [isActiveNumber, isActivePersonal]);
+  }, [dispatch, isActiveNumber, isActivePersonal]);
 
   return isLoading ? (
     <MainSpinner isLoading={isLoading} />
-  ) : isUser ? (
+  ) : (
     <>
       <ChangePhoneNumber active={isActiveNumber} setIsActive={setIsActiveNumber} />
       <EditPersonalModal active={isActivePersonal} setIsActive={setIsActivePersonal} />
@@ -128,8 +128,6 @@ function Profile() {
         </div>
       </div>
     </>
-  ) : (
-    <></>
   );
 }
 

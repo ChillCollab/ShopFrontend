@@ -94,13 +94,13 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
   const changePassword = (oldPassword: string, newPassword: string) => {
     profileReqs
       .changePassword(oldPassword, newPassword)
-      .then((res: any) => {
+      .then((res) => {
         if (res?.status === 200) {
           setIsActive(false);
           dispatch(addAlert({ message: 'Password has been changed successfully', type: 'success' }));
         }
       })
-      .catch((e: any) => {
+      .catch((e) => {
         setState({
           ...state,
           currentPassword: {
@@ -139,7 +139,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
         error: false,
       },
     });
-  }, [active]);
+  }, [state, active]);
 
   useEffect(() => {
     if (

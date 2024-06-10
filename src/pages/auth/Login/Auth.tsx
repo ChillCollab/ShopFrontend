@@ -43,7 +43,7 @@ const Auth = () => {
     if (localStorage.getItem('access_token') !== null) {
       checkLogin(navigate);
     }
-  }, []);
+  });
   return <div className="loginContainer">{/* <Manipulator /> */}</div>;
 };
 

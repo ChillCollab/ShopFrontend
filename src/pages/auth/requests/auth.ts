@@ -11,6 +11,8 @@ export interface User {
   active: boolean;
   created: string;
   updated: string;
+  avatar_id: string;
+  phone: string;
   role: number;
 }
 export interface LoginResponse {

@@ -1,5 +1,5 @@
 import { InputLabelMain } from '../../../components/inputs/Inputs.tsx';
-import { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { MainSpinner } from '../../../components/spinners/MainSpinner.tsx';
 import authRequests, { SuccessInterface, User } from '../requests/auth.ts';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -33,7 +33,7 @@ export default function SubmitRegistration() {
     setIsPasswordSubmit(data.target.value);
   };
 
-  const handleKeyDown = (event: any) => {
+  const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
       setIsButtonLoading(true);
       activate(code, isPassword, isPasswordSubmit);
@@ -105,7 +105,7 @@ export default function SubmitRegistration() {
           setIsLoading(false);
         });
     }
-  }, []);
+  });
 
   return (
     <div className="loginContainer">

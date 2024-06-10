@@ -28,7 +28,7 @@ export const ChangeEmailModal: React.FC<ChangeEmailProps> = ({ active, setIsActi
     setIsLoading(true);
     profileReqs
       .changeEmail(isEmail)
-      .then((res: any) => {
+      .then((res) => {
         if (res.status === 200) {
           dispatch(
             addAlert({ message: 'An email with a confirmation code has been sent to your email.', type: 'success' })
@@ -38,7 +38,7 @@ export const ChangeEmailModal: React.FC<ChangeEmailProps> = ({ active, setIsActi
           setIsLoading(false);
         }
       })
-      .catch((e: any) => {
+      .catch((e) => {
         setIsError(true);
         dispatch(addAlert({ message: e?.response?.message, type: 'error' }));
         setIsLoading(false);

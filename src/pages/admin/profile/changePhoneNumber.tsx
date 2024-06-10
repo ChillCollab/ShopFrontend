@@ -35,12 +35,12 @@ export const ChangePhoneNumber: React.FC<ChangePhoneprops> = ({ active, setIsAct
     if (validateNumber(number)) {
       profileReqs
         .changeNumber(number)
-        .then((res: any) => {
+        .then((res) => {
           dispatch(addAlert({ message: res.data.message, type: 'success' }));
           setIsActive(false);
           setIsLoading(false);
         })
-        .catch((e: any) => {
+        .catch((e) => {
           setIsError(true);
           dispatch(addAlert({ message: e?.response?.data?.message, type: 'error' }));
           setIsLoading(false);

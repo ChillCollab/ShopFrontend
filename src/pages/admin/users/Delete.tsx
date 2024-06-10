@@ -6,26 +6,16 @@ import { RootState } from '../../../store';
 import adminReqs from '../../../requests/admin/admin.ts';
 import { AxiosError, AxiosResponse } from 'axios';
 import { addAlert } from '../../../store/systemAlertSlices.ts';
-import { isLogin } from '../../../store/userDataSlices.ts';
 import React from 'react';
 
 interface DeleteProps {
-  user: UserInfo;
   open: boolean;
   setOpen: (arg: boolean) => void;
-  setIsUsers: (arg: any) => void;
-  isUsers: any;
+  setIsUsers: (arg: never[]) => void;
+  isUsers: never[];
 }
 
-interface UserInfo {
-  id: number;
-  name: string;
-  surname: string;
-  login: string;
-  email: string;
-}
-
-export const Delete: React.FC<any> = (props: DeleteProps) => {
+export const Delete: React.FC<DeleteProps> = (props: DeleteProps) => {
   const userLogin = useSelector((state: RootState) => state.deleteUser.isDeleteLogin);
   const userId = useSelector((state: RootState) => state.deleteUser.isDeleteId);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -36,15 +26,15 @@ export const Delete: React.FC<any> = (props: DeleteProps) => {
     setIsLoading(true);
     adminReqs
       .deleteUsers(userId)
-      .then((deleteResponse: AxiosResponse<any>) => {
+      .then((deleteResponse: AxiosResponse) => {
         if (deleteResponse?.data) {
-          const updateUsers = props.isUsers.filter((user: { id: number }) => user.id !== userId[0]);
+          const updateUsers: never[] = props.isUsers.filter((user: { id: number }) => user.id !== userId[0]);
           props.setIsUsers(updateUsers);
           dispatch(addAlert({ message: `User ${userLogin} deleted`, type: 'success' }));
         }
       })
-      .catch((e: AxiosError<any>) => {
-        dispatch(addAlert({ message: e?.response?.data?.message, type: 'error' }));
+      .catch((e: AxiosError<{ message: string }>) => {
+        if (e?.response?.data) dispatch(addAlert({ message: e?.response?.data?.message, type: 'error' }));
       })
       .finally(() => {
         props.setOpen(false);

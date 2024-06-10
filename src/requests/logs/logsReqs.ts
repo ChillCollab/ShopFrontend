@@ -1,7 +1,7 @@
-import {axiosInstance} from "../axiosInstance.ts";
+import { axiosInstance } from '../axiosInstance.ts';
 
 export const logsReqs = {
-    getLogs : () => {
-        return axiosInstance.get('/admin/actions/list');
-    },
-}
+  getLogs: () => {
+    return axiosInstance.get('/admin/actions/list');
+  },
+};

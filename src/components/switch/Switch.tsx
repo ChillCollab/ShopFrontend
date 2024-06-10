@@ -8,7 +8,7 @@ interface SwitchProps {
   checked?: boolean;
 }
 
-export const MainSwitch: React.FC<any> = (props: SwitchProps) => {
+export const MainSwitch: React.FC<SwitchProps> = (props: SwitchProps) => {
   return (
     <FormControlLabel control={<Switch />} label={props.label} labelPlacement="start" checked={props.checked} />
     // <Switch {...label} />

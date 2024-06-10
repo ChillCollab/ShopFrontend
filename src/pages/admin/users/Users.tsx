@@ -21,7 +21,7 @@ const Users = () => {
   const isId = useSelector((state: RootState) => state.deleteUser.isDeleteId);
 
   const dispatch = useDispatch();
-  const handleDelete = (id: number, login: any) => {
+  const handleDelete = (id: number, login: string) => {
     console.log(isId);
     dispatch(isDeleteLogin({ isDeleteLogin: login }));
     dispatch(isDeleteId({ isDeleteId: [id] }));

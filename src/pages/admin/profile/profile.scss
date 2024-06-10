@@ -111,7 +111,6 @@ h1 {
   max-height: 56px;
 }
 
-
 .change-password {
   display: inline-block; /* Подстраивает ширину под содержимое */
   margin-top: 5px;
@@ -219,7 +218,7 @@ h1 {
   display: flex;
   flex-direction: column;
   .MuiOutlinedInput-root {
-    width: 435px ;
+    width: 435px;
   }
 }
 
@@ -258,7 +257,6 @@ h1 {
     padding-left: 100px;
   }
   .userInfo {
-
   }
 
   .change-password-modal {
@@ -276,13 +274,12 @@ h1 {
 
   .modal-avatar-edit {
     top: 226px;
-    left: 290px
+    left: 290px;
   }
 
   .change-email-modal {
     padding: 30px 30px;
   }
-
 }
 
 @media (max-width: $md) {
@@ -312,7 +309,7 @@ h1 {
   }
   .modal-avatar-edit {
     top: 226px;
-    left: 213px
+    left: 213px;
   }
 
   .avatar {
@@ -320,4 +317,3 @@ h1 {
     width: 100px;
   }
 }
-

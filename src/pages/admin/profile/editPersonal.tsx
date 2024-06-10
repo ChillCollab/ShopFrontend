@@ -103,12 +103,12 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
   const updateData = (name: string, surname: string, login: string) => {
     profileReqs
       .changePersonalData(name, surname, login)
-      .then((changeDataResponse: AxiosResponse<any>) => {
+      .then((changeDataResponse: AxiosResponse) => {
         if (changeDataResponse.status === 200) {
           if (login) {
             dispatch(isLogin({ isLogin: login }));
           }
-          authRequests.userInfo().then((res: AxiosResponse<any>) => {
+          authRequests.userInfo().then((res: AxiosResponse) => {
             if (res.status === 200) {
               localStorage.setItem(storage.userData, JSON.stringify(res.data));
             }
@@ -117,7 +117,7 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
           setIsActive(false);
         }
       })
-      .catch((e: AxiosError<any>) => {
+      .catch((e: AxiosError<{ code: number; message: string }>) => {
         if (e?.response?.status === 500) {
           dispatch(addAlert({ message: 'Something went wrong', type: 'error' }));
           return;
@@ -125,7 +125,7 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
         if (e?.response?.data?.code === 24) {
           setErrorLogin(true);
         }
-        dispatch(addAlert({ message: e?.response?.data?.message, type: 'error' }));
+        if (e?.response) dispatch(addAlert({ message: e?.response?.data?.message, type: 'error' }));
       });
   };
 
@@ -157,13 +157,13 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
     if (file) {
       profileReqs
         .uploadAvatar(file)
-        .then((uploadResponse: any) => {
+        .then((uploadResponse) => {
           if (uploadResponse.status === 200) {
             setIsActive(false);
             dispatch(addAlert({ message: uploadResponse?.data?.message, type: 'success' }));
           }
         })
-        .catch((e: any) => {
+        .catch((e) => {
           dispatch(addAlert({ message: e.response.data.message, type: 'error' }));
         });
     }

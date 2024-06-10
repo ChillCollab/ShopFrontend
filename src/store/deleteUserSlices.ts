@@ -10,7 +10,7 @@ const deleteUserSlices = createSlice({
     isDeleteLogin(state, action) {
       state.isDeleteLogin = action.payload.isDeleteLogin;
     },
-    isDeleteId(state, action: { payload: any; type: string | [number] }) {
+    isDeleteId(state, action: { payload: { isDeleteId: never[] }; type: string | [number] }) {
       state.isDeleteId = action.payload.isDeleteId;
     },
   },

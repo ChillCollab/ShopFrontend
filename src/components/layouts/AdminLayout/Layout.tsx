@@ -29,23 +29,23 @@ const Layout = () => {
     if (localStorage.getItem(storage.userData) == null || localStorage.getItem(storage.accessToken) === undefined) {
       authRequests
         .userInfo()
-        .then((res: AxiosResponse<any>) => {
+        .then((res: AxiosResponse) => {
           localStorage.setItem(storage.userData, JSON.stringify(res.data));
           dispatch(setImage({ isImage: res.data.avatar_id }));
           dispatch(isLogin({ isLogin: res.data.login }));
         })
-        .catch((e: AxiosError<any>) => {
+        .catch((e: AxiosError<{ message: string }>) => {
           if (e?.response?.status === 500) {
             dispatch(addAlert({ message: 'Internal server error', type: 'error' }));
           }
-          dispatch(addAlert({ message: e?.response?.data?.message, type: 'error' }));
+          if (e?.response) dispatch(addAlert({ message: e?.response.data.message, type: 'error' }));
         });
     } else {
       dispatch(setImage({ isImage: JSON.parse(localStorage.getItem(storage.userData) || '').avatar_id }));
       dispatch(isLogin({ isLogin: JSON.parse(localStorage.getItem(storage.userData) || '').login }));
     }
     setIsLoading(false);
-  }, []);
+  }, [dispatch]);
 
   return isLoading ? (
     <MainSpinner isLoading={isLoading} />
