@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './products.scss';
 import DataTable from '../../../components/dataTable/DataTable';
 import { GridColDef } from '@mui/x-data-grid';
@@ -53,8 +52,6 @@ const columns: GridColDef[] = [
 ];
 
 const Products = () => {
-  const [open, setOpen] = useState(false);
-
   // TEST THE API
 
   // const { isLoading, data } = useQuery({
@@ -69,7 +66,7 @@ const Products = () => {
     <div className="products">
       <div className="info">
         <h1>Products</h1>
-        <button onClick={() => setOpen(true)}>Add New Products</button>
+        <button>Add New Products</button>
       </div>
       <DataTable slug="products" columns={columns} rows={products} />
       {/* TEST THE API */}
