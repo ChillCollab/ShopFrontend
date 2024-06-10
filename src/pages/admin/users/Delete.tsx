@@ -40,7 +40,7 @@ export const Delete: React.FC<any> = (props: DeleteProps) => {
         if (deleteResponse?.data) {
           const updateUsers = props.isUsers.filter((user: { id: number }) => user.id !== userId[0]);
           props.setIsUsers(updateUsers);
-          dispatch(addAlert({ message: `User ${isLogin} deleted`, type: 'success' }));
+          dispatch(addAlert({ message: `User ${userLogin} deleted`, type: 'success' }));
         }
       })
       .catch((e: AxiosError<any>) => {
