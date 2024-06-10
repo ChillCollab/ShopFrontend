@@ -190,7 +190,6 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
                       label={input.name}
                       type={'text'}
                       size={'medium'}
-                      style={{ width: '100%', maxWidth: '435px', minWidth: '435px', maxHeight: '56px', color: 'white' }}
                     />
                   );
                 })}

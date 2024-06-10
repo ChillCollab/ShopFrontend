@@ -19,6 +19,7 @@ interface InputLabelEmailChange {
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   value?: string;
   disabled?: boolean;
+  id?: string;
 }
 
 const InputLabelEmailChange: React.FC<InputLabelEmailChange> = ({
@@ -32,6 +33,7 @@ const InputLabelEmailChange: React.FC<InputLabelEmailChange> = ({
   onClick,
   value,
   disabled,
+  id,
 }) => {
   return (
     <FormControl className="custom-form-control" variant="outlined">
@@ -43,7 +45,7 @@ const InputLabelEmailChange: React.FC<InputLabelEmailChange> = ({
         onChange={onChange}
         error={error}
         size={size}
-        id="outlined-adornment-password"
+        id={id}
         onKeyDown={onKeyDown}
         onFocus={onFocus}
         value={value}

@@ -67,8 +67,8 @@ const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMen
           <span>{isName}</span>
         </div>
         <img src="/settings.svg" alt="settings" className="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} />
-        <SettingsMenu isOpen={isMenuOpen} />
       </div>
+      <SettingsMenu isOpen={isMenuOpen} />
     </div>
   );
 };

@@ -3,6 +3,7 @@ import resetPassReducer from './resetPassSlices';
 import systemAlertSlices from './systemAlertSlices.ts';
 import navbarSlices from './navbarSlices.ts';
 import userDataSlices from './userDataSlices.ts';
+import deleteUserSlices from './deleteUserSlices.ts';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     alert: systemAlertSlices,
     navbar: navbarSlices,
     userData: userDataSlices,
+    deleteUser: deleteUserSlices,
   },
 });
 

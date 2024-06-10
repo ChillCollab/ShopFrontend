@@ -88,7 +88,6 @@ export const ChangePhoneNumber: React.FC<ChangePhoneprops> = ({ active, setIsAct
                   console.log(e);
                 }}
                 size={'medium'}
-                style={{ width: '100%', maxWidth: '435px', minWidth: '435px', maxHeight: '56px', color: 'white' }}
               />
             </div>
             <LoadingBtnModal

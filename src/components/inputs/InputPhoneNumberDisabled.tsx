@@ -19,6 +19,7 @@ interface InputPhoneNumberDisabled {
   error?: boolean | undefined;
   value?: string;
   disabled?: boolean;
+  id?: string;
 }
 
 export const InputPhoneNumberDisabled: React.FC<InputPhoneNumberDisabled> = ({
@@ -32,6 +33,7 @@ export const InputPhoneNumberDisabled: React.FC<InputPhoneNumberDisabled> = ({
   onFocus,
   value,
   disabled,
+  id,
 }) => {
   return (
     <FormControl className="custom-form-control" variant="outlined">
@@ -43,7 +45,7 @@ export const InputPhoneNumberDisabled: React.FC<InputPhoneNumberDisabled> = ({
         onChange={onChange}
         error={error}
         size={size}
-        id="outlined-adornment-phone"
+        id={id}
         onKeyDown={onKeyDown}
         onFocus={onFocus}
         value={' + ' + value}

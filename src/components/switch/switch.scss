@@ -1,0 +1,33 @@
+@import '../../styles/variables';
+
+.Mui-checked+ {
+    .MuiSwitch-track {
+        background-color: $main-button !important;
+    }
+}
+
+.MuiSwitch-root {
+    .Mui-checked+ {
+        .MuiSwitch-track {
+            background-color: $main-button !important;
+        }
+    }
+    .MuiSwitch-track {
+        background-color: $main-color !important;
+    }
+}
+
+.MuiFormControlLabel-label {
+    color: $soft-color !important;
+}
+
+.MuiFormControlLabel-root {
+    margin-left: 0 !important;
+}
+
+.MuiTypography-root {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 17px !important;
+    line-height: 21.25px !important;
+}

@@ -11,10 +11,12 @@ interface ModalProps {
   active: boolean;
   setIsActive: (active: boolean) => void;
   children?: ReactNode;
+  closeButton?: boolean;
 }
 
-export const ModalContainer: React.FC<ModalProps> = ({ active, setIsActive, children }) => {
+export const ModalContainer: React.FC<ModalProps> = ({ active, setIsActive, children, closeButton }) => {
   const [childrenLoaded, setChildrenLoaded] = useState(false);
+  if (closeButton === undefined) closeButton = true;
 
   useEffect(() => {
     // Устанавливаем childrenLoaded в true сразу после первой отрисовки children
@@ -33,7 +35,9 @@ export const ModalContainer: React.FC<ModalProps> = ({ active, setIsActive, chil
         <>
           <div className="backdrop" onClick={handleBackdropClick} />
           <div className="modal-container">
-            <img src="/close.svg" alt="close" className="close-modal" onClick={() => setIsActive(false)} />
+            {closeButton ? (
+              <img src="/close.svg" alt="close" className="close-modal" onClick={() => setIsActive(false)} />
+            ) : null}
             {children}
           </div>
         </>

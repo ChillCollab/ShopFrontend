@@ -1,11 +1,13 @@
 @import '../../styles/variables';
+@import '../../styles/responsive';
 
 .navbar {
   width: 100%;
-  padding: 29px 38px 46px 38px;
+  padding: 29px 20px 46px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 
   .logo {
     display: flex;
@@ -69,14 +71,14 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 3.7rem;
-  right: 1.5rem;
-  background: $dark-bg;
+  top: 71px;
+  right: 35px;
+  background: $menu-background-small;
   padding: 0.3rem;
   width: 8rem;
-  border: 1.5px solid $soft-bg;
-  border-radius: 5px;
+  border-radius: 7px;
   margin-bottom: 0.4rem;
+  z-index: 1000;
 }
 
 .settingsButton {
@@ -88,19 +90,33 @@
 }
 
 .settingsButton:hover {
-  background: $menu-button-hover;
+  color: $hover-button;
 }
 
-@media (max-width: 700px) {
+@media (max-width: $xl) {
+  .logo .material-symbols-outlined {
+    display: block;
+  }
+}
+
+@media (max-width: $md) {
   .logo {
+    span {
+      display: none;
+    }
+  }
+
+  .user {
     span {
       display: none;
     }
   }
 }
 
-@media (max-width: 1024px) {
-  .logo .material-symbols-outlined {
-    display: block;
+@media (max-width: $sm) {
+  .user {
+    span {
+      display: none;
+    }
   }
 }
