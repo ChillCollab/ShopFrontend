@@ -1,0 +1,82 @@
+@import '../../../styles/variables.scss';
+
+.error {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+}
+
+.registerContainer {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.inputs-container-reg {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  gap: 30px;
+}
+
+h1 {
+  color: $main-color;
+}
+
+.inputRegContainer {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  min-width: 325px;
+  height: 735px;
+  padding: 0 20px;
+
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  Input {
+    color: $soft-color;
+  }
+}
+
+.loginContainer {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  min-width: 325px;
+  justify-content: center;
+  align-items: center;
+  background-color: $main_bg;
+  width: 100%;
+  height: 100%;
+}
+
+.registerBox {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  p {
+    font-size: 17px;
+    line-height: 17px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+.registerButton {
+  margin: 0.5rem;
+  color: $soft-color;
+  font-size: 17px;
+  line-height: 17px;
+  font-weight: 700;
+}

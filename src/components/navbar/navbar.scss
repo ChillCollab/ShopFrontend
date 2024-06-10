@@ -1,0 +1,122 @@
+@import '../../styles/variables';
+@import '../../styles/responsive';
+
+.navbar {
+  width: 100%;
+  padding: 29px 20px 46px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    gap: 10px;
+  }
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .icon {
+      cursor: pointer;
+      //@include sm{
+      //  display: none;
+      //}
+    }
+
+    .notification {
+      position: relative;
+      cursor: pointer;
+
+      span {
+        background-color: red;
+        color: white;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+      }
+    }
+
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      img {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.logo .material-symbols-outlined {
+  display: none;
+  cursor: pointer;
+}
+
+.settingsMenuContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 71px;
+  right: 35px;
+  background: $menu-background-small;
+  padding: 0.3rem;
+  width: 8rem;
+  border-radius: 7px;
+  margin-bottom: 0.4rem;
+  z-index: 1000;
+}
+
+.settingsButton {
+  padding: 4px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.settingsButton:hover {
+  color: $hover-button;
+}
+
+@media (max-width: $xl) {
+  .logo .material-symbols-outlined {
+    display: block;
+  }
+}
+
+@media (max-width: $md) {
+  .logo {
+    span {
+      display: none;
+    }
+  }
+
+  .user {
+    span {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: $sm) {
+  .user {
+    span {
+      display: none;
+    }
+  }
+}

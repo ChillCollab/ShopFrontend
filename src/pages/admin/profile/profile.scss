@@ -1,0 +1,319 @@
+@import '../../../styles/variables';
+@import '../../../styles/responsive';
+
+.profile {
+}
+
+h1 {
+  display: block;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 38.73px;
+}
+
+.avatar {
+  margin: 10px 53px 10px 0;
+  height: 166px;
+  width: 166px;
+  border-radius: 50%;
+}
+
+.userInfo {
+  margin: 43px 0;
+  display: flex;
+}
+
+.fioContainer {
+  padding: 14px 0 14px 0;
+  gap: 10px;
+}
+
+.infoContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.fio {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+  color: #d9d7ff;
+  gap: 10px;
+}
+
+.loginCase {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.email-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.email-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin: 45px 0;
+}
+
+.info-change {
+  padding-left: 222px;
+  display: flex;
+  flex-direction: column;
+}
+
+.log {
+  padding: 3px 15px 3px 0;
+}
+
+.change-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-info-btn {
+  cursor: pointer;
+  &:hover {
+    fill: $hover-button;
+  }
+}
+
+.change-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+}
+
+.pass-cnt {
+  display: flex;
+  flex-direction: column;
+}
+.input-style {
+  width: 100%;
+  color: $soft-color;
+  max-width: 510px;
+  max-height: 56px;
+}
+
+.change-password {
+  display: inline-block; /* Подстраивает ширину под содержимое */
+  margin-top: 5px;
+  font-size: 11px;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  line-height: 13.75px;
+  color: $soft-color;
+  text-decoration: underline;
+  cursor: pointer;
+  max-width: 510px;
+
+  &:hover {
+    color: $hover-button;
+  }
+}
+
+.change-password-modal,
+.edit-personal-modal {
+  display: flex;
+  padding: 58px 160px;
+}
+
+.change-email-modal {
+  display: flex;
+  padding: 118px 160px;
+}
+
+.change-email-submit-modal {
+  display: flex;
+  padding: 128px 160px;
+}
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.personal-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.change-password-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 30px;
+  margin: 45px 0;
+}
+
+.modal-avatar-container {
+  width: 138px;
+  height: 138px;
+  margin: 45px 0;
+}
+.modal-avatar-edit {
+  cursor: pointer;
+  position: absolute;
+  top: 254px;
+  left: 420px;
+  transform: translate(-50%, -50%);
+}
+
+.send-image-container {
+  width: 197px;
+  height: 82px;
+  display: flex;
+}
+
+.password-img-container {
+  width: 140px;
+  height: 140px;
+  display: flex;
+}
+
+.img-phone-number {
+  width: 140px;
+  height: 140px;
+}
+
+.edit-img-container {
+  width: 138px;
+  height: 138px;
+  display: flex;
+}
+
+.imgContainer {
+  width: 140px;
+  height: 140px;
+  display: flex;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.inputs-container {
+  gap: 25px;
+  display: flex;
+  flex-direction: column;
+  .MuiOutlinedInput-root {
+    width: 435px;
+  }
+}
+
+.submit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .repeat-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    p {
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 21.25px;
+    }
+  }
+}
+
+@media (max-width: $lg) {
+  .info-change {
+    max-width: 100%;
+    padding-left: 100px;
+  }
+  .userInfo {
+  }
+
+  .change-password-modal {
+    padding: 30px 30px;
+  }
+
+  .edit-personal-modal {
+    padding: 30px 30px;
+  }
+
+  .avatar {
+    height: 125px;
+    width: 125px;
+  }
+
+  .modal-avatar-edit {
+    top: 226px;
+    left: 290px;
+  }
+
+  .change-email-modal {
+    padding: 30px 30px;
+  }
+}
+
+@media (max-width: $md) {
+  .info-change {
+    padding: 0;
+    align-items: center;
+  }
+
+  .inputs-container {
+    .MuiOutlinedInput-root {
+      max-width: 500px;
+      min-width: 20px;
+    }
+  }
+}
+
+@media (max-width: $sm) {
+  .inputs-container {
+    .MuiOutlinedInput-root {
+      max-width: 280px;
+      min-width: 20px;
+    }
+  }
+
+  .inputs {
+    min-width: 300px;
+  }
+  .modal-avatar-edit {
+    top: 226px;
+    left: 213px;
+  }
+
+  .avatar {
+    height: 100px;
+    width: 100px;
+  }
+}

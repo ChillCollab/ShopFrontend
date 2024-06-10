@@ -1,0 +1,86 @@
+@import '../../styles/variables';
+
+.dataTable {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  justify-content: center;
+  border: 0;
+
+  .dataGrid {
+    .MuiDataGrid-toolbarContainer {
+      flex-direction: row-reverse;
+    }
+    .MuiDataGrid-withBorderColor {
+      border-color: rgba(178, 176, 181, 0.45) !important;
+    }
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .action {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+
+      img {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.MuiDataGrid-columnHeadersInner {
+  background: rgba(0, 0, 0, 0.32) !important;
+  flex: 1 !important;
+  box-shadow: 0 1px 4px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+.MuiSvgIcon-root {
+  font-size: 18px !important;
+  color: rgba(149, 146, 152, 1) !important;
+  border-radius: 4px !important;
+  fill: rgba(255, 255, 255, 1) !important;
+}
+.MuiSvgIcon-root:hover {
+  fill: $hover-button !important;
+}
+
+.MuiFormControl-root {
+  input {
+    color: $soft-color !important;
+  }
+}
+
+//column Arrow
+.MuiButtonBase-root-MuiIconButton-root {
+  color: $soft-color !important;
+}
+
+.MuiInputBase-root-MuiInput-root {
+  color: rgba(195, 195, 195, 1) !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 16.94px !important;
+}
+
+.MuiDataGrid-selectedRowCount {
+  color: $soft-color !important;
+}
+
+.MuiDataGrid-toolbarContainer {
+  padding: 20px 0 24px 20px !important;
+}
+
+.MuiTablePagination-displayedRows {
+  font-size: 10px !important;
+  color: rgba(255, 255, 255, 0.87) !important;
+}

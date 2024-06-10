@@ -1,0 +1,89 @@
+@import '../../../styles/variables';
+@import '../../../styles/responsive';
+
+.add-user-modal {
+  display: flex;
+  padding: 58px 161px;
+}
+
+.add-user-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.add-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 39px;
+}
+
+.add-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 30px;
+}
+
+.add-user-inputs-container {
+  margin-bottom: 45px;
+  gap: 25px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .MuiInputBase-root {
+    width: 328px;
+    height: 53px;
+  }
+  .MuiFormControlLabel-root {
+    margin-bottom: 0;
+  }
+}
+
+.switch-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 328px;
+  justify-content: space-between;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  width: 328px;
+
+  .MuiLoadingButton-root {
+    width: 328px;
+    margin-top: 45px;
+  }
+}
+
+@media (max-width: $md) {
+  .add-user-modal {
+    padding: 45px 65px;
+  }
+}
+
+@media (max-width: $sm) {
+  .add-user-modal {
+    padding: 25px 25px;
+  }
+  .add-user-inputs-container {
+    .MuiInputBase-root {
+      width: 250px;
+    }
+  }
+  .switch-container {
+    width: 280px;
+  }
+
+  .btn-container {
+    .MuiLoadingButton-root {
+      width: 280px;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+@import '../../styles/variables';
+
+.loading-btn-modal {
+  display: flex !important;
+  height: 70px !important;
+  background-color: $main-button !important;
+  font-weight: 600 !important;
+  color: $main-color !important;
+}
+
+.loading-btn-modal-disable {
+  display: flex !important;
+  height: 70px !important;
+  background-color: $main-button-disabled !important;
+  font-weight: 600 !important;
+  color: $main-button-text-disabled !important;
+}
+
+.loading-btn-modal:hover {
+  background-color: $main-color !important;
+  color: $main-button !important;
+}

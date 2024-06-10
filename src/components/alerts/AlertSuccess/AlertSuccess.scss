@@ -1,0 +1,65 @@
+@import '../../../styles/variables.scss';
+
+.back-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 900;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alert {
+  position: fixed;
+  bottom: 50px; /* Отступ снизу */
+  z-index: 999;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: alert-in 0.3s ease-in-out forwards;
+  border-radius: 7px;
+}
+
+.alert-exit {
+  animation: alert-out 0.3s ease-in-out forwards;
+}
+
+.MuiAlert-colorSuccess {
+  background-color: $main-color-alert !important;
+  color: $main-color-alert-text !important;
+
+  .MuiAlert-icon {
+    color: $main-color-alert-text !important;
+  }
+}
+
+.MuiSvgIcon-root {
+  .MuiSvgIcon-fontSizeInherit {
+    .css-1vooibu-MuiSvgIcon-root {
+      svg {
+        fill: #8b87d6 !important;
+      }
+    }
+  }
+}
+
+@keyframes alert-in {
+  from {
+    transform: translateY(100%); /* Начальная позиция - снизу */
+  }
+  to {
+    transform: translateY(0); /* Конечная позиция - на месте */
+  }
+}
+
+@keyframes alert-out {
+  from {
+    transform: translateY(0); /* Начальная позиция - на месте */
+  }
+  to {
+    transform: translateY(100%); /* Конечная позиция - снизу */
+  }
+}
