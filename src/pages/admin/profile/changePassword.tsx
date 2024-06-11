@@ -123,23 +123,23 @@ export const ChangePasswordModal: React.FC<ChangePasswordProps> = ({ active, set
       });
   };
 
-  useEffect(() => {
-    setState({
-      ...state,
-      currentPassword: {
-        value: '',
-        error: false,
-      },
-      newPassword: {
-        value: '',
-        error: false,
-      },
-      repeatPassword: {
-        value: '',
-        error: false,
-      },
-    });
-  }, [state, active]);
+  // useEffect(() => {
+  //   setState({
+  //     ...state,
+  //     currentPassword: {
+  //       value: '',
+  //       error: false,
+  //     },
+  //     newPassword: {
+  //       value: '',
+  //       error: false,
+  //     },
+  //     repeatPassword: {
+  //       value: '',
+  //       error: false,
+  //     },
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (

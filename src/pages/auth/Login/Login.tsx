@@ -145,25 +145,7 @@ const Login: React.FC = () => {
     if (access !== null || refresh !== null) {
       authRequests
         .userInfo()
-        .then((res) => {
-          if (res.status !== 200) {
-            if (res.status === 401) {
-              authRequests.refreshToken().then((refreshResponse) => {
-                if (refreshResponse.status !== 200) {
-                  localStorage.removeItem(storage.accessToken);
-                  localStorage.removeItem(storage.refreshToken);
-                } else {
-                  localStorage.setItem(storage.accessToken, refreshResponse.data.access_token);
-                  localStorage.setItem(storage.refreshToken, refreshResponse.data.refresh_token);
-                  if (res.data?.role <= 0) {
-                    navigate(routePaths.HOME, { replace: true });
-                  } else {
-                    navigate(routePaths.ADMIN, { replace: true });
-                  }
-                }
-              });
-            }
-          } else {
+        .then((res) => {{
             if (res.data.role <= 0) {
               navigate(routePaths.HOME, { replace: true });
             } else {
@@ -171,13 +153,16 @@ const Login: React.FC = () => {
             }
           }
         })
-        .then(() => {
-          setState({ ...state, loading: { page: false, button: false } });
-        });
     } else {
-      setState({ ...state, loading: { page: false, button: false } });
+      setState(state => ({
+        ...state,
+        loading: {
+          ...state.loading,
+          page: false,
+        },
+      }));
     }
-  }, [state, navigate]);
+  }, [navigate]);
 
   return state.loading.page ? (
     <MainSpinner isLoading={state.loading.page} />

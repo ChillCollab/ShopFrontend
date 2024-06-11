@@ -30,6 +30,7 @@ export const InputLabelPasswordClean: React.FC<InputLabelClean> = ({
         {label}
       </InputLabel>
       <OutlinedInput
+          autoComplete={'off'}
         disabled={disabled}
         style={style}
         onChange={onChange}
