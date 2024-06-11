@@ -14,7 +14,7 @@ import SuccessfulSend from '../../pages/auth/Forgot/SuccessfulSend.tsx';
 import Profile from '../../pages/admin/profile/Profile.tsx';
 import SuccessfulRegister from '../../pages/auth/Register/SuccessfulRegister.tsx';
 import Logs from '../../pages/admin/logs/Logs.tsx';
-import Categories from "../../pages/admin/categories/Categories.tsx";
+import Categories from '../../pages/admin/categories/Categories.tsx';
 
 export const routePaths = {
   HOME: '/',

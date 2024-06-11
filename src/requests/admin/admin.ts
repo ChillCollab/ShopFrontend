@@ -9,7 +9,7 @@ const adminReqs = {
   },
   getCategories: () => {
     return axiosInstance.get('/admin/categories/list');
-  }
+  },
 };
 
 export default adminReqs;

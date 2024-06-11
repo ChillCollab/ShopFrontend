@@ -152,7 +152,6 @@ export default function ResetPassword() {
         ...prevState.loading,
         initial: false,
       },
-
     }));
   }, [navigate, code]);
 
