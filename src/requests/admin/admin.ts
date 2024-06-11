@@ -7,6 +7,9 @@ const adminReqs = {
   deleteUsers: (id: number[] | never[]) => {
     return axiosInstance.delete(`/admin/users/delete`, { data: { id: id } });
   },
+  getCategories: () => {
+    return axiosInstance.get('/admin/categories/list');
+  }
 };
 
 export default adminReqs;

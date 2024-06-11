@@ -14,11 +14,13 @@ import SuccessfulSend from '../../pages/auth/Forgot/SuccessfulSend.tsx';
 import Profile from '../../pages/admin/profile/Profile.tsx';
 import SuccessfulRegister from '../../pages/auth/Register/SuccessfulRegister.tsx';
 import Logs from '../../pages/admin/logs/Logs.tsx';
+import Categories from "../../pages/admin/categories/Categories.tsx";
 
 export const routePaths = {
   HOME: '/',
   ADMIN_PRODUCT: '/admin/product/:id',
   ADMIN_PRODUCTS: '/admin/products',
+  ADMIN_CATEGORIES: '/admin/categories',
   ADMIN_USER: '/admin/profile',
   ADMIN_USERS: '/admin/users',
   ADMIN: '/admin',
@@ -52,6 +54,10 @@ export const routeConfig = [
       {
         path: routePaths.ADMIN_PRODUCT,
         element: <Product />,
+      },
+      {
+        path: routePaths.ADMIN_CATEGORIES,
+        element: <Categories />,
       },
       {
         path: routePaths.ADMIN_PRODUCTS,
