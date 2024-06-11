@@ -89,6 +89,7 @@ const Register: React.FC = () => {
             {inputs.map((fieldName) => {
               return (
                 <InputLabelMain
+                    key={fieldName.name}
                   error={false}
                   size="medium"
                   type="text"
