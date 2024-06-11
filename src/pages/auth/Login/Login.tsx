@@ -143,18 +143,17 @@ const Login: React.FC = () => {
     const access = localStorage.getItem(storage.accessToken);
     const refresh = localStorage.getItem(storage.refreshToken);
     if (access !== null || refresh !== null) {
-      authRequests
-        .userInfo()
-        .then((res) => {{
-            if (res.data.role <= 0) {
-              navigate(routePaths.HOME, { replace: true });
-            } else {
-              navigate(routePaths.ADMIN, { replace: true });
-            }
+      authRequests.userInfo().then((res) => {
+        {
+          if (res.data.role <= 0) {
+            navigate(routePaths.HOME, { replace: true });
+          } else {
+            navigate(routePaths.ADMIN, { replace: true });
           }
-        })
+        }
+      });
     } else {
-      setState(state => ({
+      setState((state) => ({
         ...state,
         loading: {
           ...state.loading,
