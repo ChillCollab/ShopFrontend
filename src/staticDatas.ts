@@ -47,8 +47,8 @@ export const menu = [
     listItems: [
       {
         id: 1,
-        title: 'Elements',
-        url: '/admin',
+        title: 'Categories',
+        url: '/admin/categories',
         icon: '/element.svg',
       },
       {
