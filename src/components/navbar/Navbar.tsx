@@ -18,9 +18,10 @@ interface NavbarProps {
 }
 interface SettingsMenu {
   isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
+const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen, setIsOpen }) => {
   const navigate = useNavigate();
   const logout = useCallback(() => {
     authRequests.logout().then((logoutResponse) => {
@@ -35,7 +36,15 @@ const SettingsMenu: React.FC<SettingsMenu> = ({ isOpen }) => {
   if (isOpen) {
     return (
       <div className="settingsMenuContainer">
-        <span className="settingsButton">Edit profile</span>
+        <span
+          className="settingsButton"
+          onClick={() => {
+            navigate(routePaths.ADMIN_USER, { replace: true });
+            setIsOpen(false);
+          }}
+        >
+          Edit profile
+        </span>
         <span className="settingsButton" onClick={() => logout()}>
           Logout
         </span>
@@ -68,7 +77,7 @@ const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMen
         </div>
         <img src="/settings.svg" alt="settings" className="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} />
       </div>
-      <SettingsMenu isOpen={isMenuOpen} />
+      <SettingsMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
     </div>
   );
 };

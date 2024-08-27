@@ -62,7 +62,6 @@ const Add = (props: Props) => {
             ))}
           </form>
           <div className={'switch-container'}>
-            <MainSwitch label={'Activate'} />
             <MainSwitch label={'Send email'} />
           </div>
           <div className={'btn-container'}>
