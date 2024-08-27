@@ -7,6 +7,7 @@ interface LoadingBtnModalProps {
   title: string;
   onClick?: () => void;
   disabled?: boolean;
+  className?: string;
 }
 
 export const LoadingBtnModal: React.FC<LoadingBtnModalProps> = ({ loading, title, disabled, onClick }) => {

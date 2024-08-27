@@ -1,0 +1,44 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/responsive.scss';
+
+.settings-content-container {
+  display: flex;
+  margin-top: 20px;
+}
+
+.settings-smtp-container {
+  display: flex;
+  padding: 15px;
+  border: $soft-bg 1.5px solid;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  p {
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24.2px;
+    color: $soft-color;
+    padding-bottom: 5px;
+    border-bottom: $soft-bg 1.5px solid;
+  }
+  .settings-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+
+    .MuiButtonBase-root {
+      width: 150px;
+      border-radius: 10px;
+      max-height: 40px;
+    }
+  }
+}
+
+.settings-inputs-container {
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

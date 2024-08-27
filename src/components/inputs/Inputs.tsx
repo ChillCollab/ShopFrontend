@@ -14,6 +14,7 @@ export const InputLabelMain: React.FC<InputPropType> = ({
   onKeyDown,
   disabled,
   value,
+  id,
 }) => {
   return (
     <FormControl style={{ width: '100%' }} className="custom-form-control" variant="outlined">
@@ -25,7 +26,8 @@ export const InputLabelMain: React.FC<InputPropType> = ({
         {...register}
         error={error}
         size={size}
-        id="outlined-adornment-password"
+        key={'key'}
+        id={id}
         type={type}
         label={label}
         value={value}

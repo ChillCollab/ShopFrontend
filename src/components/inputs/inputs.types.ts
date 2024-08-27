@@ -36,5 +36,6 @@ export type InputPropType = {
   disabled?: boolean | undefined;
   value?: unknown;
   itemID?: string;
+  key?: string;
   onFocus?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
 };
