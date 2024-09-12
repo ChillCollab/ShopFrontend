@@ -20,19 +20,21 @@ export const BaseSelector = (props: BaseSelectorProps) => {
       <InputLabel onChange={props.onChange} id={'base-select-label'}>
         {props.label}
       </InputLabel>
-      <Select
-        labelId="base-select-label"
-        id="base-select"
-        defaultValue={props.defaultValue}
-        label={props.label}
-        onChange={props.onChange}
-      >
-        {props.options.map((option) => (
-          <MenuItem key={option.id} value={option.id}>
-            {option.name}
-          </MenuItem>
-        ))}
-      </Select>
+      <div className={'base-selector'}>
+        <Select
+          labelId="base-select-label"
+          id="base-select"
+          defaultValue={props.defaultValue}
+          label={props.label}
+          onChange={props.onChange}
+        >
+          {props.options.map((option) => (
+            <MenuItem key={option.id} value={option.id}>
+              {option.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </div>
     </FormControl>
   );
 };

@@ -1,14 +1,16 @@
 import { GridToolbarExport, GridToolbarQuickFilter } from '@mui/x-data-grid';
-import './usersToolbar.scss';
+import './toolbar.scss';
 import { useDispatch } from 'react-redux';
 import { isDeleteId, isDeleteLogin } from '../../store/deleteUserSlices.ts';
 import { memo } from 'react';
 import { User } from '../../pages/admin/users/Users.types.ts';
+import { isDeleteCategoriesId, isDeleteCategoriesName } from '../../store/deleteCategorySlice.ts';
+import { Category } from '../../pages/admin/categories/Categories.type.ts';
 
 interface UsersToolbarProps {
-  selectedRows: User[];
+  selectedRows: (Category[] & User[]) | any[];
   allRowsCount: number;
-  rows: User[];
+  rows: (User[] & Category[]) | any[];
   isDelete: boolean;
   setIsDelete: (arg: boolean) => void;
   isOpenEdit: boolean;
@@ -21,11 +23,18 @@ const UsersToolbar = (props: UsersToolbarProps) => {
 
   const handleDelete = () => {
     const logins: string[] = [];
+    const names: string[] = [];
     props.selectedRows.forEach((item) => {
       logins.push(item.login);
+      names.push(item.name);
     });
+
+    console.log(props.selectedRows);
     dispatch(isDeleteLogin({ isDeleteLogin: logins.join(', ') }));
     dispatch(isDeleteId({ isDeleteId: props.selectedRows.map((item) => item.id) }));
+    dispatch(isDeleteCategoriesName({ isDeleteCategoriesName: names.join(', ') }));
+    dispatch(isDeleteCategoriesId({ isDeleteCategoriesId: props.selectedRows.map((item) => item.category_id) }));
+
     props.setIsDelete(true);
   };
 

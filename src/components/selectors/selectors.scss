@@ -1,5 +1,11 @@
 @import '../../styles/variables.scss';
 
+
+  .MuiMenu-paper  {
+    background-color: $dark-color !important;
+    color: $soft-color !important;
+  }
+
 .selector-form-control {
 
   .MuiOutlinedInput-root {

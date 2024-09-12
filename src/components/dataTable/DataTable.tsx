@@ -1,6 +1,6 @@
 import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 import './dataTable.scss';
-import UsersToolbar from './UsersToolbar.tsx';
+import Toolbar from './Toolbar.tsx';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { User } from '../../pages/admin/users/Users.types.ts';
 
@@ -12,6 +12,8 @@ type Props = {
   useCheckbox?: boolean;
   isDelete?: boolean;
   setIsDelete?: (arg: boolean) => void;
+  isDeleteCategory?: boolean;
+  setIsCategory?: (arg: boolean) => void;
   setIsOpenEdit?: (arg: boolean) => void;
   setIsUserData?: Dispatch<SetStateAction<User>>;
   pageSize?: number;
@@ -42,7 +44,7 @@ const DataTable = (props: Props) => {
             },
           },
         }}
-        slots={{ toolbar: UsersToolbar }}
+        slots={{ toolbar: Toolbar }}
         slotProps={{
           toolbar: {
             showQuickFilter: true,

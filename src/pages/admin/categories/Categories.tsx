@@ -6,6 +6,7 @@ import adminReqs from '../../../requests/admin/admin.ts';
 import { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 import { addAlert } from '../../../store/systemAlertSlices.ts';
+import { DeleteCategory } from './DeleteCategory.tsx';
 
 const Categories = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
@@ -13,7 +14,6 @@ const Categories = () => {
   const [isDeleted, setIsDeleted] = React.useState<boolean>(false);
   const [isOpenEdit, setIsOpenEdit] = React.useState<boolean>(false);
 
-  console.log(isOpenEdit);
   const categoriesGrid: GridColDef[] = [
     {
       field: 'name',
@@ -84,6 +84,12 @@ const Categories = () => {
       <div className="logs-page">
         <h1>Categories</h1>
       </div>
+      <DeleteCategory
+        open={isDeleted}
+        setOpen={setIsDeleted}
+        setIsCategories={setIsCategories}
+        isCategories={isCategories}
+      />
       <DataTable
         setIsOpenEdit={setIsOpenEdit}
         isDelete={isDeleted}

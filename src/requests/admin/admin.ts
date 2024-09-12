@@ -10,6 +10,9 @@ const adminReqs = {
   getCategories: () => {
     return axiosInstance.get('/admin/categories/list');
   },
+  deleteCategories: (id: string[] | never[]) => {
+    return axiosInstance.delete(`/admin/categories/delete`, { data: { category_id: id } });
+  },
   addUser: (name: string, surname: string, login: string, email: string, send_mail: boolean) => {
     return axiosInstance.post('/admin/users/create', {
       name: name,
