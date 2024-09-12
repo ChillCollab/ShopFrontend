@@ -10,10 +10,10 @@ type Props = {
   slug: string;
   useAction?: boolean;
   useCheckbox?: boolean;
-  isDelete: boolean;
-  setIsDelete: (arg: boolean) => void;
-  setIsOpenEdit: (arg: boolean) => void;
-  setIsUserData: Dispatch<SetStateAction<User>>;
+  isDelete?: boolean;
+  setIsDelete?: (arg: boolean) => void;
+  setIsOpenEdit?: (arg: boolean) => void;
+  setIsUserData?: Dispatch<SetStateAction<User>>;
   pageSize?: number;
   rowName?: string;
 };

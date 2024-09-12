@@ -1,7 +1,7 @@
 import './products.scss';
-import DataTable from '../../../components/dataTable/DataTable';
+// import DataTable from '../../../components/dataTable/DataTable';
 import { GridColDef } from '@mui/x-data-grid';
-import { products } from '../../../staticDatas';
+// import { products } from '../../../staticDatas';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -51,6 +51,8 @@ const columns: GridColDef[] = [
   },
 ];
 
+console.log(columns);
+
 const Products = () => {
   // TEST THE API
 
@@ -68,7 +70,7 @@ const Products = () => {
         <h1>Products</h1>
         <button>Add New Products</button>
       </div>
-      <DataTable slug="products" columns={columns} rows={products} />
+      {/*<DataTable slug="products" columns={columns} rows={products} />*/}
       {/* TEST THE API */}
 
       {/* {isLoading ? (

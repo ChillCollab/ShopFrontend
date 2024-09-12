@@ -10,7 +10,10 @@ import { addAlert } from '../../../store/systemAlertSlices.ts';
 const Categories = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [isCategories, setIsCategories] = React.useState<never[]>([]);
+  const [isDeleted, setIsDeleted] = React.useState<boolean>(false);
+  const [isOpenEdit, setIsOpenEdit] = React.useState<boolean>(false);
 
+  console.log(isOpenEdit);
   const categoriesGrid: GridColDef[] = [
     {
       field: 'name',
@@ -81,7 +84,15 @@ const Categories = () => {
       <div className="logs-page">
         <h1>Categories</h1>
       </div>
-      <DataTable useCheckbox={true} slug="logs" columns={categoriesGrid} rows={isCategories} />
+      <DataTable
+        setIsOpenEdit={setIsOpenEdit}
+        isDelete={isDeleted}
+        setIsDelete={setIsDeleted}
+        useCheckbox={true}
+        slug="logs"
+        columns={categoriesGrid}
+        rows={isCategories}
+      />
     </div>
   );
 };
