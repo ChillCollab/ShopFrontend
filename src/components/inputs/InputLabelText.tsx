@@ -10,6 +10,8 @@ interface InputLabelTextProps {
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   style?: React.CSSProperties | undefined;
+  value?: string;
+  defaultValue?: string;
 }
 
 const InputLabelText: React.FC<InputLabelTextProps> = (props) => {
@@ -29,6 +31,8 @@ const InputLabelText: React.FC<InputLabelTextProps> = (props) => {
         onKeyDown={onKeyDown}
         onFocus={onFocus}
         onChange={onChange}
+        defaultValue={props.defaultValue}
+        value={props.value}
       />
     </FormControl>
   );

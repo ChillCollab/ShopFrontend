@@ -50,7 +50,13 @@ function Profile() {
   ) : (
     <>
       <ChangePhoneNumber active={isActiveNumber} setIsActive={setIsActiveNumber} />
-      <EditPersonalModal active={isActivePersonal} setIsActive={setIsActivePersonal} />
+      <EditPersonalModal
+        name={isUser?.name}
+        surname={isUser?.surname}
+        login={isUser?.login}
+        active={isActivePersonal}
+        setIsActive={setIsActivePersonal}
+      />
       <ChangePasswordModal active={isActivePassword} setIsActive={setIsActivePassword} />
       <ChangeEmailModal active={isActiveEmail} setIsActive={setIsActiveEmail} setIsActiveSub={setIsActiveEmailSubmit} />
       <ChangeEmailSubmitModal active={isActiveEmailSubmit} setIsActive={setIsActiveEmailSubmit} />
@@ -58,9 +64,27 @@ function Profile() {
         <h1>Profile</h1>
         <div className="userInfo">
           {isUser?.avatar_id === '' ? (
-            <img src={'/noavatar.png'} className="avatar" alt="avatar" />
+            <img
+              src={'/noavatar.png'}
+              className="avatar"
+              alt="avatar"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.onerror = null;
+                target.src = '/noavatar.png';
+              }}
+            />
           ) : (
-            <img src={isUser?.avatar_id} className="avatar" alt="avatar" />
+            <img
+              src={isUser?.avatar_id}
+              className="avatar"
+              alt="avatar"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.onerror = null;
+                target.src = '/noavatar.png';
+              }}
+            />
           )}
           <div className="infoContainer">
             <div className="fioContainer">

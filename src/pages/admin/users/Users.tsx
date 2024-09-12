@@ -1,33 +1,37 @@
 import DataTable from '../../../components/dataTable/DataTable.tsx';
 import './users.scss';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import Add from './Add.tsx';
 import adminReqs from '../../../requests/admin/admin.ts';
 import { MainSpinner } from '../../../components/spinners/MainSpinner.tsx';
 import { Button } from '@mui/material';
 import { Delete } from './Delete.tsx';
 import { GridColDef } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { isDeleteId, isDeleteLogin } from '../../../store/deleteUserSlices.ts';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../../store';
+import Edit from './Edit.tsx';
+import { User } from './Users.types.ts';
 
 const Users = () => {
   const [open, setOpen] = useState(false);
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [isUsers, setIsUsers] = useState([]);
+  const [isUserData, setIsUserData] = useState<User>({
+    id: 0,
+    login: '',
+    name: '',
+    surname: '',
+    email: '',
+    avatar_id: '',
+    active: false,
+    role: 0,
+    phone: '',
+  });
   const [isLoading, setIsLoading] = useState(true);
   const [isDelete, setIsDelete] = useState(false);
 
   const isId = useSelector((state: RootState) => state.deleteUser.isDeleteId);
-
-  const dispatch = useDispatch();
-  const handleDelete = (id: number, login: string) => {
-    console.log(isId);
-    dispatch(isDeleteLogin({ isDeleteLogin: login }));
-    dispatch(isDeleteId({ isDeleteId: [id] }));
-
-    setIsDelete(true);
-  };
+  const usersList = useSelector((state: RootState) => state.usersListTriggers.usersList);
 
   const columns: GridColDef[] = [
     {
@@ -36,7 +40,7 @@ const Users = () => {
       headerClassName: 'headerBox',
       cellClassName: 'idClass',
       headerName: 'ID',
-      width: 80,
+      width: 40,
     },
     {
       field: 'avatar_id',
@@ -44,28 +48,28 @@ const Users = () => {
       headerAlign: 'center',
       cellClassName: 'nameCell',
       headerClassName: 'headerBox',
-      width: 80,
+      width: 60,
       renderCell: (params) => {
         return <img style={{ height: '38px', width: '38px' }} src={params.row.avatar_id || '/noavatar.png'} alt="" />;
       },
     },
     {
-      field: 'name',
+      field: 'login',
       type: 'string',
-      headerName: 'First name',
-      width: 175,
+      headerName: 'Login',
+      width: 150,
       headerAlign: 'center',
       headerClassName: 'headerBox',
       cellClassName: 'nameCell',
     },
     {
-      field: 'surname',
+      field: 'name',
       type: 'string',
-      headerName: 'Last name',
-      width: 175,
-      cellClassName: 'nameCell',
+      headerName: 'First name',
+      width: 150,
       headerAlign: 'center',
       headerClassName: 'headerBox',
+      cellClassName: 'nameCell',
     },
     {
       field: 'email',
@@ -79,7 +83,7 @@ const Users = () => {
     {
       field: 'created',
       headerName: 'Created At',
-      flex: 0.05,
+      flex: 0.1,
       type: 'string',
       cellClassName: 'createCell',
       headerAlign: 'center',
@@ -88,7 +92,7 @@ const Users = () => {
     {
       field: 'updated',
       headerName: 'Updated At',
-      flex: 0.05,
+      flex: 0.1,
       type: 'string',
       cellClassName: 'createCell',
       headerAlign: 'center',
@@ -97,7 +101,7 @@ const Users = () => {
     {
       field: 'active',
       headerName: 'Activated',
-      flex: 0.05,
+      flex: 0.1,
       type: 'boolean',
       cellClassName: 'verifiedCell',
       headerAlign: 'center',
@@ -107,29 +111,6 @@ const Users = () => {
           <img src="/verified.svg" alt="Verified" />
         ) : (
           <img src="/notverified.svg" alt="Not Verified" />
-        );
-      },
-    },
-    {
-      field: 'action',
-      headerName: 'Action',
-      width: 100,
-      headerAlign: 'center',
-      headerClassName: 'headerBox',
-      renderCell: (params) => {
-        return (
-          <div className="action">
-            <Link key={params.row.id + '-link'} to={`${params.row.id}`}>
-              <img key={params.row.id + '-img'} src="/view.svg" alt="" />
-            </Link>
-            <div
-              key={params.row.id + '-div'}
-              className="delete"
-              onClick={() => handleDelete(params.row.id, params.row.name + ' ' + params.row.surname)}
-            >
-              <img key={params.row.id + '-img-delete'} src="/delete.svg" alt="" />
-            </div>
-          </div>
         );
       },
     },
@@ -144,7 +125,7 @@ const Users = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [isDelete, isId, usersList]);
 
   const AddSvg = () => {
     return (
@@ -177,6 +158,7 @@ const Users = () => {
     <MainSpinner isLoading={isLoading} />
   ) : (
     <div className="users">
+      <Edit isOpenEdit={isOpenEdit} setIsOpenEdit={setIsOpenEdit} user={isUserData} />
       <Add slug="user" columns={columns} setOpen={setOpen} open={open} />
       <Delete isUsers={isUsers} setIsUsers={setIsUsers} open={isDelete} setOpen={setIsDelete} />
       <div className="info">
@@ -197,15 +179,18 @@ const Users = () => {
         </Button>
       </div>
       <DataTable
+        setIsUserData={setIsUserData}
+        setIsOpenEdit={setIsOpenEdit}
+        isDelete={isDelete}
         setIsDelete={setIsDelete}
         useAction={true}
         slug="users"
         columns={columns}
         rows={isUsers}
-        useCheckbox={false}
+        useCheckbox={true}
       />
     </div>
   );
 };
 
-export default Users;
+export default memo(Users);

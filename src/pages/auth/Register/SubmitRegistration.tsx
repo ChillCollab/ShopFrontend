@@ -106,7 +106,7 @@ export default function SubmitRegistration() {
           setIsLoading(false);
         });
     }
-  }, [code]);
+  }, [navigate, code]);
 
   return (
     <div className="loginContainer">

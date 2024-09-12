@@ -72,7 +72,15 @@ const Navbar: React.FC<NavbarProps> = ({ setToggle, toggle, isMenuOpen, setIsMen
           <img src="/notifications.svg" alt="notifications" />
         </Badge>
         <div className="user">
-          <img src={image ? image : '/noavatar.png'} alt="avatar" />
+          <img
+            src={image ? image : '/noavatar.png'}
+            alt="avatar"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.onerror = null;
+              target.src = '/noavatar.png';
+            }}
+          />
           <span>{isName}</span>
         </div>
         <img src="/settings.svg" alt="settings" className="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} />

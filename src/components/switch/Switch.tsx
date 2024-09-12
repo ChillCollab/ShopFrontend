@@ -6,11 +6,18 @@ import './switch.scss';
 interface SwitchProps {
   label?: string;
   checked?: boolean;
+  onChange?: () => void;
 }
 
 export const MainSwitch: React.FC<SwitchProps> = (props: SwitchProps) => {
   return (
-    <FormControlLabel control={<Switch />} label={props.label} labelPlacement="start" checked={props.checked} />
+    <FormControlLabel
+      onChange={props.onChange}
+      control={<Switch />}
+      label={props.label}
+      labelPlacement="start"
+      checked={props.checked}
+    />
     // <Switch {...label} />
   );
 };

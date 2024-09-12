@@ -1,0 +1,15 @@
+@import '../../styles/variables.scss';
+
+.selector-form-control {
+
+  .MuiOutlinedInput-root {
+    color: $soft-color;
+  }
+
+  .MuiInputLabel-root {
+    color: $placeholder-color !important;
+    .Mui-focused {
+      color: $placeholder-color !important;
+    }
+  }
+}

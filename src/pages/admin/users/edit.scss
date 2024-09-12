@@ -1,0 +1,64 @@
+@import '../../../styles/variables.scss';
+
+.change-user-modal {
+  display: flex;
+  padding: 58px 161px;
+}
+
+.change-user-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.change-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 39px;
+}
+
+.change-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 30px;
+}
+
+.change-user-inputs-container {
+  margin-bottom: 20px;
+  gap: 25px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .MuiInputBase-root {
+    width: 328px;
+    height: 53px;
+  }
+  .MuiFormControlLabel-root {
+    margin-bottom: 0;
+  }
+}
+
+form {
+  .MuiLoadingButton-root {
+    width: 328px;
+    height: 53px !important;
+      background-color: $main-button-disabled !important;
+    margin-top: 5px;
+  }
+}
+
+.save-changes-btn-container {
+  display: flex;
+  justify-content: center;
+  display: table-column;
+  width: 328px;
+
+  .MuiLoadingButton-root {
+    width: 328px;
+    margin-top: 5px;
+  }
+}
