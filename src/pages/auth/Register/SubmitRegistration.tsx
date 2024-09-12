@@ -69,6 +69,7 @@ export default function SubmitRegistration() {
         });
     } else {
       setIsErr(true);
+      setIsMsg('Passwords do not match');
       setIsButtonLoading(false);
     }
   };
@@ -105,7 +106,7 @@ export default function SubmitRegistration() {
           setIsLoading(false);
         });
     }
-  });
+  }, [navigate, code]);
 
   return (
     <div className="loginContainer">

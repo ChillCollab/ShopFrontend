@@ -15,6 +15,7 @@ import Profile from '../../pages/admin/profile/Profile.tsx';
 import SuccessfulRegister from '../../pages/auth/Register/SuccessfulRegister.tsx';
 import Logs from '../../pages/admin/logs/Logs.tsx';
 import Categories from '../../pages/admin/categories/Categories.tsx';
+import Settings from '../../pages/admin/settings/Settings.tsx';
 
 export const routePaths = {
   HOME: '/',
@@ -32,6 +33,7 @@ export const routePaths = {
   FORGOT_PASSWORD: '/admin/forgot',
   FORGOT_PASSWORD_SUCCESS: '/admin/forgot/success',
   ADMIN_LOGS: '/admin/logs',
+  ADMIN_SETTINGS: '/admin/settings',
 };
 
 export const routeConfig = [
@@ -66,6 +68,10 @@ export const routeConfig = [
       {
         path: routePaths.ADMIN_LOGS,
         element: <Logs />,
+      },
+      {
+        path: routePaths.ADMIN_SETTINGS,
+        element: <Settings />,
       },
     ],
   },

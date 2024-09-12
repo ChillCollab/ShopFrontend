@@ -14,10 +14,12 @@ import authRequests from '../../auth/requests/auth.ts';
 interface EditPersonalProps {
   active: boolean;
   setIsActive: (active: boolean) => void;
+  name?: string;
+  surname?: string;
+  login?: string;
 }
 
-export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsActive }) => {
-  // const [isUploading, setIsUploading] = useState<boolean>(false);
+export const EditPersonalModal: React.FC<EditPersonalProps> = (props: EditPersonalProps) => {
   const [name, setName] = useState<string>('');
   const [surname, setSurname] = useState<string>('');
   const [login, setLogin] = useState<string>('');
@@ -68,6 +70,11 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
           src={avatarUrl}
           className="modal-avatar"
           alt="avatar"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.onerror = null;
+            target.src = '/noavatar.png';
+          }}
         />
         <img
           src="/changeAvatar.svg"
@@ -114,7 +121,7 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
             }
           });
           dispatch(addAlert({ message: 'Personal data has been changed', type: 'success' }));
-          setIsActive(false);
+          props.setIsActive(false);
         }
       })
       .catch((e: AxiosError<{ code: number; message: string }>) => {
@@ -134,6 +141,7 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
       key: 'input-name',
       id: 'input-name',
       name: 'Name',
+      defaultValue: props.name,
       error: false,
       onChange: handleName,
     },
@@ -141,6 +149,7 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
       key: 'input-surname',
       id: 'input-surname',
       name: 'Surname',
+      defaultValue: props.surname,
       error: false,
       onChange: handleSurname,
     },
@@ -148,6 +157,7 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
       key: 'input-email',
       id: 'input-login',
       name: 'Login',
+      defaultValue: props.login,
       error: errorLogin,
       onChange: handleLogin,
     },
@@ -159,7 +169,7 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
         .uploadAvatar(file)
         .then((uploadResponse) => {
           if (uploadResponse.status === 200) {
-            setIsActive(false);
+            props.setIsActive(false);
             dispatch(addAlert({ message: uploadResponse?.data?.message, type: 'success' }));
           }
         })
@@ -171,13 +181,13 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
 
   return (
     <>
-      <ModalContainer key={'edit-personal-modal'} active={active} setIsActive={setIsActive}>
+      <ModalContainer key={'edit-personal-modal'} active={props.active} setIsActive={props.setIsActive}>
         <div key={'edit-personal'} className={'edit-personal-modal'}>
           <div key={'edit-personal-container'} className={'data-container'}>
             <div key={'edit-personal22'} className={'personal-title'}>
               Personal data
             </div>
-            <AvatarUploader key={'edit-per2sonal'} />
+            <AvatarUploader key={'edit-personal'} />
             <div key={'edit-persona23l'} className={'info-container'}>
               <div key={'edit-per23sonal'} className={'inputs-container'}>
                 {inputs.map((input) => {
@@ -186,6 +196,7 @@ export const EditPersonalModal: React.FC<EditPersonalProps> = ({ active, setIsAc
                       key={input.key}
                       id={input.id}
                       onChange={input.onChange}
+                      defaultValue={input.defaultValue}
                       error={input.error}
                       label={input.name}
                       type={'text'}

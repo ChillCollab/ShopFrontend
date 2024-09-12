@@ -4,6 +4,7 @@ import systemAlertSlices from './systemAlertSlices.ts';
 import navbarSlices from './navbarSlices.ts';
 import userDataSlices from './userDataSlices.ts';
 import deleteUserSlices from './deleteUserSlices.ts';
+import usersListTriggerSlice from './usersListTriggersSlice.ts';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     navbar: navbarSlices,
     userData: userDataSlices,
     deleteUser: deleteUserSlices,
+    usersListTriggers: usersListTriggerSlice,
   },
 });
 

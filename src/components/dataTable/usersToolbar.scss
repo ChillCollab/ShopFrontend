@@ -1,0 +1,104 @@
+@import '../../styles/variables.scss';
+
+
+.MuiGridToolbarQuickFilter-root {
+    padding: 0 !important;
+}
+.users-toolbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .MuiFormControl-root {
+        padding: 0;
+    }
+
+    .users-toolbar-filter-container {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        height: 40px;
+        justify-content: center;
+
+        .MuiInput-root {
+            border: 0;
+        }
+
+        .MuiInput-root::before {
+            border: 0;
+            content: unset;
+        }
+        .MuiInput-root::after {
+            border: 0;
+            content: unset;
+        }
+        .MuiInputBase-root {
+            background-color: transparent;
+            border: 1.4px solid $table-line;
+            border-radius: 10px;
+            height: 40px;
+            width: 215px;
+
+
+            .Mui-focused {
+                display: none;
+            }
+
+            .MuiSvgIcon-root {
+                margin-right: 12px;
+                margin-left: 18px;
+            }
+        }
+
+        .users-toolbar-selected-container-container {
+            display: flex;
+            flex-direction: row;
+            cursor: pointer;
+            align-items: center;
+            gap: 20px;
+
+            .delete-button-container {
+                display: flex;
+                width: 26px;
+                height: 26px;
+                justify-content: center;
+                align-items: center;
+
+                :hover {
+                    opacity: 60%;
+                }
+            }
+            .delete-button-container-none {
+                display: none;
+            }
+
+            .edit-button-container-display {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                :hover {
+                    opacity: 60%;
+                }
+            }
+            .edit-button-container-none {
+                display: none;
+            }
+
+            .users-toolbar-selected-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 188px;
+                height: 40px;
+                background-color: rgba(255, 255, 255, 0.2);
+                border-radius: 7px;
+
+                p {
+                    color: white;
+                }
+            }
+        }
+    }
+}

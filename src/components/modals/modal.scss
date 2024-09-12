@@ -27,4 +27,9 @@
   top: 20px;
   right: 20px;
   cursor: pointer;
+  transition: transform 500ms ease;
+  &:hover {
+    opacity: 85%;
+    transform: scale(1.2);
+  }
 }

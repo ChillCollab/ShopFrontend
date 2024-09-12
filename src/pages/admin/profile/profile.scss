@@ -176,6 +176,11 @@ h1 {
   top: 254px;
   left: 420px;
   transform: translate(-50%, -50%);
+  transition: transform 500ms ease; /* Ensures transform changes animate smoothly */
+}
+
+.modal-avatar-edit:hover {
+  transform: translate(-50%, -50%) scale(1.2); /* Use transform with scale */
 }
 
 .send-image-container {
